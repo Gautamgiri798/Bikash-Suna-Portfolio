@@ -9,8 +9,6 @@
   [![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/919360870164)
 
   A modern, highly immersive personal portfolio website for **Bikash Suna**, displaying professional video editing services, clapperboard showreels, and custom rate calculators built using high-end UI design systems.
-  
-  [**View Repository**](https://github.com/Gautamgiri798/Bikash-Suna-Portfolio) • [**Request Project**](https://wa.me/919360870164)
 </div>
 
 ---
@@ -96,10 +94,3 @@ Get the website running on your local machine in seconds:
    Open your browser and navigate to:
    👉 **[http://localhost:8000](http://localhost:8000)**
 
----
-
-## 📞 Get in Touch
-
-* **Phone / WhatsApp**: [+91 9360870164](https://wa.me/919360870164)
-* **Instagram**: [@bikash_suna_07](https://instagram.com/bikash_suna_07)
-* **Location**: Jharsuguda, Odisha
