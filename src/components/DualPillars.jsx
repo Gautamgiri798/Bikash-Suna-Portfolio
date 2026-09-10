@@ -3,28 +3,63 @@ import React from 'react';
 export default function DualPillars() {
   return (
     <section className="pillars-section section-padding" id="what-i-do">
+      {/* Background ambient lighting */}
+      <div className="pillars-ambient-glow glow-purple-left"></div>
+      <div className="pillars-ambient-glow glow-cyan-right"></div>
+
       <div className="container">
+        {/* Section Header */}
         <div className="section-header scroll-reveal">
-          <span className="section-subtitle">DUAL SUPERPOWERS</span>
+          <div className="section-subtitle-pill pill-purple-gradient">
+            <i className="fa-solid fa-layer-group text-purple"></i>
+            <span>DUAL SUPERPOWERS</span>
+          </div>
           <h2 className="section-title">Two Passions. One Powerful Creator.</h2>
-          <div className="title-underline"></div>
-          <p className="section-intro">
+          <div className="title-underline-laser"></div>
+          <p className="section-description-centered">
             Whether you need a high-end cinematic video editor to transform your raw footage or an
             authentic content creator to promote your brand to an engaged audience — I bring both
             worlds together.
           </p>
+
+          {/* Synergy Advantage Badge */}
+          <div className="synergy-advantage-pill">
+            <span className="synergy-pulse-dot"></span>
+            <span className="synergy-text">
+              <strong>The 2-in-1 Advantage:</strong> Scripted, 4K Mastered & Published by the Same Creator
+            </span>
+          </div>
         </div>
 
+        {/* 2-Column Luxury Pillars Grid */}
         <div className="pillars-grid">
-          {/* Pillar 1: The Video Editor */}
-          <div className="pillar-card editor-pillar stagger-1 scroll-reveal">
-            <div className="pillar-header">
-              <div className="pillar-icon-box">
-                <i className="fa-solid fa-clapperboard"></i>
+          {/* ========================================================= */}
+          {/* PILLAR 1: THE VIDEO EDITOR                                */}
+          {/* ========================================================= */}
+          <div className="pillar-card-premium editor-pillar-premium stagger-1 scroll-reveal">
+            {/* Top Luminous Laser Accent Bar */}
+            <div className="card-top-laser-bar laser-purple"></div>
+
+            {/* Header: Icon, Tags & Title */}
+            <div className="pillar-card-header">
+              <div className="pillar-header-top">
+                <span className="pillar-badge-luxury badge-purple">
+                  <i className="fa-solid fa-film"></i> POST-PRODUCTION
+                </span>
+                <span className="pillar-metric-chip chip-purple">
+                  <i className="fa-solid fa-scissors"></i> 120+ Edits Delivered
+                </span>
               </div>
-              <div className="pillar-title-area">
-                <span className="pillar-tag">POST-PRODUCTION</span>
-                <h3>The Video Editor</h3>
+
+              <div className="pillar-title-row">
+                <div className="pillar-icon-orb orb-purple">
+                  <i className="fa-solid fa-clapperboard"></i>
+                  <span className="orb-ambient-halo"></span>
+                </div>
+                <div>
+                  <h3 className="pillar-title">The Video Editor</h3>
+                  <span className="pillar-role-subtitle">Retention-Obsessed Storytelling</span>
+                </div>
               </div>
             </div>
 
@@ -33,58 +68,110 @@ export default function DualPillars() {
               viewer attention from the first second and keep watch times high.
             </p>
 
-            <div className="pillar-features-list">
-              <div className="feature-row">
-                <i className="fa-solid fa-bolt text-purple"></i>
-                <div>
-                  <strong>Velocity Curves & Speed Ramping:</strong> Perfectly timed cut transitions
-                  matching rhythmic beats.
+            <div className="pillar-divider"></div>
+
+            {/* Interactive Feature Rows */}
+            <div className="pillar-features-suite">
+              <div className="feature-card-item">
+                <div className="feature-icon-badge badge-purple-glow">
+                  <i className="fa-solid fa-bolt text-purple"></i>
+                </div>
+                <div className="feature-info">
+                  <h4 className="feature-heading">Velocity Curves & Speed Ramping</h4>
+                  <p className="feature-detail">
+                    Perfectly timed cut transitions matching rhythmic musical beats and motion cadence.
+                  </p>
                 </div>
               </div>
-              <div className="feature-row">
-                <i className="fa-solid fa-closed-captioning text-cyan"></i>
-                <div>
-                  <strong>Kinetic Typography & Captions:</strong> Dynamic animations in high-converting
-                  creator styles.
+
+              <div className="feature-card-item">
+                <div className="feature-icon-badge badge-cyan-glow">
+                  <i className="fa-solid fa-closed-captioning text-cyan"></i>
+                </div>
+                <div className="feature-info">
+                  <h4 className="feature-heading">Kinetic Typography & Captions</h4>
+                  <p className="feature-detail">
+                    Dynamic word-by-word animations in high-converting modern creator styles.
+                  </p>
                 </div>
               </div>
-              <div className="feature-row">
-                <i className="fa-solid fa-wand-magic-sparkles text-purple"></i>
-                <div>
-                  <strong>Cinematic LUT Color Grading:</strong> Rich contrast and professional cinematic
-                  tones.
+
+              <div className="feature-card-item">
+                <div className="feature-icon-badge badge-purple-glow">
+                  <i className="fa-solid fa-wand-magic-sparkles text-purple"></i>
+                </div>
+                <div className="feature-info">
+                  <h4 className="feature-heading">Cinematic LUT Color Grading</h4>
+                  <p className="feature-detail">
+                    Rich filmic contrast, balanced skin tones, and professional Hollywood palettes.
+                  </p>
                 </div>
               </div>
-              <div className="feature-row">
-                <i className="fa-solid fa-volume-high text-cyan"></i>
-                <div>
-                  <strong>Multi-Track Sound Design:</strong> Immersive whooshes, risers, impacts, and
-                  audio mastering.
+
+              <div className="feature-card-item">
+                <div className="feature-icon-badge badge-cyan-glow">
+                  <i className="fa-solid fa-volume-high text-cyan"></i>
+                </div>
+                <div className="feature-info">
+                  <h4 className="feature-heading">Multi-Track Sound Design</h4>
+                  <p className="feature-detail">
+                    Immersive acoustic whooshes, risers, bass impacts, and clean vocal mastering.
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="pillar-footer">
-              <div className="tools-badges">
-                <span>CapCut Pro</span>
-                <span>Premiere Pro</span>
-                <span>After Effects</span>
+            {/* Pillar Footer: Stack Badges & CTA */}
+            <div className="pillar-footer-suite">
+              <div className="tools-badges-dock">
+                <span className="tool-chip">
+                  <i className="fa-solid fa-scissors text-purple"></i> CapCut Pro
+                </span>
+                <span className="tool-chip">
+                  <i className="fa-solid fa-sliders text-cyan"></i> Premiere Pro
+                </span>
+                <span className="tool-chip">
+                  <i className="fa-solid fa-wand-sparkles text-purple"></i> After Effects
+                </span>
               </div>
-              <a href="#services" className="pillar-link">
-                View Editing Rates <i className="fa-solid fa-arrow-right"></i>
+
+              <a href="#services" className="pillar-cta-link link-purple">
+                <span>View Editing Rates</span>
+                <i className="fa-solid fa-arrow-right"></i>
               </a>
             </div>
+
+            {/* Bottom Expanding Glow Line */}
+            <div className="pillar-bottom-glow-bar glow-purple"></div>
           </div>
 
-          {/* Pillar 2: The Content Creator & Collaborator */}
-          <div className="pillar-card creator-pillar stagger-2 scroll-reveal">
-            <div className="pillar-header">
-              <div className="pillar-icon-box creator-icon-box">
-                <i className="fa-solid fa-bullhorn"></i>
+          {/* ========================================================= */}
+          {/* PILLAR 2: THE CONTENT CREATOR                             */}
+          {/* ========================================================= */}
+          <div className="pillar-card-premium creator-pillar-premium stagger-2 scroll-reveal">
+            {/* Top Luminous Laser Accent Bar */}
+            <div className="card-top-laser-bar laser-cyan"></div>
+
+            {/* Header: Icon, Tags & Title */}
+            <div className="pillar-card-header">
+              <div className="pillar-header-top">
+                <span className="pillar-badge-luxury badge-cyan">
+                  <i className="fa-solid fa-bullhorn"></i> INFLUENCE & REACH
+                </span>
+                <span className="pillar-metric-chip chip-cyan">
+                  <i className="fa-brands fa-instagram"></i> 50K+ Reach
+                </span>
               </div>
-              <div className="pillar-title-area">
-                <span className="pillar-tag creator-tag">INFLUENCE & REACH</span>
-                <h3>The Content Creator</h3>
+
+              <div className="pillar-title-row">
+                <div className="pillar-icon-orb orb-cyan">
+                  <i className="fa-solid fa-bullhorn"></i>
+                  <span className="orb-ambient-halo"></span>
+                </div>
+                <div>
+                  <h3 className="pillar-title">The Content Creator</h3>
+                  <span className="pillar-role-subtitle">Authentic Audience Advocacy</span>
+                </div>
               </div>
             </div>
 
@@ -93,53 +180,89 @@ export default function DualPillars() {
               startups reach targeted viewers through seamless sponsored integrations.
             </p>
 
-            <div className="pillar-features-list">
-              <div className="feature-row">
-                <i className="fa-solid fa-handshake text-teal"></i>
-                <div>
-                  <strong>Dedicated Sponsored Reels:</strong> Custom high-energy hook scripting, full
-                  video edit, and co-author tag.
+            <div className="pillar-divider"></div>
+
+            {/* Interactive Feature Rows */}
+            <div className="pillar-features-suite">
+              <div className="feature-card-item">
+                <div className="feature-icon-badge badge-cyan-glow">
+                  <i className="fa-solid fa-handshake text-cyan"></i>
+                </div>
+                <div className="feature-info">
+                  <h4 className="feature-heading">Dedicated Sponsored Reels</h4>
+                  <p className="feature-detail">
+                    Custom high-energy hook scripting, full 4K video edit, and official co-author tag.
+                  </p>
                 </div>
               </div>
-              <div className="feature-row">
-                <i className="fa-solid fa-box-open text-blue"></i>
-                <div>
-                  <strong>Product Showcases & Unboxings:</strong> Authentic reviews and hands-on feature
-                  highlights.
+
+              <div className="feature-card-item">
+                <div className="feature-icon-badge badge-blue-glow">
+                  <i className="fa-solid fa-box-open text-blue"></i>
+                </div>
+                <div className="feature-info">
+                  <h4 className="feature-heading">Product Showcases & Unboxings</h4>
+                  <p className="feature-detail">
+                    Authentic reviews, real-world testing, and high-impact feature highlights.
+                  </p>
                 </div>
               </div>
-              <div className="feature-row">
-                <i className="fa-solid fa-share-nodes text-teal"></i>
-                <div>
-                  <strong>Story Promotions & Link Stickers:</strong> 24h active engagement directly
-                  driving traffic to your brand.
+
+              <div className="feature-card-item">
+                <div className="feature-icon-badge badge-cyan-glow">
+                  <i className="fa-solid fa-share-nodes text-cyan"></i>
+                </div>
+                <div className="feature-info">
+                  <h4 className="feature-heading">Story Promotions & Link Stickers</h4>
+                  <p className="feature-detail">
+                    24h active engagement directly driving conversion traffic to your product bio-link.
+                  </p>
                 </div>
               </div>
-              <div className="feature-row">
-                <i className="fa-solid fa-chart-line text-blue"></i>
-                <div>
-                  <strong>Organic Viral Potential:</strong> Algorithm-optimized formats engineered for
-                  maximum shares and saves.
+
+              <div className="feature-card-item">
+                <div className="feature-icon-badge badge-blue-glow">
+                  <i className="fa-solid fa-chart-line text-blue"></i>
+                </div>
+                <div className="feature-info">
+                  <h4 className="feature-heading">Organic Viral Potential</h4>
+                  <p className="feature-detail">
+                    Algorithm-optimized formats engineered for maximum audience shares and saves.
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="pillar-footer">
-              <div className="tools-badges creator-badges">
-                <span>Tech Gear</span>
-                <span>Creative Apps</span>
-                <span>Lifestyle</span>
-                <span>Audio</span>
+            {/* Pillar Footer: Stack Badges & CTA */}
+            <div className="pillar-footer-suite">
+              <div className="tools-badges-dock creator-badges-dock">
+                <span className="tool-chip">
+                  <i className="fa-solid fa-laptop-code text-cyan"></i> Tech Gear
+                </span>
+                <span className="tool-chip">
+                  <i className="fa-solid fa-mobile-screen text-blue"></i> Creative Apps
+                </span>
+                <span className="tool-chip">
+                  <i className="fa-solid fa-camera-retro text-cyan"></i> Lifestyle
+                </span>
+                <span className="tool-chip">
+                  <i className="fa-solid fa-headphones text-blue"></i> Audio
+                </span>
               </div>
+
               <a
                 href="https://wa.me/919360870164?text=Hi%20Bikash!%20I%20want%20to%20discuss%20a%20Brand%20Sponsorship%20/%20Paid%20Promotion%20collab."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="pillar-link creator-link"
+                className="pillar-cta-link link-cyan"
               >
-                Discuss Brand Collab <i className="fa-solid fa-arrow-right"></i>
+                <span>Discuss Brand Collab</span>
+                <i className="fa-solid fa-arrow-right"></i>
               </a>
             </div>
+
+            {/* Bottom Expanding Glow Line */}
+            <div className="pillar-bottom-glow-bar glow-cyan"></div>
           </div>
         </div>
       </div>

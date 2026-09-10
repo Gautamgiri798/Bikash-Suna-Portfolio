@@ -139,7 +139,7 @@ export default function App() {
     );
 
     const revealElements = document.querySelectorAll(
-      '.scroll-reveal, .reveal-on-scroll, .section-header, .pillar-card, .profile-simple-card, .intro-card, .skill-item, .mediakit-stat-card, .workflow-step-card, .pricing-card, .calculator-box, .contact-info-card, .payment-card'
+      '.scroll-reveal, .reveal-on-scroll, .section-header, .pillar-card, .profile-simple-card, .about-portrait-wrapper, .intro-card, .intro-card-premium, .skill-item, .skill-item-premium, .mediakit-stat-card, .mediakit-stat-card-premium, .workflow-step-card, .workflow-card-premium, .pricing-card, .pricing-card-premium, .calculator-box, .contact-info-card, .payment-card'
     );
     revealElements.forEach((el) => observer.observe(el));
 
