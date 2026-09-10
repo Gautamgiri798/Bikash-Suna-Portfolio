@@ -41,19 +41,32 @@
 
 ---
 
-## 📑 Navigation Matrix
+## 📑 Quick Navigation Hub
 
 <div align="center">
 
-| 🌌 Visual Experience | 💼 Commercial & Rates | 🛠️ Engineering & Setup |
-| :--- | :--- | :--- |
-| 🌟 [Executive Overview](#-executive-overview) | 💰 [Service Rate Matrix](#-service-rate-matrix) | 💻 [Tech Stack & Architecture](#-tech-stack--dependencies) |
-| 🌌 [Interactive 3D WebGL Universe](#-1-interactive-3d-webgl-gyro--particle-universe) | 🛠️ [4-Phase Production Pipeline](#️-4-phase-creative-production-pipeline) | 📂 [Repository Architecture](#-comprehensive-project-structure) |
-| 🎬 [Pure Diamond Ice-White Hero](#-2-cinematic-hero--pure-diamond-ice-white-typography) | 📊 [Creator Media Kit Desk](#-4-creator-media-kit--analytics-desk) | 🚀 [Getting Started & Local Setup](#-getting-started--local-setup) |
-| 💬 [Right-Sided WhatsApp Concierge](#-3-right-sided-floating-whatsapp-concierge) | 💳 [Direct UPI Drawer & Scanner](#-6-direct-sponsor-desk--instant-upi-drawer) | ⚙️ [Configuration & Customization](#️-customization-guide) |
-| 🎞️ [Filterable Showreels & Player](#-5-filterable-showreel-showcase--cinema-player) | 🤝 [Commercial Bookings & Contact](#-commercial-bookings--contact) | ⚡ [Performance & 60FPS Benchmarks](#-performance--optimization-standards) |
+  <!-- Interactive Navigation Pill Badges -->
+  <a href="#-executive-overview"><img src="https://img.shields.io/badge/🌟_Overview-1e293b?style=for-the-badge&logoColor=white" alt="Overview" /></a>
+  <a href="#-1-interactive-3d-webgl-gyro--particle-universe"><img src="https://img.shields.io/badge/🌌_3D_WebGL-1e293b?style=for-the-badge&logoColor=white" alt="3D WebGL" /></a>
+  <a href="#-2-cinematic-hero--pure-diamond-ice-white-typography"><img src="https://img.shields.io/badge/🎬_Ice--White_Hero-1e293b?style=for-the-badge&logoColor=white" alt="Hero" /></a>
+  <a href="#-3-right-sided-floating-whatsapp-concierge"><img src="https://img.shields.io/badge/💬_WhatsApp_Desk-1e293b?style=for-the-badge&logoColor=white" alt="WhatsApp" /></a>
+  <a href="#-5-filterable-showreel-showcase--cinema-player"><img src="https://img.shields.io/badge/🎞️_Showreels-1e293b?style=for-the-badge&logoColor=white" alt="Showreels" /></a>
+  <br/>
+  <a href="#-service-rate-matrix"><img src="https://img.shields.io/badge/💰_Rate_Matrix-1e293b?style=for-the-badge&logoColor=white" alt="Rates" /></a>
+  <a href="#️-4-phase-creative-production-pipeline"><img src="https://img.shields.io/badge/🛠️_4--Phase_Pipeline-1e293b?style=for-the-badge&logoColor=white" alt="Pipeline" /></a>
+  <a href="#-4-creator-media-kit--analytics-desk"><img src="https://img.shields.io/badge/📊_Media_Kit-1e293b?style=for-the-badge&logoColor=white" alt="Media Kit" /></a>
+  <a href="#-6-direct-sponsor-desk--instant-upi-drawer"><img src="https://img.shields.io/badge/💳_UPI_Desk-1e293b?style=for-the-badge&logoColor=white" alt="UPI Desk" /></a>
+  <a href="#-getting-started--local-setup"><img src="https://img.shields.io/badge/🚀_Run_Locally-1e293b?style=for-the-badge&logoColor=white" alt="Local Setup" /></a>
 
 </div>
+
+<br/>
+
+| Section Pillar | Focus & Direct Deep Links |
+| :--- | :--- |
+| **🌌 Visual & 3D Experience** | [🌟 Executive Overview](#-executive-overview) &nbsp;&bull;&nbsp; [🌌 3D WebGL Canvas](#-1-interactive-3d-webgl-gyro--particle-universe) &nbsp;&bull;&nbsp; [🎬 Ice-White Hero Typography](#-2-cinematic-hero--pure-diamond-ice-white-typography) &nbsp;&bull;&nbsp; [🎞️ Showreel Gallery](#-5-filterable-showreel-showcase--cinema-player) |
+| **💼 Commercial & Collaboration** | [💬 WhatsApp Concierge](#-3-right-sided-floating-whatsapp-concierge) &nbsp;&bull;&nbsp; [💰 Service Rate Matrix](#-service-rate-matrix) &nbsp;&bull;&nbsp; [🛠️ 4-Phase Production Pipeline](#️-4-phase-creative-production-pipeline) &nbsp;&bull;&nbsp; [📊 Creator Media Kit](#-4-creator-media-kit--analytics-desk) &nbsp;&bull;&nbsp; [💳 UPI Payment Drawer](#-6-direct-sponsor-desk--instant-upi-drawer) |
+| **⚙️ Engineering & Architecture** | [💻 Tech Stack & Architecture](#-tech-stack--dependencies) &nbsp;&bull;&nbsp; [📂 Repository Structure](#-comprehensive-project-structure) &nbsp;&bull;&nbsp; [🚀 Getting Started & Setup](#-getting-started--local-setup) &nbsp;&bull;&nbsp; [⚙️ Customization Guide](#️-customization-guide) &nbsp;&bull;&nbsp; [⚡ 60FPS Benchmarks](#-performance--optimization-standards) |
 
 ---
 
