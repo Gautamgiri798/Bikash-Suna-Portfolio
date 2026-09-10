@@ -41,26 +41,19 @@
 
 ---
 
-## 📑 Table of Contents
+## 📑 Navigation Matrix
 
-- [🌟 Executive Overview](#-executive-overview)
-- [⚡ Core Features & Architecture](#-core-features--architecture)
-  - [🌌 Interactive 3D WebGL Universe](#-1-interactive-3d-webgl-gyro--particle-universe)
-  - [🎬 Pure Diamond Ice-White Hero](#-2-cinematic-hero--pure-diamond-ice-white-typography)
-  - [💬 Right-Sided WhatsApp Automation Concierge](#-3-right-sided-floating-whatsapp-concierge)
-  - [📊 Creator Media Kit & Analytics Desk](#-4-creator-media-kit--analytics-desk)
-  - [🎞️ Filterable Showreel Showcase & Cinema Player](#-5-filterable-showreel-showcase--cinema-player)
-  - [💳 1-Click UPI Drawer & QR Scanner](#-6-direct-sponsor-desk--instant-upi-drawer)
-  - [🚀 Lenis 60FPS Scroll Engine & Circular Dial](#-7-lenis-60fps-smooth-scrolling-engine)
-- [💰 Service Rate Matrix](#-service-rate-matrix)
-- [🛠️ 4-Phase Creative Production Pipeline](#️-4-phase-creative-production-pipeline)
-- [💻 Tech Stack & Dependencies](#-tech-stack--dependencies)
-- [📂 Comprehensive Project Structure](#-comprehensive-project-structure)
-- [🚀 Getting Started & Local Setup](#-getting-started--local-setup)
-- [⚙️ Customization Guide](#️-customization-guide)
-- [⚡ Performance & Optimization Standards](#-performance--optimization-standards)
-- [🤝 Commercial Bookings & Contact](#-commercial-bookings--contact)
-- [📄 License](#-license)
+<div align="center">
+
+| 🌌 Visual Experience | 💼 Commercial & Rates | 🛠️ Engineering & Setup |
+| :--- | :--- | :--- |
+| 🌟 [Executive Overview](#-executive-overview) | 💰 [Service Rate Matrix](#-service-rate-matrix) | 💻 [Tech Stack & Architecture](#-tech-stack--dependencies) |
+| 🌌 [Interactive 3D WebGL Universe](#-1-interactive-3d-webgl-gyro--particle-universe) | 🛠️ [4-Phase Production Pipeline](#️-4-phase-creative-production-pipeline) | 📂 [Repository Architecture](#-comprehensive-project-structure) |
+| 🎬 [Pure Diamond Ice-White Hero](#-2-cinematic-hero--pure-diamond-ice-white-typography) | 📊 [Creator Media Kit Desk](#-4-creator-media-kit--analytics-desk) | 🚀 [Getting Started & Local Setup](#-getting-started--local-setup) |
+| 💬 [Right-Sided WhatsApp Concierge](#-3-right-sided-floating-whatsapp-concierge) | 💳 [Direct UPI Drawer & Scanner](#-6-direct-sponsor-desk--instant-upi-drawer) | ⚙️ [Configuration & Customization](#️-customization-guide) |
+| 🎞️ [Filterable Showreels & Player](#-5-filterable-showreel-showcase--cinema-player) | 🤝 [Commercial Bookings & Contact](#-commercial-bookings--contact) | ⚡ [Performance & 60FPS Benchmarks](#-performance--optimization-standards) |
+
+</div>
 
 ---
 
@@ -100,19 +93,13 @@ Every single interaction has been fine-tuned for visual excellence, fluid 60FPS 
 * **Realistic Typing Simulation**: Selecting any preset triggers an animated 3-dot typing response before generating a direct WhatsApp launch button with tailored inquiry parameters.
 * **Custom Message Input**: Allows clients and sponsors to type customized project requirements and launch directly to `+91 9360870164`.
 
-```text
- ┌─────────────────────────────────────────────────────────┐
- │                                                         │
- │               [Main Portfolio Sections]                 │
- │                                                         │
- │                                                         │
- │                                    ┌──────────────┐     │
- │                                    │  (▲ 84%)     │ ◄───┼── Circular Scroll Dial
- │                                    └──────────────┘     │   (bottom: 6.5rem; right: 2.25rem)
- │                                    ┌──────────────┐     │
- │                                    │ [WhatsApp 💬]│ ◄───┼── Floating WhatsApp Concierge
- └────────────────────────────────────┴──────────────┴─────┘   (bottom: 2.0rem; right: 2.0rem)
-```
+#### 📐 Bottom-Right Controls Architecture
+
+| UI Control Layer | Viewport Anchor | Stacking Context | Interactive Dynamics & Features |
+| :--- | :---: | :---: | :--- |
+| **Circular Progress Dial** | `bottom: 6.5rem; right: 2.25rem;` | `z-index: 999` | 0ms synchronous Lenis tracking (`0% - 100%`) with fast return-to-top trigger |
+| **Floating WhatsApp Trigger** | `bottom: 2.0rem; right: 2.0rem;` | `z-index: 1000` | Emerald pulse halo, unread indicator badge, and 1-click concierge expander |
+| **Concierge Chat Modal** | `bottom: 74px; right: 0;` | `z-index: 1001` | Right-anchored slide-up dialog with interactive quick chips & direct routing |
 
 ### 📊 4. Creator Media Kit & Analytics Desk
 * **Audience Metrics**: Transparent commercial dashboard showcasing cumulative impressions, monthly view volume, and primary demographic distribution.
@@ -148,18 +135,23 @@ Transparent, upfront rate packages designed for fast client decision-making:
 
 ## 🛠️ 4-Phase Creative Production Pipeline
 
-```
-  ┌───────────────┐     ┌───────────────┐     ┌───────────────┐     ┌───────────────┐
-  │   PHASE 01    │     │   PHASE 02    │     │   PHASE 03    │     │   PHASE 04    │
-  │  Ingestion &  │ ──► │  Rough Cut &  │ ──► │ Sound Design  │ ──► │  4K Master &  │
-  │ Storyboarding │     │   Pacing      │     │  & Color FX   │     │ Final Delivery│
-  └───────────────┘     └───────────────┘     └───────────────┘     └───────────────┘
+```mermaid
+flowchart LR
+    P1["<b>01 · INGESTION</b><br/>Asset Catalog & Hook Map"] --> P2["<b>02 · ROUGH CUT</b><br/>Rhythmic Cuts & Retention"]
+    P2 --> P3["<b>03 · SOUND & COLOR</b><br/>Foley FX & Cinematic LUTs"]
+    P3 --> P4["<b>04 · 4K MASTER</b><br/>Multi-Platform Handover"]
+
+    classDef stage fill:#0d1117,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc,rx:8,ry:8;
+    class P1,P2,P3,P4 stage;
 ```
 
-1. **Ingestion & Storyboarding**: Asset organization, narrative structure mapping, hook identification, and footage review.
-2. **Rough Cut & Pacing**: Timeline assembly, rhythmic beat cuts, retention-driven transitions, and dead-space elimination.
-3. **Sound Design & Color FX**: Atmospheric foley, cinematic risers, vocal leveling, and custom multi-curve LUT color grading.
-4. **4K Master & Delivery**: High-bitrate 4K encoding, aspect-ratio optimization, platform compression compliance, and cloud handover.
+| Phase | Milestone | Core Technical Scope | Key Deliverables | Timeline |
+| :---: | :--- | :--- | :--- | :---: |
+| `01` | **Ingestion & Storyboarding** | Asset cataloging, camera roll curation, narrative hook mapping & audio beat sync | Curated footage bin & timeline storyboard | Day 1 |
+| `02` | **Rough Cut & Retention Pacing** | Rhythmic timeline assembly, retention-driven transitions, micro-zooms, kinetic caption timing | First-pass review cut & pacing draft | Day 1–2 |
+| `03` | **Sound Design & Color FX** | Atmospheric foley, cinematic risers, vocal leveling & custom multi-curve LUT grading | Master audio mix & fully graded sequence | Day 2 |
+| `04` | **4K Master & Final Delivery** | High-bitrate 4K encoding (9:16 vertical & 16:9 widescreen), compression compliance & cloud handover | Final 4K masters ready for publishing | Day 2–3 |
+
 
 ---
 
