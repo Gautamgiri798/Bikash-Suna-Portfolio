@@ -137,6 +137,12 @@ Every single interaction has been fine-tuned for visual excellence, fluid 60FPS 
   * 🚀 *Rush 24h Express Delivery*
 * **Realistic Typing Simulation**: Selecting any chip triggers an animated 3-dot typing response before generating a direct WhatsApp launch button with customized project specs.
 
+### ⚓ 9. Clean Luxury 3-Column Footer
+* **Brand Foundation**: Dual-tone brand typography featuring vibrant purple `BIKASH` (`#7c3aed`) and crisp white `SUNA` (`#ffffff`) alongside a tailored creative agency narrative.
+* **Instant Navigation Matrix**: Direct anchor routes to key sections (`Home`, `About`, `Portfolio`, `Services & Collabs`, and `Contact & WhatsApp`).
+* **Direct Touchpoint Links**: Quick-connect mobile phone link (`tel:+919360870164`), verified Instagram shortcut (`@bikash_suna_07`), and studio headquarters indicator (`Jharsuguda, Odisha`).
+* **Minimalist Copyright Bar**: Clean, distraction-free legal ownership footer (`© 2026 Bikash Suna. All Rights Reserved.`).
+
 ---
 
 ## 💰 Service Rate Matrix
@@ -280,6 +286,7 @@ Easily tailor this codebase for your personal branding or client project:
 | **Service Packages & Rates** | `src/components/Services.jsx` | Adjust prices and feature lists for Reels, Albums, and Collabs. |
 | **Showreel Projects** | `src/components/Portfolio.jsx` | Add project items, thumbnail paths, client names, and metrics. |
 | **Audience Media Kit** | `src/components/CreatorMediaKit.jsx` | Update impressions, engagement percentages, and follower stats. |
+| **Footer & Touchpoints** | `src/components/Footer.jsx` | Update brand statement, navigation anchors, and direct contact channels. |
 | **Color Tokens & Glows** | `src/index.css` | Customize `:root` CSS variables (`--color-accent-purple`, `--color-accent-teal`, etc.). |
 
 ---
