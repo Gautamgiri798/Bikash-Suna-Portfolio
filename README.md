@@ -43,30 +43,17 @@
 
 ## 📑 Quick Navigation Hub
 
-<div align="center">
-
-  <!-- Interactive Navigation Pill Badges -->
-  <a href="#-executive-overview"><img src="https://img.shields.io/badge/🌟_Overview-1e293b?style=for-the-badge&logoColor=white" alt="Overview" /></a>
-  <a href="#-1-interactive-3d-webgl-gyro--particle-universe"><img src="https://img.shields.io/badge/🌌_3D_WebGL-1e293b?style=for-the-badge&logoColor=white" alt="3D WebGL" /></a>
-  <a href="#-2-cinematic-hero--pure-diamond-ice-white-typography"><img src="https://img.shields.io/badge/🎬_Ice--White_Hero-1e293b?style=for-the-badge&logoColor=white" alt="Hero" /></a>
-  <a href="#-3-dual-superpowers--two-passions-one-powerful-creator"><img src="https://img.shields.io/badge/⚡_Dual_Pillars-1e293b?style=for-the-badge&logoColor=white" alt="Dual Pillars" /></a>
-  <a href="#-4-cinema-studio-video-player--fullscreen-hud"><img src="https://img.shields.io/badge/📽️_Cinema_Player-1e293b?style=for-the-badge&logoColor=white" alt="Cinema Player" /></a>
-  <br/>
-  <a href="#-5-filterable-showreel-showcase"><img src="https://img.shields.io/badge/🎞️_Showreels-1e293b?style=for-the-badge&logoColor=white" alt="Showreels" /></a>
-  <a href="#-6-creator-media-kit--live-analytics-desk"><img src="https://img.shields.io/badge/📊_Media_Kit-1e293b?style=for-the-badge&logoColor=white" alt="Media Kit" /></a>
-  <a href="#-service-rate-matrix"><img src="https://img.shields.io/badge/💰_Rate_Matrix-1e293b?style=for-the-badge&logoColor=white" alt="Rates" /></a>
-  <a href="#-7-clean-luxury-contact--instant-payments-suite"><img src="https://img.shields.io/badge/💳_Contact_%26_UPI-1e293b?style=for-the-badge&logoColor=white" alt="Contact & Payments" /></a>
-  <a href="#-8-right-sided-floating-whatsapp-concierge"><img src="https://img.shields.io/badge/💬_WhatsApp_Desk-1e293b?style=for-the-badge&logoColor=white" alt="WhatsApp" /></a>
-
-</div>
-
+<a href="#-executive-overview"><img src="https://img.shields.io/badge/🌟_OVERVIEW-1e293b?style=for-the-badge&logoColor=white" alt="Overview" /></a>
+<a href="#-1-interactive-3d-webgl-gyro--particle-universe"><img src="https://img.shields.io/badge/🌌_3D_WEBGL-1e293b?style=for-the-badge&logoColor=white" alt="3D WebGL" /></a>
+<a href="#-2-cinematic-hero--pure-diamond-ice-white-typography"><img src="https://img.shields.io/badge/🎬_ICE--WHITE_HERO-1e293b?style=for-the-badge&logoColor=white" alt="Hero" /></a>
+<a href="#-3-dual-superpowers--two-passions-one-powerful-creator"><img src="https://img.shields.io/badge/⚡_DUAL_PILLARS-1e293b?style=for-the-badge&logoColor=white" alt="Dual Pillars" /></a>
+<a href="#-4-cinema-studio-video-player--fullscreen-hud"><img src="https://img.shields.io/badge/📽️_CINEMA_PLAYER-1e293b?style=for-the-badge&logoColor=white" alt="Cinema Player" /></a>
 <br/>
-
-| Section Pillar | Focus & Direct Deep Links |
-| :--- | :--- |
-| **🌌 Visual & 3D Experience** | [🌟 Executive Overview](#-executive-overview) &nbsp;&bull;&nbsp; [🌌 3D WebGL Canvas](#-1-interactive-3d-webgl-gyro--particle-universe) &nbsp;&bull;&nbsp; [🎬 Ice-White Hero Typography](#-2-cinematic-hero--pure-diamond-ice-white-typography) &nbsp;&bull;&nbsp; [📽️ Cinema Fullscreen HUD](#-4-cinema-studio-video-player--fullscreen-hud) &nbsp;&bull;&nbsp; [🎞️ Showreel Gallery](#-5-filterable-showreel-showcase) |
-| **💼 Commercial & Collaboration** | [⚡ Dual Superpowers](#-3-dual-superpowers--two-passions-one-powerful-creator) &nbsp;&bull;&nbsp; [📊 Creator Media Kit](#-6-creator-media-kit--live-analytics-desk) &nbsp;&bull;&nbsp; [💰 Service Rate Matrix](#-service-rate-matrix) &nbsp;&bull;&nbsp; [🛠️ 4-Phase Pipeline](#️-4-phase-creative-production-pipeline) &nbsp;&bull;&nbsp; [💳 Instant UPI Payments](#-7-clean-luxury-contact--instant-payments-suite) &nbsp;&bull;&nbsp; [💬 WhatsApp Concierge](#-8-right-sided-floating-whatsapp-concierge) |
-| **⚙️ Engineering & Architecture** | [💻 Tech Stack & Architecture](#-tech-stack--dependencies) &nbsp;&bull;&nbsp; [📂 Repository Structure](#-comprehensive-project-structure) &nbsp;&bull;&nbsp; [🚀 Getting Started & Setup](#-getting-started--local-setup) &nbsp;&bull;&nbsp; [⚙️ Customization Guide](#️-customization-guide) &nbsp;&bull;&nbsp; [⚡ 60FPS Benchmarks](#-performance--optimization-standards) |
+<a href="#-5-filterable-showreel-showcase"><img src="https://img.shields.io/badge/🎞️_SHOWREELS-1e293b?style=for-the-badge&logoColor=white" alt="Showreels" /></a>
+<a href="#-6-creator-media-kit--live-analytics-desk"><img src="https://img.shields.io/badge/📊_MEDIA_KIT-1e293b?style=for-the-badge&logoColor=white" alt="Media Kit" /></a>
+<a href="#-service-rate-matrix"><img src="https://img.shields.io/badge/💰_RATE_MATRIX-1e293b?style=for-the-badge&logoColor=white" alt="Rates" /></a>
+<a href="#-7-clean-luxury-contact--instant-payments-suite"><img src="https://img.shields.io/badge/💳_CONTACT_%26_UPI-1e293b?style=for-the-badge&logoColor=white" alt="Contact & Payments" /></a>
+<a href="#-8-right-sided-floating-whatsapp-concierge"><img src="https://img.shields.io/badge/💬_WHATSAPP_DESK-1e293b?style=for-the-badge&logoColor=white" alt="WhatsApp" /></a>
 
 ---
 
