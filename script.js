@@ -150,19 +150,28 @@ document.addEventListener('DOMContentLoaded', () => {
             quantity = 99;
         }
 
-        // Express delivery costs: ₹200 for reels, ₹1000 for albums
+        // Express delivery costs: ₹200 for reels, ₹400 for collab campaigns, ₹1000 for albums
         let expressCostPerUnit = 0;
         if (expressCheckbox.checked) {
             if (baseCostPerUnit === 600) {
                 expressCostPerUnit = 200;
                 expressCostInfo.textContent = '+₹200 per video';
+            } else if (baseCostPerUnit === 1500) {
+                expressCostPerUnit = 400;
+                expressCostInfo.textContent = '+₹400 per campaign';
             } else {
                 expressCostPerUnit = 1000;
                 expressCostInfo.textContent = '+₹1000 per video';
             }
         } else {
             // just update description based on select type
-            expressCostInfo.textContent = baseCostPerUnit === 600 ? '+₹200 per video' : '+₹1000 per video';
+            if (baseCostPerUnit === 600) {
+                expressCostInfo.textContent = '+₹200 per video';
+            } else if (baseCostPerUnit === 1500) {
+                expressCostInfo.textContent = '+₹400 per campaign';
+            } else {
+                expressCostInfo.textContent = '+₹1000 per video';
+            }
         }
 
         // Custom Sound FX costs: ₹150 per video
@@ -180,17 +189,24 @@ document.addEventListener('DOMContentLoaded', () => {
         breakdownAddonsDisplay.textContent = `₹${addonsTotal}`;
 
         // Update Booking CTA href dynamically
-        const selectedOptionText = projectTypeSelect.options[projectTypeSelect.selectedIndex].getAttribute('data-name');
-        let detailsText = `Hi Bikash, I want to book ${quantity} x ${selectedOptionText}(s).`;
+        const selectedOption = projectTypeSelect.options[projectTypeSelect.selectedIndex];
+        const selectedOptionText = selectedOption ? selectedOption.getAttribute('data-name') : 'Project';
+        
+        let detailsText = '';
+        if (baseCostPerUnit === 1500) {
+            detailsText = `Hi Bikash! I want to collaborate for a Paid Promotion / Brand Collab (${quantity} campaign).`;
+        } else {
+            detailsText = `Hi Bikash, I want to book ${quantity} x ${selectedOptionText}(s).`;
+        }
         
         const addonsList = [];
-        if (expressCheckbox.checked) addonsList.push("Express Delivery");
+        if (expressCheckbox.checked) addonsList.push("Express Delivery (24-48h)");
         if (customSfxCheckbox.checked) addonsList.push("Custom Premium SFX");
         
         if (addonsList.length > 0) {
             detailsText += ` Options: ${addonsList.join(', ')}.`;
         }
-        detailsText += ` Estimated cost: ₹${finalTotal}. Let's get started!`;
+        detailsText += ` Estimated total: ₹${finalTotal}. Let's discuss details!`;
 
         const encodedMessage = encodeURIComponent(detailsText);
         calcBookingBtn.href = `https://wa.me/919360870164?text=${encodedMessage}`;
@@ -307,8 +323,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function openModal(title, category) {
         modal.classList.add('active');
         playerTitle.textContent = title;
-        playerBadge.textContent = category === 'reel' ? 'Short Reel' : 'Video Album';
-        videoDuration = category === 'reel' ? 30 : 90; // Reels are shorter, Albums are longer
+        let badgeLabel = 'Short Reel';
+        if (category === 'album') badgeLabel = 'Video Album';
+        else if (category === 'collab') badgeLabel = 'Brand Collab';
+        playerBadge.textContent = badgeLabel;
+        videoDuration = category === 'album' ? 90 : 30; // Albums are longer, reels/collabs are shorter
         
         // Reset player state
         isPlaying = false;
@@ -398,8 +417,10 @@ document.addEventListener('DOMContentLoaded', () => {
         existingDots.forEach(dot => dot.remove());
 
         // Create interactive moving dots depending on video category
-        const dotCount = category === 'reel' ? 25 : 12;
-        const color = category === 'reel' ? '#06b6d4' : '#7c3aed';
+        const dotCount = category === 'album' ? 12 : 25;
+        let color = '#7c3aed';
+        if (category === 'reel') color = '#06b6d4';
+        else if (category === 'collab') color = '#10b981';
         
         for (let i = 0; i < dotCount; i++) {
             const graphic = document.createElement('div');

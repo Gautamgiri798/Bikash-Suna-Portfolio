@@ -768,9 +768,9 @@ img {
 /* Services & Pricing Cards Styling */
 .services-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    max-width: 1000px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -778,7 +778,7 @@ img {
     background: var(--color-bg-card);
     border: var(--border-glass);
     border-radius: var(--radius-lg);
-    padding: 3.5rem 2.5rem;
+    padding: 3.5rem 2rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -791,12 +791,23 @@ img {
     box-shadow: 0 10px 40px -10px rgba(124, 58, 237, 0.15);
 }
 
+.pricing-card.collab-card {
+    background: linear-gradient(180deg, rgba(22, 26, 34, 0.85) 0%, rgba(10, 24, 34, 0.95) 100%);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 0 10px 40px -10px rgba(6, 182, 212, 0.12);
+}
+
 .pricing-card:hover {
     transform: translateY(-8px);
 }
 
 .pricing-card.highlighted:hover {
     box-shadow: 0 15px 40px -5px rgba(124, 58, 237, 0.25), var(--shadow-glow);
+}
+
+.pricing-card.collab-card:hover {
+    border-color: rgba(6, 182, 212, 0.6);
+    box-shadow: 0 15px 40px -5px rgba(6, 182, 212, 0.25), 0 0 25px rgba(6, 182, 212, 0.15);
 }
 
 .pricing-badge {
@@ -819,6 +830,13 @@ img {
     color: var(--color-text-primary);
     border: none;
     box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+}
+
+.pricing-badge.promo-badge {
+    background: linear-gradient(135deg, var(--color-accent-teal) 0%, var(--color-accent-blue) 100%);
+    color: var(--color-text-primary);
+    border: none;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.35);
 }
 
 .package-name {
@@ -1428,6 +1446,15 @@ img {
     text-transform: uppercase;
 }
 
+.item-tag.collab-tag {
+    background: rgba(6, 182, 212, 0.9);
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
 .portfolio-info {
     padding: 1.5rem;
     display: flex;
@@ -1787,6 +1814,32 @@ img {
     box-shadow: var(--shadow-glow);
 }
 
+.collab-highlight-item {
+    background: rgba(6, 182, 212, 0.05);
+    border: 1px solid rgba(6, 182, 212, 0.25);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    transition: var(--transition-normal);
+}
+
+.collab-highlight-item:hover {
+    background: rgba(6, 182, 212, 0.12);
+    border-color: rgba(6, 182, 212, 0.5);
+    transform: translateX(4px);
+}
+
+.collab-icon {
+    background: rgba(6, 182, 212, 0.12) !important;
+    color: var(--color-accent-teal) !important;
+    border-color: rgba(6, 182, 212, 0.3) !important;
+}
+
+.collab-highlight-item:hover .collab-icon {
+    background: linear-gradient(135deg, var(--color-accent-teal) 0%, var(--color-accent-blue) 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.4) !important;
+}
+
 .contact-label {
     font-size: 0.75rem;
     font-weight: 700;
@@ -2084,6 +2137,10 @@ img {
     .about-skills-stack {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 1.5rem;
     }
     .portfolio-grid {
