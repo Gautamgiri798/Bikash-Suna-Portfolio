@@ -176,7 +176,7 @@ All showcase items are managed in the centralized configuration file [src/data/p
   * **Instagram Creator Profile**: Official sunset-violet gradient badge routing directly to `@bikash_suna_07`.
   * **Studio Location**: Jharsuguda, Odisha, India.
 * **Cyber Cinema UPI Desk**:
-  * **1-Click UPI VPA Copy**: One-tap copy for official UPI ID (**`9360870164@superyes`**) with animated green checkmark confirmation.
+  * **1-Click Mobile-Responsive UPI VPA Copy**: High-contrast, touch-optimized copy button displaying both iconic feedback and dynamic text label (`Copy` &rarr; `Copied`) for official UPI ID (**`9360870164@superyes`**). Engineered with flexbox `min-width: 0` protection and robust fallback clipboard execution to guarantee 100% visibility and functionality across all mobile screen sizes and webviews.
   * **Verified Payee Indicator**: Displays official payee name **BIKASH SUNA** with a verified status badge and `super.money` badge.
   * **Real Scannable Super.money QR Code**: High-contrast, scannable QR code enclosed in an animated futuristic viewfinder with sweeping neon laser scan and bracket reticles.
   * **Tap to Pay via UPI App**: Native mobile deep link (`upi://pay?pa=9360870164@superyes&pn=Bikash%20Suna&cu=INR`) that instantly launches default payment apps on smartphones.
