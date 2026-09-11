@@ -87,10 +87,11 @@ Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion,
   * Pacing, kinetic captions, sound design, multi-cam sync, and cinematic color grading.
   * Master software suite badges: Premiere Pro, After Effects, DaVinci Resolve, CapCut Pro.
   * Direct pricing anchors: Short Reels from **₹600**, Long Form from **₹3,000**.
-* **Pillar 02 — High-Impact Content Creator**:
-  * Authentic storytelling, organic lifestyle integration, viral reel strategies, and high-converting commercial CTAs.
-  * Platforms: Instagram Reels, YouTube Shorts, and Brand Collabs.
-  * Direct sponsorship anchor: Paid Collabs from **₹1,500**.
+* **Pillar 02 — High-Impact Content Creator & Brand Partner**:
+  * Authentic audience advocacy, high-converting product showcases, viral reel hook scripting, and macro product b-roll.
+  * Verified distribution reach: **50K+ Monthly Audience Reach**, 98% retention, and 8.4% engagement.
+  * Commercial Collab Model: Tailored brand sponsorship packages with **Custom Quote via DM / WhatsApp** based on campaign deliverables, product scope, and distribution reach.
+  * Key Deliverables: Dedicated sponsored Reel authored by Bikash, official Instagram co-author post, 24h active story blast with direct conversion link sticker, and full end-to-end 4K production.
 * **2-in-1 Synergy Banner**: Highlighting the hybrid Creator + Editor package for brands seeking all-in-one production, saving time and maximizing audience resonance.
 
 ### 📽️ 4. Cinema Studio Video Player & Fullscreen HUD
@@ -128,6 +129,7 @@ assets/videos/
 All showcase items are managed in the centralized configuration file [src/data/projects.js](src/data/projects.js):
 
 ```javascript
+// Long Video Album Example
 {
   id: 'album-1',
   category: 'album',
@@ -143,6 +145,24 @@ All showcase items are managed in the centralized configuration file [src/data/p
   duration: '2:20',
   quality: '4K Cinema • 24 FPS',
   metric: '🎵 Official MV',
+},
+
+// Brand Collab / Sponsored Showcase Example
+{
+  id: 'collab-1',
+  category: 'collab',
+  title: 'Creator Tech Unbox & Sponsored Reel',
+  desc: 'High-converting sponsored showcase with retention-engineered hook, macro product b-roll, and story link stickers.',
+  img: 'assets/reel.jpg',
+  videoUrl: '', // e.g., 'assets/videos/brand-collabs/tech-collab.mp4'
+  tags: ['Paid Promotion', 'Brand Collab', 'Hook Retention'],
+  badge: 'Brand Collab',
+  color: 'emerald',
+  icon: 'fa-handshake',
+  duration: '0:28',
+  quality: '4K UHD',
+  metric: '🚀 50K+ Reach',
+  isCollab: true,
 }
 ```
 
@@ -179,7 +199,7 @@ All showcase items are managed in the centralized configuration file [src/data/p
 * **Interactive Preset Quick Chips**:
   * ⚡ *Short Reel Edit (₹600)*
   * 🎬 *Long Video Album (₹3,000)*
-  * 🤝 *Brand Collab / Paid Promo (₹1,500)*
+  * 🤝 *Brand Collab / Paid Promo (DM for Collab)*
   * 🚀 *Rush 24h Express Delivery*
 * **Realistic Typing Simulation**: Selecting any chip triggers an animated 3-dot typing response before generating a direct WhatsApp launch button with customized project specs.
 
@@ -201,7 +221,7 @@ Transparent, upfront pricing packages designed for immediate commercial decision
 | :--- | :--- | :--- | :---: |
 | **⚡ Short-Form Reel / TikTok** | 9:16 vertical, hook retention pacing, sound design, kinetic subtitle timing, color grading | 24h – 48h | **₹600** / reel |
 | **🎬 Long Video / YouTube Album** | 16:9 cinematic, multi-cam sync, master sound mix, B-roll pacing, custom LUT grade | 48h – 72h | **₹3,000** / video |
-| **🤝 Brand Collab / Paid Promo** | Dedicated sponsored Reel, story blast, co-author tag, permanent feed post, link in bio | 48h | **₹1,500** / post |
+| **🤝 Paid Promotion & Brand Collab** | 1 Dedicated sponsored Reel authored by Bikash, Instagram Co-Author & Tagged Collab, 24h story blast with link sticker, hook scripting, product B-roll, 4K edit & sound design (50K+ Reach) | 48h – 72h | **DM for Collaboration** (Custom Quote) |
 | **🚀 Rush 24h Express Turnaround** | Priority rendering queue, dedicated revision window, same-day draft | 24 Hours | **Add-on** |
 
 ---
@@ -265,7 +285,7 @@ Bikash-Suna-Portfolio/
 │   │   ├── CreatorMediaKit.jsx     # Creator metrics, demographic statistics & sparklines
 │   │   ├── Portfolio.jsx           # Filterable 4K showreel gallery with luxury duration pills
 │   │   ├── VideoModal.jsx          # Studio cinema player with native & windowed Fullscreen HUD
-│   │   ├── Services.jsx            # Transparent rate cards (Reels ₹600, Albums ₹3000, Collabs ₹1500)
+│   │   ├── Services.jsx            # Transparent rate cards (Reels ₹600, Albums ₹3000, Collabs via DM)
 │   │   ├── Contact.jsx             # Direct sponsor desk, UPI copy node & laser QR scanner
 │   │   ├── Footer.jsx              # Brand footer with navigation & copyright
 │   │   └── FloatingWhatsApp.jsx    # Right-sided interactive WhatsApp concierge
