@@ -134,58 +134,18 @@ public/thumbnails/   # High-resolution reel posters (reel-1.jpg, reel-2.jpg, ree
 All showcase items are managed in the centralized configuration file [src/data/projects.js](src/data/projects.js):
 
 ```javascript
-// Short Reel Example (with local MP4 preview & live Instagram link)
 {
   id: 'reel-1',
-  category: 'reel',
+  category: 'reel', // 'reel' (9:16) | 'album' (16:9) | 'collab'
   title: 'She Is Just My Best Friend | Sambalpuri Reel',
-  desc: 'A playful Sambalpuri dialogue reel built around natural performances, expressive reactions, and relationship-driven storytelling. The edit combines conversational pacing, cinematic framing, clean transitions, and carefully timed visual cuts.',
+  desc: 'Conversational pacing, cinematic framing, and clean dialogue transitions.',
   img: 'assets/thumbnails/reel-1.jpg',
-  videoUrl: '/videos/short-reels/bestfriend-reel.mp4',
-  externalUrl: 'https://www.instagram.com/reel/DIx7upbzs2B/',
-  tags: ['Dialogue Editing', 'Sambalpuri Reel', 'Storytelling', 'Cinematic Framing', 'Visual Pacing'],
+  videoUrl: '/videos/short-reels/bestfriend-reel.mp4', // Local video or YouTube URL
+  externalUrl: 'https://www.instagram.com/reel/DIx7upbzs2B/', // Instagram or YouTube direct link
+  tags: ['Dialogue Editing', 'Sambalpuri Reel', 'Visual Pacing'],
   badge: 'Short Reel',
-  color: 'cyan',
-  icon: 'fa-bolt',
+  color: 'cyan', // 'cyan' | 'purple' | 'gold' | 'blue' | 'emerald'
   duration: '1:13',
-  quality: '4K • 60 FPS',
-  metric: '🔥 62K+ Likes',
-},
-
-// Long Video Album Example (with official YouTube link)
-{
-  id: 'album-1',
-  category: 'album',
-  title: 'Babu Zaraa Bachke | Official Sambalpuri Rap MV',
-  desc: 'Edited a high-energy Sambalpuri rap music video with cinematic color grading, performance-driven cuts, rhythmic pacing, and immersive sound design, transforming regional rap into a visually dynamic music experience.',
-  img: 'assets/babu-zaraa-bachke.jpg',
-  videoUrl: 'https://youtu.be/3lBV0PMO6ec',
-  externalUrl: 'https://youtu.be/3lBV0PMO6ec',
-  tags: ['Video Editing', 'Sambalpuri Rap', 'Music Video', 'Color Grading', 'Sound Design'],
-  badge: 'Video Album',
-  color: 'purple',
-  icon: 'fa-film',
-  duration: '2:20',
-  quality: '4K Cinema • 24 FPS',
-  metric: '🎵 Official MV',
-},
-
-// Brand Collab / Sponsored Showcase Example
-{
-  id: 'collab-1',
-  category: 'collab',
-  title: 'Creator Tech Unbox & Sponsored Reel',
-  desc: 'High-converting sponsored showcase with retention-engineered hook, macro product b-roll, and story link stickers.',
-  img: 'assets/reel.jpg',
-  videoUrl: '', // e.g., 'assets/videos/brand-collabs/tech-collab.mp4'
-  tags: ['Paid Promotion', 'Brand Collab', 'Hook Retention'],
-  badge: 'Brand Collab',
-  color: 'emerald',
-  icon: 'fa-handshake',
-  duration: '0:28',
-  quality: '4K UHD',
-  metric: '🚀 50K+ Reach',
-  isCollab: true,
 }
 ```
 
