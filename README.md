@@ -15,6 +15,7 @@
     <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-6.0-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite 6" /></a>
     <a href="https://github.com/darkroomengineering/lenis"><img src="https://img.shields.io/badge/Lenis-Smooth_Scroll-000000?style=for-the-badge&logoColor=white" alt="Lenis" /></a>
     <a href="https://wa.me/919360870164"><img src="https://img.shields.io/badge/WhatsApp-Live_Desk-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp Desk" /></a>
+    <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" /></a>
     <a href="#-license"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License" /></a>
   </p>
 
@@ -32,6 +33,10 @@
       <img src="https://img.shields.io/badge/💰_Pricing_Rates-10B981?style=flat-square" alt="Pricing Rates" />
     </a>
     &nbsp;
+    <a href="#-deployment-guide-vercel--production">
+      <img src="https://img.shields.io/badge/🌐_Deploy_Guide-000000?style=flat-square&logo=vercel&logoColor=white" alt="Deploy Guide" />
+    </a>
+    &nbsp;
     <a href="#-getting-started--local-setup">
       <img src="https://img.shields.io/badge/🚀_Run_Locally-0EA5E9?style=flat-square" alt="Run Locally" />
     </a>
@@ -47,7 +52,7 @@
 <a href="#-1-interactive-3d-webgl-gyro--particle-universe"><img src="https://img.shields.io/badge/🌌_3D_WEBGL-1e293b?style=for-the-badge&logoColor=white" alt="3D WebGL" /></a>
 <a href="#-2-cinematic-hero--pure-diamond-ice-white-typography"><img src="https://img.shields.io/badge/🎬_ICE--WHITE_HERO-1e293b?style=for-the-badge&logoColor=white" alt="Hero" /></a>
 <a href="#-3-dual-superpowers--two-passions-one-powerful-creator"><img src="https://img.shields.io/badge/⚡_DUAL_PILLARS-1e293b?style=for-the-badge&logoColor=white" alt="Dual Pillars" /></a>
-<a href="#-4-cinema-studio-video-player--fullscreen-hud"><img src="https://img.shields.io/badge/📽️_CINEMA_PLAYER-1e293b?style=for-the-badge&logoColor=white" alt="Cinema Player" /></a>
+<a href="#-4-cinema-studio-video-player--persistent-controls"><img src="https://img.shields.io/badge/📽️_CINEMA_PLAYER-1e293b?style=for-the-badge&logoColor=white" alt="Cinema Player" /></a>
 <br/>
 <a href="#-5-filterable-showreel-showcase"><img src="https://img.shields.io/badge/🎞️_SHOWREELS-1e293b?style=for-the-badge&logoColor=white" alt="Showreels" /></a>
 <a href="#-video-assets--custom-media-management"><img src="https://img.shields.io/badge/📁_VIDEO_ASSETS-1e293b?style=for-the-badge&logoColor=white" alt="Video Assets" /></a>
@@ -55,6 +60,7 @@
 <a href="#-service-rate-matrix"><img src="https://img.shields.io/badge/💰_RATE_MATRIX-1e293b?style=for-the-badge&logoColor=white" alt="Rates" /></a>
 <a href="#-7-clean-luxury-contact--instant-payments-suite"><img src="https://img.shields.io/badge/💳_CONTACT_%26_UPI-1e293b?style=for-the-badge&logoColor=white" alt="Contact & Payments" /></a>
 <a href="#-8-right-sided-floating-whatsapp-concierge"><img src="https://img.shields.io/badge/💬_WHATSAPP_DESK-1e293b?style=for-the-badge&logoColor=white" alt="WhatsApp" /></a>
+<a href="#-deployment-guide-vercel--production"><img src="https://img.shields.io/badge/🌐_DEPLOYMENT-1e293b?style=for-the-badge&logoColor=white" alt="Deployment" /></a>
 
 ---
 
@@ -65,7 +71,7 @@ This web platform is engineered as an ultra-high-end cinematic portfolio, creati
 1. **Elite Video Editor & Post-Production Specialist**: Precision narrative storytelling, retention-driven cuts, cinematic DaVinci color grading, immersive sound design, and viral pacing for short-form Reels, TikToks, and long-form music video & documentary edits.
 2. **High-Impact Content Creator & Brand Partner**: Authentic lifestyle & tech storytelling, verified creator presence, transparent media kit retention analytics, and instant direct brand collaboration funnels.
 
-Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion, zero input latency, and seamless conversion-optimized client onboarding.
+Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion, zero input latency, responsive cross-device geometry, and seamless conversion-optimized client onboarding.
 
 ---
 
@@ -78,7 +84,7 @@ Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion,
 
 ### 🎬 2. Cinematic Hero & Pure Diamond Ice-White Typography
 * **High-Contrast Headline Typography**: The rotating typewriter titles (*"Influential Content Creator"*, *"Cinematic Video Editor"*, *"Viral Reel Specialist"*, *"Brand Collab Partner"*) are rendered in a bespoke **Pure Diamond Ice-White with Platinum Glow** gradient (`#FFFFFF` &rarr; `#F8FAFC` &rarr; `#E2E8F0` &rarr; `#CBD5E1`).
-* **Multi-Depth Platinum Aura**: Layered drop shadows (`rgba(255, 255, 255, 0.7)` and `rgba(226, 232, 240, 0.4)`) guarantee 100% legibility against dark studio backgrounds.
+* **Multi-Depth Platinum Aura**: Layered drop shadows guarantee 100% legibility against dark studio backgrounds.
 * **Studio Production Monitor Suite**: Real-time visualizer card displaying Premiere Pro and After Effects workflow previews, simulated playback controls, live frequency audio visualizers, and timecode readouts.
 * **Live Verified Metrics**: Dynamic animated counters tracking 120+ projects completed, 4.9★ rating, and 100% client retention.
 
@@ -94,16 +100,16 @@ Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion,
   * Key Deliverables: Dedicated sponsored Reel authored by Bikash, official Instagram co-author post, 24h active story blast with direct conversion link sticker, and full end-to-end 4K production.
 * **2-in-1 Synergy Banner**: Highlighting the hybrid Creator + Editor package for brands seeking all-in-one production, saving time and maximizing audience resonance.
 
-### 📽️ 4. Cinema Studio Video Player & Fullscreen HUD
+### 📽️ 4. Cinema Studio Video Player & Persistent Controls
 * **Studio Cinema Monitor Frame**: High-fidelity video player dialog with frosted glass header, glowing window status controls, and an active pulsing `REC` indicator.
-* **Dual Fullscreen Engine**:
-  * **Native Fullscreen API**: Leverages `requestFullscreen()` with graceful vendor prefix support (`webkit`, `moz`, `ms`) for true full-monitor immersion.
-  * **Cinema Viewport Maximization HUD**: Custom fullscreen fallback that stretches seamlessly across the browser with floating player controls, audio toggle, and ESC key listener.
-* **Interactive Media HUD**:
-  * **SMPTE Timecode Reader**: Real-time elapsed / duration display (`00:00:18:14 / 00:01:24:00`).
-  * **Cinematic Ken Burns Canvas**: Subtle pan and zoom dynamics simulating master footage.
-  * **Live Audio Equalizer**: Dynamic animated frequency bars with one-click Mute/Unmute toggle.
-  * **Interactive Scrubber Bar**: Scrubbable timeline with hover preview and progress filling.
+* **Persistent HTML5 Controls**:
+  * Luxury permanent Play/Pause toggle with large center overlay and toolbar control button.
+  * Interactive progress scrubber bar with drag preview.
+  * Accurate SMPTE elapsed / total timecode reader (`00:00:18 / 00:03:42`).
+  * Dedicated volume and audio mute toggle.
+  * True full-screen toggle supporting native Fullscreen API (`requestFullscreen()`) across all browsers.
+* **Embedded YouTube Video Mode**: Seamlessly switches to native responsive YouTube embeds for external music videos with persistent direct action links.
+* **Zero Lag & No Freeze**: Fully optimized local high-bitrate video playback ensuring smooth scrub and audio retention.
 
 ### 🎞️ 5. Filterable Showreel Showcase
 * **Zero-Lag Smooth Filtering**: Fast category switching between `All Work`, `Short Reels (9:16)`, `Long Albums (16:9)`, and `Brand Collabs`.
@@ -114,7 +120,6 @@ Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion,
   * **Instagram Direct Badges**: Dedicated sunset-pink gradient pill buttons routing directly to live Instagram Reels in a new tab.
   * **YouTube Direct Badges**: Signature crimson red pill buttons linking directly to full official YouTube music videos.
 * **Decoupled Card Interactivity**: Text descriptions, titles, and tags remain fully selectable for smooth client reading and copying, while video playback is cleanly mapped to the Cinema thumbnail monitor and the *"Watch Project Preview"* action button.
-* **Live Social Proof & Tags**: Verified project metrics and skills pills (`Dialogue Editing`, `Sambalpuri Reel`, `Cinematic Storytelling`, `Color Grading`, `Sound Design`, etc.).
 
 ---
 
@@ -178,22 +183,16 @@ All showcase items are managed in the centralized configuration file [src/data/p
 ---
 
 ## 💬 8. Right-Sided Floating WhatsApp Concierge
-* **Optimal Right-Side Placement**: Anchored at `bottom: 2rem; right: 2rem;`, eliminating overlap with left-sided navigation elements.
+* **Optimal Right-Side Placement**: Anchored cleanly at `bottom: 2rem; right: 2rem;`, eliminating overlap with navigation elements.
 * **Harmonious Scroll Dial Coexistence**: The circular progress dial floats directly above the WhatsApp trigger (`bottom: 6.5rem; right: 2.25rem;`).
-* **Interactive Preset Quick Chips**:
+* **Always-Accessible Quick Options**:
   * ⚡ *Short Reel Edit (₹600)*
   * 🎬 *Long Video Album (₹3,000)*
   * 🤝 *Brand Collab / Paid Promo (DM for Collab)*
   * 🚀 *Rush 24h Express Delivery*
+* **Persistent Presets Architecture**: Options remain visible and interactive even after clicking an option, allowing clients to explore multiple service packages without losing access.
 * **Realistic Typing Simulation**: Selecting any chip triggers an animated 3-dot typing response before generating a direct WhatsApp launch button with customized project specs.
-
----
-
-## ⚓ 9. Clean Luxury 3-Column Footer
-* **Brand Foundation**: Dual-tone brand typography featuring vibrant purple `BIKASH` (`#7c3aed`) and crisp white `SUNA` (`#ffffff`) alongside a tailored creative agency narrative.
-* **Instant Navigation Matrix**: Direct anchor routes to key sections (`Home`, `About`, `Portfolio`, `Services & Collabs`, and `Contact & WhatsApp`).
-* **Direct Touchpoint Links**: Quick-connect mobile phone link (`tel:+919360870164`), verified Instagram shortcut (`@bikash_suna_07`), and studio headquarters indicator (`Jharsuguda, Odisha`).
-* **Minimalist Copyright Bar**: Clean, distraction-free legal ownership footer (`© 2026 Bikash Suna. All Rights Reserved.`).
+* **Custom Inquiry Input**: Integrated chat input footer allowing visitors to type bespoke requirements or rates and open WhatsApp in 1-click.
 
 ---
 
@@ -250,14 +249,17 @@ flowchart LR
 ```bash
 Bikash-Suna-Portfolio/
 ├── assets/
-│   ├── babu-zaraa-bachke.jpg        # Long Album thumbnail artwork
+│   ├── album.jpg                   # Long Album cover artwork
+│   ├── babu-zaraa-bachke.jpg        # Album poster artwork
 │   ├── hero.jpg                    # Studio hero environment photograph
-│   ├── reel.jpg                    # High-energy reel preview thumbnail
+│   ├── payment-qr-card.png         # UPI preview card
 │   ├── payment-qr-code.png         # Scannable super.money payment QR
-│   └── videos/                     # Organized video directories
+│   ├── profile.jpg                 # Creator portrait
+│   ├── reel.jpg                    # High-energy reel preview thumbnail
+│   └── thumbnails/                 # Fallback poster references
 ├── public/                         # Static assets served at root
 │   ├── assets/                     # Scannable payment QR codes & cards
-│   ├── thumbnails/                 # Downloaded high-res covers (reel-1 to 3, collab-1 & 2)
+│   ├── thumbnails/                 # High-res showreel thumbnails (reel-1 to 3, collab-1 & 2)
 │   └── videos/                     # High-bitrate video categories
 │       ├── short-reels/            # Short reels (bestfriend-reel, mor-maa, pahela-nazar)
 │       ├── long-videos/            # Long video albums (babu-zaraa-bachke)
@@ -272,11 +274,11 @@ Bikash-Suna-Portfolio/
 │   │   ├── About.jsx               # Creative journey, software masteries & snapshot
 │   │   ├── CreatorMediaKit.jsx     # Creator metrics, demographic statistics & sparklines
 │   │   ├── Portfolio.jsx           # Filterable 4K showreel gallery with luxury duration pills
-│   │   ├── VideoModal.jsx          # Studio cinema player with native & windowed Fullscreen HUD
+│   │   ├── VideoModal.jsx          # Studio cinema player with persistent controls & fullscreen HUD
 │   │   ├── Services.jsx            # Transparent rate cards (Reels ₹600, Albums ₹3000, Collabs via DM)
 │   │   ├── Contact.jsx             # Direct sponsor desk, UPI copy node & laser QR scanner
 │   │   ├── Footer.jsx              # Brand footer with navigation & copyright
-│   │   └── FloatingWhatsApp.jsx    # Right-sided interactive WhatsApp concierge
+│   │   └── FloatingWhatsApp.jsx    # Right-sided interactive WhatsApp concierge with persistent presets
 │   ├── data/
 │   │   └── projects.js             # Centralized showreel project data & video links
 │   ├── App.jsx                     # Core application orchestrator & Lenis controller
@@ -289,6 +291,35 @@ Bikash-Suna-Portfolio/
 ├── vite.config.js                  # Vite configuration & watcher optimization
 └── README.md                       # Comprehensive documentation
 ```
+
+---
+
+## 🌐 Deployment Guide (Vercel & Production)
+
+Deploying the portfolio takes less than 60 seconds with **Vercel**:
+
+### Option 1: Automatic Deployment via Git (Recommended)
+1. Push your latest code to GitHub:
+   ```bash
+   git add .
+   git commit -m "portfolio"
+   git push origin main
+   ```
+2. Go to [Vercel](https://vercel.com/) and log in with GitHub.
+3. Click **"Add New Project"** &rarr; **"Import"** `Gautamgiri798/Bikash-Suna-Portfolio`.
+4. Vercel automatically detects **Vite**:
+   - **Framework Preset**: `Vite`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
+5. Click **"Deploy"**. Any future `git push origin main` triggers automatic builds and zero-downtime updates.
+
+### Option 2: Deploy via Vercel CLI
+```bash
+npm install -g vercel
+vercel
+```
+Follow the interactive prompts to deploy directly from your local terminal.
 
 ---
 
@@ -313,10 +344,6 @@ cd Bikash-Suna-Portfolio
 Copy the sample environment file:
 ```bash
 cp .env.example .env
-```
-Ensure your database connection string is configured in `.env`:
-```env
-DATABASE_URL=postgresql://postgres:password@localhost:5432/bikash_portfolio
 ```
 
 ### 3. Install Dependencies
@@ -367,7 +394,8 @@ Easily tailor this codebase for your personal branding or client project:
 - **Zero Bloat Frameworks**: 100% vanilla CSS tokens with zero Tailwind or Bootstrap runtime overhead.
 - **Hardware-Accelerated Transforms**: Modals, hover elevations, and 3D rotations utilize `transform: translate3d()` and `will-change` hints for smooth 60FPS execution.
 - **Dynamic 3D Throttling**: WebGL frame loops pause automatically when scrolled off-screen to preserve CPU/GPU overhead.
-- **Crisp Zero-Blur Transitions**: Portfolio filtering uses pure opacity and scale animations, preventing intermediate visual blur.
+- **Persistent Video Controls**: Custom HTML5 media player controls that stay accessible without vanishing or freezing video feeds.
+- **Permanent Preset Quick-Options**: WhatsApp concierge chips remain active after interaction for rapid follow-up inquiries.
 - **Windows File Watcher Guard**: Excludes heavy binary video files from the Vite watcher to prevent `EBUSY` locks.
 - **Semantic HTML5 & Accessibility**: Fully semantic element structure (`<header>`, `<main>`, `<section>`, `<aside>`, `<footer>`), valid `aria-label` tags, and accessible contrast ratios.
 
