@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
+  const upiId = '9360870164@superyes';
   const upiNumber = '9360870164';
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(upiNumber).then(() => {
+  const handleCopy = (textToCopy = upiId) => {
+    navigator.clipboard.writeText(textToCopy).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
@@ -138,38 +139,50 @@ export default function Contact() {
           <div className="payment-card scroll-reveal">
             <div className="payment-header-block">
               <h3 className="payment-heading">Quick & Easy Payments</h3>
-              <p className="payment-intro">Direct payments accepted via GPay, PhonePe, or Paytm UPI.</p>
+              <p className="payment-intro">Direct payments accepted via GPay, PhonePe, Paytm, or any UPI app.</p>
             </div>
 
             <div className="payment-body-block">
               {/* UPI Input with Integrated Copy Button */}
               <div className="upi-payment-box">
-                <span className="upi-field-label">UPI PHONE / PAYMENT NUMBER</span>
+                <div className="upi-label-row">
+                  <span className="upi-field-label">OFFICIAL UPI ID / VPA</span>
+                  <span className="upi-verified-badge">
+                    <i className="fa-solid fa-circle-check"></i> Verified
+                  </span>
+                </div>
                 <div className="upi-input-wrapper">
                   <input
                     type="text"
-                    value={upiNumber}
+                    value={upiId}
                     readOnly
                     className="upi-number-field"
-                    aria-label="UPI Payment Number"
+                    aria-label="Official UPI ID"
                   />
                   <button
                     type="button"
                     className="btn-copy-upi"
-                    onClick={handleCopy}
-                    aria-label="Copy UPI number"
-                    title="Copy to clipboard"
+                    onClick={() => handleCopy(upiId)}
+                    aria-label="Copy UPI ID"
+                    title="Copy UPI ID to clipboard"
                   >
                     <i
                       className={copied ? 'fa-solid fa-check text-emerald' : 'fa-regular fa-copy'}
                       style={{ color: copied ? '#10b981' : '' }}
                     ></i>
                   </button>
-                  <span className={`copy-toast-tooltip ${copied ? 'show' : ''}`}>Copied!</span>
+                  <span className={`copy-toast-tooltip ${copied ? 'show' : ''}`}>Copied UPI ID!</span>
+                </div>
+
+                {/* Beneficiary Name Row */}
+                <div className="upi-beneficiary-row">
+                  <span className="beneficiary-title">Payee Name:</span>
+                  <span className="beneficiary-name">BIKASH SUNA</span>
+                  <span className="beneficiary-app">super.money</span>
                 </div>
               </div>
 
-              {/* Stylized QR Code Scanner Container */}
+              {/* Stylized QR Code Scanner Container with Real Super.money QR */}
               <div className="qr-scanner-box">
                 <div className="qr-viewport">
                   {/* 4 Viewfinder Corner Brackets */}
@@ -181,110 +194,27 @@ export default function Contact() {
                   {/* Sweeping Laser Line */}
                   <div className="qr-laser-line"></div>
 
-                  {/* High-Contrast SVG QR Matrix */}
-                  <svg
-                    className="qr-matrix-svg"
-                    viewBox="0 0 160 160"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    {/* Dark Background */}
-                    <rect width="160" height="160" rx="10" fill="#0b0e17" />
-
-                    {/* Corner Position Patterns */}
-                    {/* Top-Left */}
-                    <rect x="14" y="14" width="38" height="38" rx="5" fill="#18152e" stroke="#c084fc" strokeWidth="3" />
-                    <rect x="22" y="22" width="22" height="22" rx="3" fill="#0b0e17" />
-                    <rect x="27" y="27" width="12" height="12" rx="2" fill="#c084fc" />
-
-                    {/* Top-Right */}
-                    <rect x="108" y="14" width="38" height="38" rx="5" fill="#18152e" stroke="#c084fc" strokeWidth="3" />
-                    <rect x="116" y="22" width="22" height="22" rx="3" fill="#0b0e17" />
-                    <rect x="121" y="27" width="12" height="12" rx="2" fill="#c084fc" />
-
-                    {/* Bottom-Left */}
-                    <rect x="14" y="108" width="38" height="38" rx="5" fill="#18152e" stroke="#c084fc" strokeWidth="3" />
-                    <rect x="22" y="116" width="22" height="22" rx="3" fill="#0b0e17" />
-                    <rect x="27" y="121" width="12" height="12" rx="2" fill="#c084fc" />
-
-                    {/* Alignment Pattern Bottom-Right */}
-                    <rect x="112" y="112" width="24" height="24" rx="3" fill="#18152e" stroke="#38bdf8" strokeWidth="2.5" />
-                    <rect x="119" y="119" width="10" height="10" rx="2" fill="#0b0e17" />
-                    <rect x="122" y="122" width="4" height="4" rx="1" fill="#38bdf8" />
-
-                    {/* QR Modules (Timing & Data) */}
-                    <g fill="#f8fafc" opacity="0.9">
-                      {/* Timing bars */}
-                      <rect x="58" y="18" width="5" height="5" rx="1" />
-                      <rect x="68" y="18" width="5" height="5" rx="1" fill="#c084fc" />
-                      <rect x="78" y="18" width="5" height="5" rx="1" />
-                      <rect x="88" y="18" width="5" height="5" rx="1" fill="#38bdf8" />
-                      <rect x="98" y="18" width="5" height="5" rx="1" />
-
-                      <rect x="18" y="58" width="5" height="5" rx="1" />
-                      <rect x="18" y="68" width="5" height="5" rx="1" fill="#c084fc" />
-                      <rect x="18" y="78" width="5" height="5" rx="1" />
-                      <rect x="18" y="88" width="5" height="5" rx="1" fill="#38bdf8" />
-                      <rect x="18" y="98" width="5" height="5" rx="1" />
-
-                      {/* Middle Data Modules */}
-                      <rect x="28" y="58" width="6" height="6" rx="1" fill="#38bdf8" />
-                      <rect x="38" y="58" width="6" height="6" rx="1" />
-                      <rect x="48" y="58" width="6" height="6" rx="1" fill="#c084fc" />
-                      <rect x="28" y="70" width="6" height="6" rx="1" />
-                      <rect x="38" y="70" width="6" height="6" rx="1" fill="#38bdf8" />
-                      <rect x="48" y="70" width="6" height="6" rx="1" />
-                      <rect x="28" y="82" width="6" height="6" rx="1" fill="#c084fc" />
-                      <rect x="38" y="82" width="6" height="6" rx="1" />
-                      <rect x="48" y="82" width="6" height="6" rx="1" fill="#38bdf8" />
-
-                      <rect x="58" y="28" width="6" height="6" rx="1" fill="#c084fc" />
-                      <rect x="70" y="28" width="6" height="6" rx="1" />
-                      <rect x="82" y="28" width="6" height="6" rx="1" fill="#38bdf8" />
-                      <rect x="94" y="28" width="6" height="6" rx="1" />
-
-                      <rect x="58" y="40" width="6" height="6" rx="1" />
-                      <rect x="70" y="40" width="6" height="6" rx="1" fill="#c084fc" />
-                      <rect x="82" y="40" width="6" height="6" rx="1" />
-                      <rect x="94" y="40" width="6" height="6" rx="1" fill="#38bdf8" />
-
-                      <rect x="58" y="112" width="6" height="6" rx="1" fill="#38bdf8" />
-                      <rect x="70" y="112" width="6" height="6" rx="1" />
-                      <rect x="82" y="112" width="6" height="6" rx="1" fill="#c084fc" />
-                      <rect x="94" y="112" width="6" height="6" rx="1" />
-
-                      <rect x="58" y="124" width="6" height="6" rx="1" />
-                      <rect x="70" y="124" width="6" height="6" rx="1" fill="#38bdf8" />
-                      <rect x="82" y="124" width="6" height="6" rx="1" />
-                      <rect x="94" y="124" width="6" height="6" rx="1" fill="#c084fc" />
-
-                      <rect x="58" y="136" width="6" height="6" rx="1" fill="#c084fc" />
-                      <rect x="70" y="136" width="6" height="6" rx="1" />
-                      <rect x="82" y="136" width="6" height="6" rx="1" fill="#38bdf8" />
-                      <rect x="94" y="136" width="6" height="6" rx="1" />
-
-                      <rect x="108" y="58" width="6" height="6" rx="1" fill="#38bdf8" />
-                      <rect x="120" y="58" width="6" height="6" rx="1" />
-                      <rect x="132" y="58" width="6" height="6" rx="1" fill="#c084fc" />
-                      <rect x="108" y="70" width="6" height="6" rx="1" />
-                      <rect x="120" y="70" width="6" height="6" rx="1" fill="#38bdf8" />
-                      <rect x="132" y="70" width="6" height="6" rx="1" />
-                      <rect x="108" y="82" width="6" height="6" rx="1" fill="#c084fc" />
-                      <rect x="120" y="82" width="6" height="6" rx="1" />
-                      <rect x="132" y="82" width="6" height="6" rx="1" fill="#38bdf8" />
-                      <rect x="108" y="94" width="6" height="6" rx="1" />
-                      <rect x="120" y="94" width="6" height="6" rx="1" fill="#c084fc" />
-                      <rect x="132" y="94" width="6" height="6" rx="1" />
-                    </g>
-                  </svg>
-
-                  {/* Center Rupee Emblem Disc */}
-                  <div className="qr-center-emblem">
-                    <i className="fa-solid fa-indian-rupee-sign"></i>
-                  </div>
+                  {/* Real, Clean & Scannable QR Code */}
+                  <img
+                    src="assets/payment-qr-code.png"
+                    alt="Scan to pay Bikash Suna via UPI (9360870164@superyes)"
+                    className="payment-qr-img"
+                    loading="eager"
+                  />
                 </div>
 
-                <span className="qr-instruction-text">Scan with GPay / PhonePe / Paytm</span>
+                <span className="qr-instruction-text">
+                  <i className="fa-solid fa-qrcode"></i> Scan with GPay / PhonePe / Paytm / super.money
+                </span>
+
+                {/* Instant Mobile Deep Link */}
+                <a
+                  href="upi://pay?pa=9360870164@superyes&pn=Bikash%20Suna&cu=INR"
+                  className="upi-direct-intent-btn"
+                  title="Click to open your default UPI payment app"
+                >
+                  <i className="fa-solid fa-bolt"></i> Tap to Pay via UPI App
+                </a>
               </div>
 
               {/* Supported UPI Apps Pills */}
@@ -297,6 +227,9 @@ export default function Contact() {
                 </span>
                 <span className="upi-app-pill paytm-pill">
                   <i className="fa-solid fa-receipt"></i> Paytm
+                </span>
+                <span className="upi-app-pill super-pill">
+                  <i className="fa-solid fa-bolt"></i> super.money
                 </span>
                 <span className="upi-app-pill bhim-pill">
                   <i className="fa-solid fa-building-columns"></i> BHIM UPI

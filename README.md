@@ -110,7 +110,11 @@ Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion,
 * **Hardware-Accelerated Transitions**: Pure opacity and transform scale animations eliminating blur artifacts during filter changes.
 * **Luxury Studio Duration Pill**: Frosted glassmorphism duration badge (`backdrop-filter: blur(14px)`) integrated with a 3-bar animated rhythmic gradient sound frequency indicator.
 * **Dynamic Video Length Detection**: Automatically parses and displays precise video durations via `onLoadedMetadata` for local files and custom timestamps for YouTube links.
-* **Live Social Proof & Tags**: Verified project metrics and skills pills (`Video Editing`, `Sambalpuri Rap`, `Color Grading`, etc.).
+* **Multi-Platform Direct Link Badges**:
+  * **Instagram Direct Badges**: Dedicated sunset-pink gradient pill buttons routing directly to live Instagram Reels in a new tab.
+  * **YouTube Direct Badges**: Signature crimson red pill buttons linking directly to full official YouTube music videos.
+* **Decoupled Card Interactivity**: Text descriptions, titles, and tags remain fully selectable for smooth client reading and copying, while video playback is cleanly mapped to the Cinema thumbnail monitor and the *"Watch Project Preview"* action button.
+* **Live Social Proof & Tags**: Verified project metrics and skills pills (`Dialogue Editing`, `Sambalpuri Reel`, `Cinematic Storytelling`, `Color Grading`, `Sound Design`, etc.).
 
 ---
 
@@ -119,17 +123,36 @@ Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion,
 The project is structured with dedicated media folders so you can easily drop in your video files and link them into your portfolio:
 
 ```bash
-assets/videos/
-├── short-reels/     # Place your vertical 9:16 reels (MP4 / WebM)
-├── long-videos/     # Place your widescreen 16:9 albums & music videos
-└── brand-collabs/   # Place your sponsored & commercial brand deliverables
+public/videos/
+├── short-reels/     # Vertical 9:16 reels (bestfriend-reel.mp4, mor-maa.mp4, pahela-nazar.mp4)
+├── long-videos/     # Widescreen 16:9 albums & music videos (babu-zaraa-bachke.mp4)
+└── brand-collabs/   # Sponsored & commercial brand deliverables
+public/thumbnails/   # High-resolution reel posters (reel-1.jpg, reel-2.jpg, reel-3.jpg)
 ```
 
 ### Linking Videos in `src/data/projects.js`
 All showcase items are managed in the centralized configuration file [src/data/projects.js](src/data/projects.js):
 
 ```javascript
-// Long Video Album Example
+// Short Reel Example (with local MP4 preview & live Instagram link)
+{
+  id: 'reel-1',
+  category: 'reel',
+  title: 'She Is Just My Best Friend | Sambalpuri Reel',
+  desc: 'A playful Sambalpuri dialogue reel built around natural performances, expressive reactions, and relationship-driven storytelling. The edit combines conversational pacing, cinematic framing, clean transitions, and carefully timed visual cuts.',
+  img: 'assets/thumbnails/reel-1.jpg',
+  videoUrl: '/videos/short-reels/bestfriend-reel.mp4',
+  externalUrl: 'https://www.instagram.com/reel/DIx7upbzs2B/',
+  tags: ['Dialogue Editing', 'Sambalpuri Reel', 'Storytelling', 'Cinematic Framing', 'Visual Pacing'],
+  badge: 'Short Reel',
+  color: 'cyan',
+  icon: 'fa-bolt',
+  duration: '1:13',
+  quality: '4K • 60 FPS',
+  metric: '🔥 62K+ Likes',
+},
+
+// Long Video Album Example (with official YouTube link)
 {
   id: 'album-1',
   category: 'album',
@@ -186,10 +209,11 @@ All showcase items are managed in the centralized configuration file [src/data/p
   * **Instagram Creator Profile**: Official sunset-violet gradient badge routing directly to `@bikash_suna_07`.
   * **Studio Location**: Jharsuguda, Odisha, India.
 * **Cyber Cinema UPI Desk**:
-  * **1-Click UPI Copy**: Seamless one-tap copy for UPI VPA (`9360870164@upi`) with animated feedback checkmark.
-  * **Sweeping Neon Laser Scanner**: Cyberpunk laser beam continuously sweeping vertically across a high-contrast QR code with corner bracket reticles.
-  * **Central Indian Rupee Seal**: Authentic centered `₹` emblem with gradient glow.
-  * **Supported UPI Apps**: Official brand badges for **Google Pay**, **PhonePe**, **Paytm**, and **BHIM UPI**.
+  * **1-Click UPI VPA Copy**: One-tap copy for official UPI ID (**`9360870164@superyes`**) with animated green checkmark confirmation.
+  * **Verified Payee Indicator**: Displays official payee name **BIKASH SUNA** with a verified status badge and `super.money` badge.
+  * **Real Scannable Super.money QR Code**: High-contrast, scannable QR code enclosed in an animated futuristic viewfinder with sweeping neon laser scan and bracket reticles.
+  * **Tap to Pay via UPI App**: Native mobile deep link (`upi://pay?pa=9360870164@superyes&pn=Bikash%20Suna&cu=INR`) that instantly launches default payment apps on smartphones.
+  * **Supported UPI Apps**: Official badges for **Google Pay**, **PhonePe**, **Paytm**, **super.money**, and **BHIM UPI**.
 
 ---
 
@@ -269,11 +293,14 @@ Bikash-Suna-Portfolio/
 │   ├── babu-zaraa-bachke.jpg        # Long Album thumbnail artwork
 │   ├── hero.jpg                    # Studio hero environment photograph
 │   ├── reel.jpg                    # High-energy reel preview thumbnail
-│   └── videos/                     # Organized video categories
-│       ├── short-reels/            # Short reels (MP4 / WebM)
-│       ├── long-videos/            # Long video albums & music videos
-│       └── brand-collabs/          # Brand collaboration sponsored reels
+│   ├── payment-qr-code.png         # Scannable super.money payment QR
+│   └── videos/                     # Organized video directories
 ├── public/                         # Static assets served at root
+│   ├── assets/                     # Scannable payment QR codes & cards
+│   ├── thumbnails/                 # Downloaded high-res reel covers (reel-1, reel-2, reel-3)
+│   └── videos/                     # High-bitrate video categories
+│       ├── short-reels/            # Short reels (bestfriend-reel, mor-maa, pahela-nazar)
+│       └── long-videos/            # Long video albums (babu-zaraa-bachke)
 ├── src/
 │   ├── components/
 │   │   ├── Navbar.jsx              # Frosted glass responsive header with mobile drawer
@@ -365,7 +392,7 @@ Easily tailor this codebase for your personal branding or client project:
 | **Showreel Projects & Links** | `src/data/projects.js` | Add video links (YouTube or local paths), descriptions, tags, and badges. |
 | **WhatsApp Desk Number** | `src/components/FloatingWhatsApp.jsx` | Change `919360870164` to your international phone number. |
 | **Quick Action Presets** | `src/components/FloatingWhatsApp.jsx` | Modify automated preset chips, message labels, and rates. |
-| **UPI Payment ID** | `src/components/Contact.jsx` | Update `9360870164@upi` and phone number to your VPA. |
+| **UPI Payment ID** | `src/components/Contact.jsx` | Update `9360870164@superyes` (super.money) and phone number to your VPA. |
 | **Contact Channels** | `src/components/Contact.jsx` | Adjust phone, WhatsApp, Instagram username, and studio location. |
 | **Service Packages & Rates** | `src/components/Services.jsx` | Adjust prices and feature lists for Reels, Albums, and Collabs. |
 | **Audience Media Kit** | `src/components/CreatorMediaKit.jsx` | Update impressions, engagement percentages, and follower stats. |
@@ -396,7 +423,7 @@ For brand sponsorships, video editing projects, or creative inquiries:
 | **WhatsApp Sponsor Desk** | [![WhatsApp](https://img.shields.io/badge/Chat_on_WhatsApp-+91_9360870164-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://wa.me/919360870164) |
 | **Direct Phone Call** | `+91 9360870164` |
 | **Instagram Official** | [@bikash_suna_07](https://www.instagram.com/bikash_suna_07/) |
-| **Instant UPI Desk** | `9360870164@upi` *(GPay, PhonePe, Paytm, BHIM)* |
+| **Instant UPI Desk** | `9360870164@superyes` *(GPay, PhonePe, Paytm, super.money, BHIM)* |
 | **Studio Location** | Jharsuguda, Odisha, India |
 | **Turnaround** | Express 24h &bull; Standard 48h–72h |
 

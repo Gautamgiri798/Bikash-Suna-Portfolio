@@ -89,20 +89,37 @@ export default function Portfolio() {
             <div
               key={project.id}
               className={`portfolio-card-premium card-glow-${project.color} stagger-${(index % 4) + 1}`}
-              onClick={() => setSelectedProject(project)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') setSelectedProject(project);
-              }}
             >
               {/* Thumbnail Container with Cinema Monitor HUD */}
-              <div className="portfolio-img-wrapper">
-                {project.videoUrl && !project.videoUrl.includes('youtube') && !project.videoUrl.includes('youtu.be') ? (
+              <div
+                className="portfolio-img-wrapper clickable-thumb"
+                onClick={() => setSelectedProject(project)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Play preview for ${project.title}`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedProject(project);
+                  }
+                }}
+              >
+                {/* Always show the high-res thumbnail image */}
+                {project.img && (
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    className="portfolio-img portfolio-thumb-poster"
+                    style={project.style || {}}
+                    loading="lazy"
+                  />
+                )}
+
+                {/* Smooth Video Hover Preview (plays and fades in on card hover) */}
+                {project.videoUrl && !project.videoUrl.includes('youtube') && !project.videoUrl.includes('youtu.be') && (
                   <video
                     src={project.videoUrl}
-                    poster={project.img}
-                    className="portfolio-img portfolio-video-thumb"
+                    className="portfolio-img portfolio-video-preview"
                     muted
                     playsInline
                     loop
@@ -115,14 +132,6 @@ export default function Portfolio() {
                       e.currentTarget.pause();
                       e.currentTarget.currentTime = 0;
                     }}
-                  />
-                ) : (
-                  <img
-                    src={project.img}
-                    alt={project.title}
-                    className="portfolio-img"
-                    style={project.style || {}}
-                    loading="lazy"
                   />
                 )}
 
@@ -171,12 +180,30 @@ export default function Portfolio() {
                       href={project.externalUrl || project.videoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="card-open-arrow clickable"
+                      className={`card-open-arrow clickable ${
+                        (project.externalUrl || project.videoUrl).includes('youtu') ? 'yt-icon-link' : ''
+                      }`}
                       onClick={(e) => e.stopPropagation()}
-                      title="Watch on YouTube"
-                      aria-label="Watch on YouTube"
+                      title={
+                        (project.externalUrl || project.videoUrl).includes('instagram')
+                          ? 'Watch Reel on Instagram'
+                          : 'Watch on YouTube'
+                      }
+                      aria-label={
+                        (project.externalUrl || project.videoUrl).includes('instagram')
+                          ? 'Watch Reel on Instagram'
+                          : 'Watch on YouTube'
+                      }
                     >
-                      <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                      <i
+                        className={
+                          (project.externalUrl || project.videoUrl).includes('instagram')
+                            ? 'fa-brands fa-instagram'
+                            : (project.externalUrl || project.videoUrl).includes('youtu')
+                            ? 'fa-brands fa-youtube text-red'
+                            : 'fa-solid fa-arrow-up-right-from-square'
+                        }
+                      ></i>
                     </a>
                   ) : (
                     <span className="card-open-arrow">
@@ -195,10 +222,50 @@ export default function Portfolio() {
 
                 {/* Watch Showreel Footer Action */}
                 <div className="card-action-footer">
-                  <span className="action-link-text">
+                  <button
+                    type="button"
+                    className="action-link-btn"
+                    onClick={() => setSelectedProject(project)}
+                    aria-label={`Watch ${project.title} preview`}
+                  >
                     <i className="fa-solid fa-circle-play"></i> Watch Project Preview
-                  </span>
-                  <span className="action-hover-hint">Tap to play</span>
+                  </button>
+                  {project.externalUrl && project.externalUrl.includes('instagram') ? (
+                    <a
+                      href={project.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="card-footer-instagram-btn"
+                      onClick={(e) => e.stopPropagation()}
+                      title="Open Reel on Instagram"
+                    >
+                      <i className="fa-brands fa-instagram"></i> Instagram
+                    </a>
+                  ) : (project.externalUrl && (project.externalUrl.includes('youtube') || project.externalUrl.includes('youtu.be'))) || (project.videoUrl && (project.videoUrl.includes('youtube') || project.videoUrl.includes('youtu.be'))) ? (
+                    <a
+                      href={project.externalUrl || project.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="card-footer-youtube-btn"
+                      onClick={(e) => e.stopPropagation()}
+                      title="Watch on YouTube"
+                    >
+                      <i className="fa-brands fa-youtube"></i> YouTube
+                    </a>
+                  ) : project.externalUrl ? (
+                    <a
+                      href={project.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="card-footer-external-btn"
+                      onClick={(e) => e.stopPropagation()}
+                      title="Open Link"
+                    >
+                      <i className="fa-solid fa-arrow-up-right-from-square"></i> View Link
+                    </a>
+                  ) : (
+                    <span className="action-hover-hint">Tap to play</span>
+                  )}
                 </div>
               </div>
 
