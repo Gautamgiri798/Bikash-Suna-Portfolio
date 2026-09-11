@@ -5,11 +5,33 @@ export default function Contact() {
   const upiId = '9360870164@superyes';
   const upiNumber = '9360870164';
 
-  const handleCopy = (textToCopy = upiId) => {
-    navigator.clipboard.writeText(textToCopy).then(() => {
+  const fallbackCopy = (text) => {
+    try {
+      const el = document.createElement('textarea');
+      el.value = text;
+      el.setAttribute('readonly', '');
+      el.style.position = 'absolute';
+      el.style.left = '-9999px';
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    });
+    } catch (err) {
+      console.error('Fallback copy failed', err);
+    }
+  };
+
+  const handleCopy = (textToCopy = upiId) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }).catch(() => fallbackCopy(textToCopy));
+    } else {
+      fallbackCopy(textToCopy);
+    }
   };
 
   return (
@@ -170,6 +192,7 @@ export default function Contact() {
                       className={copied ? 'fa-solid fa-check text-emerald' : 'fa-regular fa-copy'}
                       style={{ color: copied ? '#10b981' : '' }}
                     ></i>
+                    <span className="btn-copy-label">{copied ? 'Copied' : 'Copy'}</span>
                   </button>
                   <span className={`copy-toast-tooltip ${copied ? 'show' : ''}`}>Copied UPI ID!</span>
                 </div>

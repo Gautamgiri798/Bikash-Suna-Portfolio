@@ -5013,6 +5013,7 @@ img {
 
 .upi-input-wrapper {
     display: flex;
+    align-items: stretch;
     position: relative;
     background: #090c14;
     border: 1px solid rgba(192, 132, 252, 0.3);
@@ -5020,6 +5021,9 @@ img {
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .upi-input-wrapper:focus-within {
@@ -5028,16 +5032,21 @@ img {
 }
 
 .upi-number-field {
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;
+    width: 0;
     background: transparent;
     border: none;
     outline: none;
     color: #ffffff;
     font-family: var(--font-heading);
-    font-size: 1.12rem;
+    font-size: clamp(0.85rem, 3.6vw, 1.12rem);
     font-weight: 800;
-    letter-spacing: 0.03em;
-    padding: 0.85rem 1.15rem;
+    letter-spacing: 0.02em;
+    padding: 0.85rem 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .upi-beneficiary-row {
@@ -5071,22 +5080,33 @@ img {
 }
 
 .btn-copy-upi {
-    background: #1a1530;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.35) 0%, rgba(99, 102, 241, 0.35) 100%);
     border: none;
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
-    color: #c084fc;
-    padding: 0 1.4rem;
-    font-size: 1.15rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    color: #e2e8f0;
+    padding: 0 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.45rem;
+    white-space: nowrap;
+    user-select: none;
 }
 
 .btn-copy-upi:hover {
-    background: #7c3aed;
+    background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
     color: #ffffff;
+}
+
+.btn-copy-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
 }
 
 .copy-toast-tooltip {
@@ -5315,8 +5335,23 @@ img {
         height: 180px;
     }
 
+    .upi-input-wrapper {
+        border-radius: 12px;
+    }
+
     .upi-number-field {
-        font-size: 1.1rem;
+        font-size: clamp(0.78rem, 3.4vw, 0.95rem);
+        padding: 0.72rem 0.75rem;
+    }
+
+    .btn-copy-upi {
+        padding: 0 0.95rem;
+        font-size: 0.85rem;
+        gap: 0.35rem;
+    }
+
+    .btn-copy-label {
+        font-size: 0.78rem;
     }
 }
 
@@ -5720,8 +5755,16 @@ img {
     .collab-highlight-row .contact-value {
         font-size: 0.95rem;
     }
-    .copy-input-wrapper input {
-        font-size: 0.9rem;
+    .upi-number-field {
+        font-size: clamp(0.75rem, 3.2vw, 0.88rem);
+        padding: 0.65rem 0.65rem;
+    }
+    .btn-copy-upi {
+        padding: 0 0.8rem;
+        font-size: 0.82rem;
+    }
+    .btn-copy-label {
+        font-size: 0.74rem;
     }
     .upi-beneficiary-row {
         flex-wrap: wrap;
