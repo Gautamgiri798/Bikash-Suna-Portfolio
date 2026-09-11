@@ -221,12 +221,12 @@ export default function Hero() {
                     <div className="track-lane">
                       <div className="clip-block clip-speedramp" style={{ width: '44%', marginLeft: '10%' }}>
                         <i className="fa-solid fa-bolt"></i>
-                        <span>Speed Ramp (400% &rarr; 40%)</span>
+                        <span>Speed Ramp<span className="timeline-desktop-only"> (400% &rarr; 40%)</span></span>
                         <div className="keyframe-diamond"></div>
                       </div>
                       <div className="clip-block clip-lut" style={{ width: '40%', marginLeft: '4%' }}>
                         <i className="fa-solid fa-wand-magic-sparkles"></i>
-                        <span>Teal & Orange 3D LUT</span>
+                        <span><span className="timeline-desktop-only">Teal & Orange </span>3D LUT</span>
                       </div>
                     </div>
                   </div>
@@ -237,15 +237,15 @@ export default function Hero() {
                     <div className="track-lane">
                       <div className="clip-block clip-main clip-1" style={{ width: '23%' }}>
                         <img src="assets/reel.jpg" alt="" className="clip-thumb-mini" />
-                        <span>01_Hook_Cut</span>
+                        <span>01_Hook<span className="timeline-desktop-only">_Cut</span></span>
                       </div>
                       <div className="clip-block clip-main clip-2" style={{ width: '31%', marginLeft: '3px' }}>
                         <img src="assets/hero.jpg" alt="" className="clip-thumb-mini" />
-                        <span>02_Hero_Cinematic</span>
+                        <span>02_Hero<span className="timeline-desktop-only">_Cine</span></span>
                       </div>
                       <div className="clip-block clip-main clip-3" style={{ width: '26%', marginLeft: '3px' }}>
                         <img src="assets/album.jpg" alt="" className="clip-thumb-mini" />
-                        <span>03_B-Roll_Rhythm</span>
+                        <span>03_B-Roll</span>
                       </div>
                       <div className="clip-block clip-main clip-4" style={{ width: '18%', marginLeft: '3px' }}>
                         <img src="assets/profile.jpg" alt="" className="clip-thumb-mini" />
@@ -267,7 +267,7 @@ export default function Hero() {
                             strokeWidth="1.8"
                           />
                         </svg>
-                        <span className="audio-title">Dialogue_Master.wav</span>
+                        <span className="audio-title">Dialogue<span className="timeline-desktop-only">_Master</span>.wav</span>
                       </div>
                       <div className="audio-waveform-block sfx-block" style={{ width: '41%', marginLeft: '2%' }}>
                         <svg className="waveform-svg sfx-wave" viewBox="0 0 150 24" preserveAspectRatio="none">
@@ -278,7 +278,7 @@ export default function Hero() {
                             strokeWidth="1.8"
                           />
                         </svg>
-                        <span className="audio-title">SFX_Impact_Riser</span>
+                        <span className="audio-title">SFX<span className="timeline-desktop-only">_Impact</span></span>
                       </div>
                     </div>
                   </div>
@@ -306,7 +306,7 @@ export default function Hero() {
                     </span>
                     <span className="pipeline-arrow">&rarr;</span>
                     <span className="pipeline-step active">
-                      <i className="fa-solid fa-wand-magic-sparkles"></i> COLOR GRADE
+                      <i className="fa-solid fa-wand-magic-sparkles"></i> <span className="timeline-desktop-only">COLOR </span>GRADE
                     </span>
                     <span className="pipeline-arrow">&rarr;</span>
                     <span className="pipeline-step">
@@ -314,7 +314,7 @@ export default function Hero() {
                     </span>
                     <span className="pipeline-arrow">&rarr;</span>
                     <span className="pipeline-step">
-                      <i className="fa-solid fa-film"></i> 4K EXPORT
+                      <i className="fa-solid fa-film"></i> <span className="timeline-desktop-only">4K </span>EXPORT
                     </span>
                   </div>
                 </div>

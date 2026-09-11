@@ -1131,132 +1131,405 @@ img {
     }
 }
 
-@media (max-width: 640px) {
+.timeline-desktop-only {
+    display: inline;
+}
+
+@media (max-width: 992px) {
+    .hero-section {
+        padding-top: 105px;
+        min-height: auto;
+        overflow-x: hidden;
+    }
+    .hero-container {
+        padding: 0 clamp(1rem, 3vw, 2rem);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    .hero-layout-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .hero-left-column {
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .hero-editorial-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hero-ctas-editorial {
+        justify-content: center;
+    }
+    .hero-editorial-stats {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hero-scroll-explore {
+        display: none;
+    }
+    .hero-right-visual {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .hero-visual-composition {
+        max-width: 580px;
+        margin: 0 auto;
+        min-height: auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 768px) {
+    .timeline-desktop-only {
+        display: none !important;
+    }
+
+    .hero-section {
+        padding-top: clamp(85px, 12vh, 100px);
+        padding-bottom: 2.5rem;
+        min-height: auto;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .hero-container {
+        padding: 0 clamp(0.85rem, 3.5vw, 1.25rem);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    .hero-layout-grid {
+        gap: 2rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Badge Pill - Perfectly proportional & never cut off */
     .hero-badge-pill {
         max-width: 100%;
-        flex-wrap: wrap;
+        width: auto;
+        display: inline-flex;
+        align-items: center;
         justify-content: center;
-        gap: 0.35rem;
-        padding: 0.3rem 0.65rem;
+        gap: 0.45rem;
+        padding: 0.35rem 0.8rem;
         margin-bottom: 1.2rem;
+        box-sizing: border-box;
     }
     .badge-category-text {
-        font-size: 0.62rem;
-        letter-spacing: 0.05em;
+        font-size: clamp(0.58rem, 2.6vw, 0.72rem);
+        letter-spacing: 0.04em;
+        white-space: nowrap;
     }
     .hero-pulse-status {
-        font-size: 0.62rem;
+        font-size: clamp(0.58rem, 2.4vw, 0.68rem);
+        padding: 0.12rem 0.45rem;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
+    .soundwave-equalizer {
+        width: 14px;
+        height: 12px;
+        gap: 2px;
+        flex-shrink: 0;
+    }
+
+    /* Title - Responsive clamp & elegant line-height */
     .hero-editorial-title {
-        font-size: clamp(1.65rem, 6.8vw, 2.15rem);
+        font-size: clamp(1.75rem, 6.5vw, 2.35rem);
         line-height: 1.15;
-        word-break: break-word;
+        letter-spacing: -0.02em;
+        margin-bottom: 1rem;
+        word-break: normal;
         overflow-wrap: break-word;
         max-width: 100%;
+        text-align: center;
     }
     .typewriter-text {
         white-space: normal !important;
         display: inline !important;
     }
+
+    /* Subtitle - Constrained width & balanced reading */
     .hero-editorial-subtitle {
-        font-size: 0.88rem;
+        font-size: clamp(0.84rem, 2.6vw, 0.92rem);
         line-height: 1.55;
-        padding: 0;
-        max-width: 100%;
+        padding: 0 0.5rem;
+        max-width: 480px;
+        margin: 0 auto 1.6rem auto;
         word-break: normal;
         overflow-wrap: break-word;
         hyphens: none;
+        text-align: center;
     }
+
+    /* CTA Buttons - Clean vertical stacking with consistent widths */
+    .hero-ctas-editorial {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto 1.8rem auto;
+        gap: 0.65rem;
+    }
+    .hero-ctas-editorial .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.88rem;
+        border-radius: 50px;
+        box-sizing: border-box;
+    }
+
+    /* Stats Card - Centered frosted glass container */
     .hero-editorial-stats {
         grid-template-columns: repeat(2, 1fr);
-        gap: 0.65rem;
-        padding: 0.75rem 0.85rem;
+        gap: 0.75rem 1rem;
         width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+        padding: 0.85rem 1rem;
+        background: rgba(18, 22, 30, 0.6);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
         box-sizing: border-box;
         overflow: hidden;
     }
     .stat-editorial-item {
+        text-align: center;
+        align-items: center;
         min-width: 0;
-        padding: 0.2rem 0.3rem;
+        padding: 0.2rem;
     }
     .stat-editorial-item .stat-val {
-        font-size: clamp(1.15rem, 4vw, 1.45rem);
+        font-size: clamp(1.2rem, 4vw, 1.45rem);
+        font-weight: 800;
     }
     .stat-editorial-item .stat-desc {
-        font-size: 0.62rem;
-        white-space: normal;
+        font-size: 0.65rem;
         line-height: 1.25;
-        word-break: break-word;
+        white-space: normal;
+    }
+
+    /* Right Visual - Composition & Studio Media Frame */
+    .hero-visual-composition {
+        width: 100%;
+        max-width: 100%;
+        min-height: auto;
+        box-sizing: border-box;
     }
     .hero-media-frame {
-        border-radius: 12px;
-    }
-    .hero-timeline-deck {
-        margin-top: 10px;
-        padding: 0.6rem;
-        border-radius: 12px;
         width: 100%;
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 12px;
         box-sizing: border-box;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Timeline Deck - Fully Mobile Responsive & Never Cut Off */
+    .hero-timeline-deck {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 10px;
+        padding: 0.55rem 0.65rem;
+        border-radius: 12px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    .timeline-deck-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 0.4rem;
+        margin-bottom: 0.4rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .timeline-deck-left {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    .rec-indicator {
+        font-size: 0.58rem;
+        padding: 0.12rem 0.4rem;
+        letter-spacing: 0.05em;
+    }
+    .rec-dot {
+        width: 5px;
+        height: 5px;
     }
     .sequence-name {
         display: none;
     }
+    .timeline-deck-right {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+    .timecode-badge {
+        font-size: 0.62rem;
+        padding: 0.12rem 0.4rem;
+        letter-spacing: 0.04em;
+    }
     .codec-chip, .fps-chip {
         display: none;
     }
-    .timeline-track-row {
-        height: 19px;
+
+    /* Tracks Area */
+    .timeline-tracks-area {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 0.35rem 0.45rem;
         gap: 0.3rem;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .timeline-track-row {
+        width: 100%;
+        min-width: 0;
+        height: 20px;
+        gap: 0.35rem;
+        display: flex;
+        align-items: center;
     }
     .track-label {
+        width: 16px;
         font-size: 0.55rem;
-        width: 14px;
+        flex-shrink: 0;
+        text-align: right;
+    }
+    .track-lane {
+        flex: 1;
+        min-width: 0;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
     }
     .clip-block {
-        font-size: 0.52rem;
-        padding: 0 0.3rem;
+        min-width: 0;
+        flex-shrink: 1;
+        height: 86%;
+        padding: 0 0.25rem;
+        gap: 0.25rem;
+        font-size: 0.54rem;
+        overflow: hidden;
+        border-radius: 2px;
     }
     .clip-block span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.52rem;
+        max-width: 65px;
+    }
+    .clip-thumb-mini {
+        width: 11px;
+        height: 11px;
+        flex-shrink: 0;
+    }
+    .keyframe-diamond {
+        display: none;
+    }
+    .audio-waveform-block {
+        min-width: 0;
+        flex-shrink: 1;
+        height: 88%;
+        padding: 0 0.25rem;
+        gap: 0.25rem;
+        overflow: hidden;
+    }
+    .waveform-svg {
+        width: 36px;
+        height: 10px;
+        flex-shrink: 0;
+    }
+    .audio-title {
+        font-size: 0.5rem;
         max-width: 65px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-    .audio-title {
-        font-size: 0.52rem;
-        max-width: 75px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    .hero-visual-composition {
-        min-height: auto;
+
+    /* Footer of Timeline */
+    .timeline-deck-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
+        margin-top: 0.35rem;
+        padding-top: 0.35rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        gap: 0.35rem;
+    }
+    .timeline-tools-dock {
+        gap: 0.2rem;
+        flex-shrink: 0;
+    }
+    .tool-btn {
+        width: 18px;
+        height: 18px;
+        font-size: 0.55rem;
+    }
+    .timeline-pipeline-badges {
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+        font-size: 0.52rem;
+        overflow: hidden;
+        flex-wrap: nowrap;
+    }
+    .pipeline-step {
+        font-size: 0.5rem;
+        white-space: nowrap;
+        padding: 0.1rem 0.2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2rem;
+    }
+    .pipeline-step i {
+        font-size: 0.48rem;
+    }
+    .pipeline-arrow {
+        font-size: 0.45rem;
+        opacity: 0.6;
+        margin: 0 1px;
     }
 }
 
-@media (max-width: 480px) {
-    .hero-ctas-editorial {
-        flex-direction: column;
-        width: 100%;
-        gap: 0.75rem;
+@media (max-width: 400px) {
+    .hero-editorial-title {
+        font-size: 1.65rem;
     }
-    .hero-ctas-editorial .btn {
-        width: 100%;
-        justify-content: center;
-        padding: 0.85rem 1.25rem;
+    .badge-category-text {
+        font-size: 0.56rem;
     }
-    .timeline-deck-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.45rem;
+    .hero-pulse-status {
+        font-size: 0.56rem;
     }
-    .timeline-pipeline-badges {
-        flex-wrap: wrap;
-        gap: 0.25rem;
-        font-size: 0.5rem;
+    .clip-block:nth-child(4) {
+        display: none;
     }
 }
 
@@ -7807,26 +8080,26 @@ html {
 }
 
 /* Mobile Responsiveness for Floating WhatsApp */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .floating-wa-container {
-        bottom: 1.25rem;
-        right: 1.25rem;
+        bottom: 1.25rem !important;
+        right: 1.25rem !important;
     }
     .floating-wa-btn {
-        width: 52px;
-        height: 52px;
+        width: 48px !important;
+        height: 48px !important;
     }
     .wa-icon-wrapper {
-        font-size: 1.55rem;
+        font-size: 1.45rem !important;
     }
     .wa-floating-tooltip {
-        display: none;
+        display: none !important;
     }
     .wa-chat-window {
         width: calc(100vw - 2.5rem);
         height: 470px;
         max-height: 75vh;
-        bottom: 64px;
+        bottom: 58px;
         right: 0;
     }
 }
