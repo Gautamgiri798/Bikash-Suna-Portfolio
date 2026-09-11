@@ -50,6 +50,7 @@
 <a href="#-4-cinema-studio-video-player--fullscreen-hud"><img src="https://img.shields.io/badge/📽️_CINEMA_PLAYER-1e293b?style=for-the-badge&logoColor=white" alt="Cinema Player" /></a>
 <br/>
 <a href="#-5-filterable-showreel-showcase"><img src="https://img.shields.io/badge/🎞️_SHOWREELS-1e293b?style=for-the-badge&logoColor=white" alt="Showreels" /></a>
+<a href="#-video-assets--custom-media-management"><img src="https://img.shields.io/badge/📁_VIDEO_ASSETS-1e293b?style=for-the-badge&logoColor=white" alt="Video Assets" /></a>
 <a href="#-6-creator-media-kit--live-analytics-desk"><img src="https://img.shields.io/badge/📊_MEDIA_KIT-1e293b?style=for-the-badge&logoColor=white" alt="Media Kit" /></a>
 <a href="#-service-rate-matrix"><img src="https://img.shields.io/badge/💰_RATE_MATRIX-1e293b?style=for-the-badge&logoColor=white" alt="Rates" /></a>
 <a href="#-7-clean-luxury-contact--instant-payments-suite"><img src="https://img.shields.io/badge/💳_CONTACT_%26_UPI-1e293b?style=for-the-badge&logoColor=white" alt="Contact & Payments" /></a>
@@ -61,10 +62,10 @@
 
 This web platform is engineered as an ultra-high-end cinematic portfolio, creative showcase, and commercial booking desk for **Bikash Suna**. It reflects both complementary superpowers of his creative career:
 
-1. **Elite Video Editor & Post-Production Specialist**: Precision narrative storytelling, retention-driven cuts, cinematic DaVinci color grading, immersive sound design, and viral pacing for short-form Reels, TikToks, and long-form YouTube documentary edits.
+1. **Elite Video Editor & Post-Production Specialist**: Precision narrative storytelling, retention-driven cuts, cinematic DaVinci color grading, immersive sound design, and viral pacing for short-form Reels, TikToks, and long-form music video & documentary edits.
 2. **High-Impact Content Creator & Brand Partner**: Authentic lifestyle & tech storytelling, verified creator presence, transparent media kit retention analytics, and instant direct brand collaboration funnels.
 
-Every single interaction has been fine-tuned for visual excellence, fluid 60FPS motion, zero input latency, and seamless conversion-optimized client onboarding.
+Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion, zero input latency, and seamless conversion-optimized client onboarding.
 
 ---
 
@@ -104,17 +105,61 @@ Every single interaction has been fine-tuned for visual excellence, fluid 60FPS 
   * **Interactive Scrubber Bar**: Scrubbable timeline with hover preview and progress filling.
 
 ### 🎞️ 5. Filterable Showreel Showcase
-* **Zero-Lag Smooth Filtering**: Fast category switching between `All Work`, `Short Reels (9:16)`, `Cinematic Long Form (16:9)`, and `Brand Collabs`.
-* **Hardware-Accelerated Transitions**: Pure opacity and transform scale animations (`portfolio-fade-in`) eliminating blur artifacts during filter changes.
-* **Live Social Proof Badges**: Real view count metrics displayed on each card (e.g., `1.2M Views`, `850K Views`, `2.4M Views`).
+* **Zero-Lag Smooth Filtering**: Fast category switching between `All Work`, `Short Reels (9:16)`, `Long Albums (16:9)`, and `Brand Collabs`.
+* **Hardware-Accelerated Transitions**: Pure opacity and transform scale animations eliminating blur artifacts during filter changes.
+* **Luxury Studio Duration Pill**: Frosted glassmorphism duration badge (`backdrop-filter: blur(14px)`) integrated with a 3-bar animated rhythmic gradient sound frequency indicator.
+* **Dynamic Video Length Detection**: Automatically parses and displays precise video durations via `onLoadedMetadata` for local files and custom timestamps for YouTube links.
+* **Live Social Proof & Tags**: Verified project metrics and skills pills (`Video Editing`, `Sambalpuri Rap`, `Color Grading`, etc.).
 
-### 📊 6. Creator Media Kit & Live Analytics Desk
+---
+
+## 📁 Video Assets & Custom Media Management
+
+The project is structured with dedicated media folders so you can easily drop in your video files and link them into your portfolio:
+
+```bash
+assets/videos/
+├── short-reels/     # Place your vertical 9:16 reels (MP4 / WebM)
+├── long-videos/     # Place your widescreen 16:9 albums & music videos
+└── brand-collabs/   # Place your sponsored & commercial brand deliverables
+```
+
+### Linking Videos in `src/data/projects.js`
+All showcase items are managed in the centralized configuration file [src/data/projects.js](src/data/projects.js):
+
+```javascript
+{
+  id: 'album-1',
+  category: 'album',
+  title: 'Babu Zaraa Bachke | Official Sambalpuri Rap MV',
+  desc: 'Edited a high-energy Sambalpuri rap music video with cinematic color grading, performance-driven cuts, rhythmic pacing, and immersive sound design, transforming regional rap into a visually dynamic music experience.',
+  img: 'assets/babu-zaraa-bachke.jpg',
+  videoUrl: 'https://youtu.be/3lBV0PMO6ec',
+  externalUrl: 'https://youtu.be/3lBV0PMO6ec',
+  tags: ['Video Editing', 'Sambalpuri Rap', 'Music Video', 'Color Grading', 'Sound Design'],
+  badge: 'Video Album',
+  color: 'purple',
+  icon: 'fa-film',
+  duration: '2:20',
+  quality: '4K Cinema • 24 FPS',
+  metric: '🎵 Official MV',
+}
+```
+
+> [!TIP]
+> **Windows Watcher Optimization**: Heavy video files in `assets/` and `public/` are ignored by Vite's file watcher in `vite.config.js` to prevent Windows file locking (`EBUSY`) issues while maintaining ultra-fast HMR for all code and style edits.
+
+---
+
+## 📊 6. Creator Media Kit & Live Analytics Desk
 * **Interactive SVG Sparkline Trends**: Dynamic SVG stroke curves visualizing consistent 30-day reach expansion.
 * **Retention & Engagement Matrix**: Transparent metrics displaying 1.2M+ Monthly Reach, 98% Retention Rate, and 8.4% Average Engagement.
 * **Demographic Breakdown**: Clean visual bars depicting core audience segments (18–24, 25–34, 35+).
 * **4-Phase Production Pipeline**: Visual workflow map demonstrating systematic client delivery from Ingestion to 4K Master.
 
-### 💳 7. Clean Luxury Contact & Instant Payments Suite
+---
+
+## 💳 7. Clean Luxury Contact & Instant Payments Suite
 * **Direct Commercial Booking Hub**:
   * **WhatsApp Sponsor Desk**: Instant chat with pre-filled inquiry parameters (`+91 9360870164`).
   * **One-Click Mobile Call**: Immediate direct phone access (`+91 9360870164`).
@@ -125,9 +170,10 @@ Every single interaction has been fine-tuned for visual excellence, fluid 60FPS 
   * **Sweeping Neon Laser Scanner**: Cyberpunk laser beam continuously sweeping vertically across a high-contrast QR code with corner bracket reticles.
   * **Central Indian Rupee Seal**: Authentic centered `₹` emblem with gradient glow.
   * **Supported UPI Apps**: Official brand badges for **Google Pay**, **PhonePe**, **Paytm**, and **BHIM UPI**.
-  * **Balanced Spacing**: Compact, elegant vertical rhythm with zero excess dead space.
 
-### 💬 8. Right-Sided Floating WhatsApp Concierge
+---
+
+## 💬 8. Right-Sided Floating WhatsApp Concierge
 * **Optimal Right-Side Placement**: Anchored at `bottom: 2rem; right: 2rem;`, eliminating overlap with left-sided navigation elements.
 * **Harmonious Scroll Dial Coexistence**: The circular progress dial floats directly above the WhatsApp trigger (`bottom: 6.5rem; right: 2.25rem;`).
 * **Interactive Preset Quick Chips**:
@@ -137,7 +183,9 @@ Every single interaction has been fine-tuned for visual excellence, fluid 60FPS 
   * 🚀 *Rush 24h Express Delivery*
 * **Realistic Typing Simulation**: Selecting any chip triggers an animated 3-dot typing response before generating a direct WhatsApp launch button with customized project specs.
 
-### ⚓ 9. Clean Luxury 3-Column Footer
+---
+
+## ⚓ 9. Clean Luxury 3-Column Footer
 * **Brand Foundation**: Dual-tone brand typography featuring vibrant purple `BIKASH` (`#7c3aed`) and crisp white `SUNA` (`#ffffff`) alongside a tailored creative agency narrative.
 * **Instant Navigation Matrix**: Direct anchor routes to key sections (`Home`, `About`, `Portfolio`, `Services & Collabs`, and `Contact & WhatsApp`).
 * **Direct Touchpoint Links**: Quick-connect mobile phone link (`tel:+919360870164`), verified Instagram shortcut (`@bikash_suna_07`), and studio headquarters indicator (`Jharsuguda, Odisha`).
@@ -155,9 +203,6 @@ Transparent, upfront pricing packages designed for immediate commercial decision
 | **🎬 Long Video / YouTube Album** | 16:9 cinematic, multi-cam sync, master sound mix, B-roll pacing, custom LUT grade | 48h – 72h | **₹3,000** / video |
 | **🤝 Brand Collab / Paid Promo** | Dedicated sponsored Reel, story blast, co-author tag, permanent feed post, link in bio | 48h | **₹1,500** / post |
 | **🚀 Rush 24h Express Turnaround** | Priority rendering queue, dedicated revision window, same-day draft | 24 Hours | **Add-on** |
-
-> [!NOTE]
-> All packages feature uniform resting card aesthetics with individual reactive hover glows, ensuring an elegant and unbiased browsing experience.
 
 ---
 
@@ -200,32 +245,40 @@ flowchart LR
 
 ```bash
 Bikash-Suna-Portfolio/
-├── public/
-│   └── assets/
-│       ├── profile.jpg             # High-resolution portrait photograph
-│       ├── hero.jpg                # Video editor studio hero environment
-│       └── showreels/              # Portfolio thumbnails & video previews
+├── assets/
+│   ├── babu-zaraa-bachke.jpg        # Long Album thumbnail artwork
+│   ├── hero.jpg                    # Studio hero environment photograph
+│   ├── reel.jpg                    # High-energy reel preview thumbnail
+│   └── videos/                     # Organized video categories
+│       ├── short-reels/            # Short reels (MP4 / WebM)
+│       ├── long-videos/            # Long video albums & music videos
+│       └── brand-collabs/          # Brand collaboration sponsored reels
+├── public/                         # Static assets served at root
 ├── src/
 │   ├── components/
 │   │   ├── Navbar.jsx              # Frosted glass responsive header with mobile drawer
 │   │   ├── Hero.jsx                # Cinematic dual-persona hero with live stats
 │   │   ├── ThreeCanvas.jsx         # WebGL 3D gyro rings & particle galaxy
 │   │   ├── ScrollingTicker.jsx     # Seamless infinite brand marquee ticker
-│   │   ├── DualPillars.jsx         # Editor vs Creator dual specialization cards & 2-in-1 synergy
+│   │   ├── DualPillars.jsx         # Editor vs Creator dual specialization cards
 │   │   ├── About.jsx               # Creative journey, software masteries & snapshot
 │   │   ├── CreatorMediaKit.jsx     # Creator metrics, demographic statistics & sparklines
-│   │   ├── Portfolio.jsx           # Filterable 4K showreel gallery with live view badges
+│   │   ├── Portfolio.jsx           # Filterable 4K showreel gallery with luxury duration pills
 │   │   ├── VideoModal.jsx          # Studio cinema player with native & windowed Fullscreen HUD
 │   │   ├── Services.jsx            # Transparent rate cards (Reels ₹600, Albums ₹3000, Collabs ₹1500)
 │   │   ├── Contact.jsx             # Direct sponsor desk, UPI copy node & laser QR scanner
 │   │   ├── Footer.jsx              # Brand footer with navigation & copyright
 │   │   └── FloatingWhatsApp.jsx    # Right-sided interactive WhatsApp concierge
+│   ├── data/
+│   │   └── projects.js             # Centralized showreel project data & video links
 │   ├── App.jsx                     # Core application orchestrator & Lenis controller
 │   ├── main.jsx                    # React 18 DOM mount point
 │   └── index.css                   # Unified glassmorphism & cyber dark-mode design system
+├── .env.example                    # Template environment variables
+├── .env                            # Local environment configuration
 ├── index.html                      # HTML5 entry with meta SEO & viewport setup
 ├── package.json                    # Dependencies & build scripts
-├── vite.config.js                  # Vite configuration & React plugin setup
+├── vite.config.js                  # Vite configuration & watcher optimization
 └── README.md                       # Comprehensive documentation
 ```
 
@@ -248,25 +301,35 @@ git clone https://github.com/Gautamgiri798/Bikash-Suna-Portfolio.git
 cd Bikash-Suna-Portfolio
 ```
 
-### 2. Install Dependencies
+### 2. Configure Environment Variables
+Copy the sample environment file:
+```bash
+cp .env.example .env
+```
+Ensure your database connection string is configured in `.env`:
+```env
+DATABASE_URL=postgresql://postgres:password@localhost:5432/bikash_portfolio
+```
+
+### 3. Install Dependencies
 ```bash
 npm install
 ```
 
-### 3. Launch Development Server
+### 4. Launch Development Server
 ```bash
 npm run dev
 ```
 Open your browser and navigate to:
 👉 **`http://localhost:5173`**
 
-### 4. Build for Production
+### 5. Build for Production
 Create an optimized production bundle in the `dist/` directory:
 ```bash
 npm run build
 ```
 
-### 5. Preview Production Build Locally
+### 6. Preview Production Build Locally
 ```bash
 npm run preview
 ```
@@ -279,12 +342,12 @@ Easily tailor this codebase for your personal branding or client project:
 
 | Configuration Area | File Location | What to Update |
 | :--- | :--- | :--- |
+| **Showreel Projects & Links** | `src/data/projects.js` | Add video links (YouTube or local paths), descriptions, tags, and badges. |
 | **WhatsApp Desk Number** | `src/components/FloatingWhatsApp.jsx` | Change `919360870164` to your international phone number. |
 | **Quick Action Presets** | `src/components/FloatingWhatsApp.jsx` | Modify automated preset chips, message labels, and rates. |
 | **UPI Payment ID** | `src/components/Contact.jsx` | Update `9360870164@upi` and phone number to your VPA. |
 | **Contact Channels** | `src/components/Contact.jsx` | Adjust phone, WhatsApp, Instagram username, and studio location. |
 | **Service Packages & Rates** | `src/components/Services.jsx` | Adjust prices and feature lists for Reels, Albums, and Collabs. |
-| **Showreel Projects** | `src/components/Portfolio.jsx` | Add project items, thumbnail paths, client names, and metrics. |
 | **Audience Media Kit** | `src/components/CreatorMediaKit.jsx` | Update impressions, engagement percentages, and follower stats. |
 | **Footer & Touchpoints** | `src/components/Footer.jsx` | Update brand statement, navigation anchors, and direct contact channels. |
 | **Color Tokens & Glows** | `src/index.css` | Customize `:root` CSS variables (`--color-accent-purple`, `--color-accent-teal`, etc.). |
@@ -297,6 +360,7 @@ Easily tailor this codebase for your personal branding or client project:
 - **Hardware-Accelerated Transforms**: Modals, hover elevations, and 3D rotations utilize `transform: translate3d()` and `will-change` hints for smooth 60FPS execution.
 - **Dynamic 3D Throttling**: WebGL frame loops pause automatically when scrolled off-screen to preserve CPU/GPU overhead.
 - **Crisp Zero-Blur Transitions**: Portfolio filtering uses pure opacity and scale animations, preventing intermediate visual blur.
+- **Windows File Watcher Guard**: Excludes heavy binary video files from the Vite watcher to prevent `EBUSY` locks.
 - **Semantic HTML5 & Accessibility**: Fully semantic element structure (`<header>`, `<main>`, `<section>`, `<aside>`, `<footer>`), valid `aria-label` tags, and accessible contrast ratios.
 
 ---
