@@ -126,8 +126,8 @@ The project is structured with dedicated media folders so you can easily drop in
 public/videos/
 ├── short-reels/     # Vertical 9:16 reels (bestfriend-reel.mp4, mor-maa.mp4, pahela-nazar.mp4)
 ├── long-videos/     # Widescreen 16:9 albums & music videos (babu-zaraa-bachke.mp4)
-└── brand-collabs/   # Sponsored & commercial brand deliverables
-public/thumbnails/   # High-resolution reel posters (reel-1.jpg, reel-2.jpg, reel-3.jpg)
+└── brand-collabs/   # Sponsored brand deliverables (shree-soni-jewellers.mp4, diwali-dhanteras-offer.mp4)
+public/thumbnails/   # High-resolution posters (reel-1 to reel-3, collab-1, collab-2)
 ```
 
 ### Linking Videos in `src/data/projects.js`
@@ -257,10 +257,11 @@ Bikash-Suna-Portfolio/
 │   └── videos/                     # Organized video directories
 ├── public/                         # Static assets served at root
 │   ├── assets/                     # Scannable payment QR codes & cards
-│   ├── thumbnails/                 # Downloaded high-res reel covers (reel-1, reel-2, reel-3)
+│   ├── thumbnails/                 # Downloaded high-res covers (reel-1 to 3, collab-1 & 2)
 │   └── videos/                     # High-bitrate video categories
 │       ├── short-reels/            # Short reels (bestfriend-reel, mor-maa, pahela-nazar)
-│       └── long-videos/            # Long video albums (babu-zaraa-bachke)
+│       ├── long-videos/            # Long video albums (babu-zaraa-bachke)
+│       └── brand-collabs/          # Brand collabs (shree-soni-jewellers, diwali-dhanteras-offer)
 ├── src/
 │   ├── components/
 │   │   ├── Navbar.jsx              # Frosted glass responsive header with mobile drawer
