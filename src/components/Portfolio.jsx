@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import VideoModal from './VideoModal';
 import { projects } from '../data/projects';
 
@@ -6,6 +6,19 @@ export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
   const [videoDurations, setVideoDurations] = useState({});
+
+  // Pause all background preview videos when modal opens to avoid GPU/CPU contention
+  useEffect(() => {
+    if (selectedProject) {
+      const previews = document.querySelectorAll('.portfolio-video-preview');
+      previews.forEach((vid) => {
+        try {
+          vid.pause();
+          vid.currentTime = 0;
+        } catch (e) {}
+      });
+    }
+  }, [selectedProject]);
 
   const handleLoadedMetadata = (id, e) => {
     const d = e.currentTarget.duration;
@@ -126,7 +139,9 @@ export default function Portfolio() {
                     preload="metadata"
                     onLoadedMetadata={(e) => handleLoadedMetadata(project.id, e)}
                     onMouseEnter={(e) => {
-                      e.currentTarget.play().catch(() => {});
+                      if (!selectedProject) {
+                        e.currentTarget.play().catch(() => {});
+                      }
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.pause();

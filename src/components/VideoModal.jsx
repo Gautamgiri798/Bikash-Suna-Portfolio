@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 // Helper to convert YouTube standard, short, or share URLs to embed URLs
 function getYouTubeEmbedUrl(url) {
@@ -14,6 +14,7 @@ function getYouTubeEmbedUrl(url) {
 
 export default function VideoModal({ isOpen, project, onClose }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
@@ -31,60 +32,90 @@ export default function VideoModal({ isOpen, project, onClose }) {
 
   const duration = isRealVideo && videoDuration > 0 ? videoDuration : fallbackDuration;
 
-  // Reset when modal opens or project changes
+  // Safe Play action that handles browser Autoplay and Abort policies properly
+  const safePlay = useCallback(() => {
+    if (!videoRef.current) return;
+    const playPromise = videoRef.current.play();
+    if (playPromise !== undefined) {
+      playPromise.catch((err) => {
+        // AbortError happens when pause() is called before play() resolves — safe to ignore!
+        if (err.name === 'AbortError') return;
+        // NotAllowedError happens when browser prevents unmuted autoplay without prior interaction
+        if (err.name === 'NotAllowedError') {
+          if (videoRef.current) {
+            videoRef.current.muted = true;
+            setIsMuted(true);
+            videoRef.current.play().catch(() => {});
+          }
+        }
+      });
+    }
+  }, []);
+
+  // Safe Pause action that does NOT alter volume or mute state
+  const safePause = useCallback(() => {
+    if (!videoRef.current) return;
+    videoRef.current.pause();
+  }, []);
+
+  // Central toggle for play / pause
+  const togglePlay = useCallback(() => {
+    if (!isRealVideo) {
+      setIsPlaying((prev) => !prev);
+      return;
+    }
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      safePlay();
+    } else {
+      safePause();
+    }
+  }, [isRealVideo, safePlay, safePause]);
+
+  // Central toggle for mute / unmute
+  const toggleMute = useCallback(() => {
+    if (isRealVideo && videoRef.current) {
+      const target = !videoRef.current.muted;
+      videoRef.current.muted = target;
+      setIsMuted(target);
+    } else {
+      setIsMuted((prev) => !prev);
+    }
+  }, [isRealVideo]);
+
+  // Reset and initialize when modal opens or active project changes
   useEffect(() => {
     if (isOpen) {
-      setIsPlaying(true);
       setCurrentTime(0);
-      setIsMuted(false);
+      setIsBuffering(false);
       setPlaybackSpeed(1);
       setIsFullscreen(false);
+
+      if (isRealVideo && videoRef.current) {
+        const vid = videoRef.current;
+        vid.currentTime = 0;
+        vid.playbackRate = 1;
+        vid.muted = false;
+        setIsMuted(false);
+        safePlay();
+      } else if (!isYouTube) {
+        setIsPlaying(true);
+      }
     } else {
       setIsPlaying(false);
+      setIsBuffering(false);
       if (videoRef.current) {
         videoRef.current.pause();
         videoRef.current.currentTime = 0;
       }
     }
-  }, [isOpen, project]);
-
-  // Sync isPlaying with real HTML5 video
-  useEffect(() => {
-    if (!isRealVideo || !videoRef.current) return;
-    if (isPlaying) {
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // If browser prevents unmuted autoplay, play muted automatically
-          if (videoRef.current) {
-            videoRef.current.muted = true;
-            setIsMuted(true);
-            videoRef.current.play().catch(() => {
-              setIsPlaying(false);
-            });
-          }
-        });
-      }
-    } else {
-      videoRef.current.pause();
-    }
-  }, [isPlaying, isRealVideo]);
-
-  // Sync mute state with real video
-  useEffect(() => {
-    if (!isRealVideo || !videoRef.current) return;
-    videoRef.current.muted = isMuted;
-  }, [isMuted, isRealVideo]);
-
-  // Sync playback rate with real video
-  useEffect(() => {
-    if (!isRealVideo || !videoRef.current) return;
-    videoRef.current.playbackRate = playbackSpeed;
-  }, [playbackSpeed, isRealVideo]);
+  }, [isOpen, project, isRealVideo, isYouTube, safePlay]);
 
   // Handle video loaded metadata
   const handleLoadedMetadata = () => {
-    if (videoRef.current && !isNaN(videoRef.current.duration)) {
+    if (videoRef.current && !isNaN(videoRef.current.duration) && isFinite(videoRef.current.duration)) {
       setVideoDuration(videoRef.current.duration);
     }
   };
@@ -96,7 +127,7 @@ export default function VideoModal({ isOpen, project, onClose }) {
     }
   };
 
-  // Simulated video playback timer when no real video file is supplied
+  // Simulated video playback timer when no real video file is supplied (fallback only)
   useEffect(() => {
     if (isRealVideo || isYouTube) return;
     let interval;
@@ -153,20 +184,20 @@ export default function VideoModal({ isOpen, project, onClose }) {
       } else if (!isYouTube) {
         if (e.code === 'Space') {
           e.preventDefault();
-          setIsPlaying((prev) => !prev);
+          togglePlay();
         } else if (e.key === 'f' || e.key === 'F') {
           e.preventDefault();
           toggleFullscreen();
         } else if (e.key === 'm' || e.key === 'M') {
           e.preventDefault();
-          setIsMuted((prev) => !prev);
+          toggleMute();
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, isFullscreen, onClose, isYouTube]);
+  }, [isOpen, isFullscreen, onClose, isYouTube, togglePlay, toggleMute]);
 
   if (!isOpen || !project) return null;
 
@@ -225,7 +256,11 @@ export default function VideoModal({ isOpen, project, onClose }) {
   const handleSpeedCycle = () => {
     const speeds = [1, 1.25, 1.5, 2];
     const nextIdx = (speeds.indexOf(playbackSpeed) + 1) % speeds.length;
-    setPlaybackSpeed(speeds[nextIdx]);
+    const newSpeed = speeds[nextIdx];
+    setPlaybackSpeed(newSpeed);
+    if (isRealVideo && videoRef.current) {
+      videoRef.current.playbackRate = newSpeed;
+    }
   };
 
   const formatTime = (time) => {
@@ -290,6 +325,20 @@ export default function VideoModal({ isOpen, project, onClose }) {
                   preload="auto"
                   onLoadedMetadata={handleLoadedMetadata}
                   onTimeUpdate={handleTimeUpdate}
+                  onPlay={() => {
+                    setIsPlaying(true);
+                    setIsBuffering(false);
+                  }}
+                  onPause={() => setIsPlaying(false)}
+                  onWaiting={() => setIsBuffering(true)}
+                  onPlaying={() => setIsBuffering(false)}
+                  onCanPlay={() => setIsBuffering(false)}
+                  onVolumeChange={() => {
+                    if (videoRef.current) {
+                      setIsMuted(videoRef.current.muted);
+                    }
+                  }}
+                  onError={() => setIsBuffering(false)}
                   onEnded={() => setIsPlaying(false)}
                 />
               ) : (
@@ -358,13 +407,19 @@ export default function VideoModal({ isOpen, project, onClose }) {
                 </div>
               </div>
 
-              {/* Center Play/Pause Trigger (for real video and simulated) */}
+              {/* Center Play/Pause / Buffering Trigger */}
               {!isYouTube && (
                 <div
                   className="player-center-cinema"
-                  onClick={() => setIsPlaying(!isPlaying)}
+                  onClick={togglePlay}
                 >
-                  {!isPlaying && (
+                  {isBuffering && (
+                    <div className="center-buffering-indicator">
+                      <div className="buffering-spinner"></div>
+                      <span className="buffering-label">LOADING HD STREAM...</span>
+                    </div>
+                  )}
+                  {!isPlaying && !isBuffering && (
                     <div className="center-play-button-luxury">
                       <div className="pulse-outer-ring"></div>
                       <div className="center-play-icon">
@@ -376,7 +431,7 @@ export default function VideoModal({ isOpen, project, onClose }) {
                 </div>
               )}
 
-              {/* Footer Controls Area (for real video and simulated) */}
+              {/* Footer Controls Area */}
               {!isYouTube && (
                 <div className="player-footer-cinema">
                   {/* Interactive Scrubber Bar */}
@@ -400,8 +455,9 @@ export default function VideoModal({ isOpen, project, onClose }) {
                     <div className="controls-left-group">
                       {/* Play / Pause Toggle */}
                       <button
+                        type="button"
                         className="cinema-control-btn play-pause-btn"
-                        onClick={() => setIsPlaying(!isPlaying)}
+                        onClick={togglePlay}
                         aria-label={isPlaying ? 'Pause video' : 'Play video'}
                         title={isPlaying ? 'Pause (Space)' : 'Play (Space)'}
                       >
@@ -410,8 +466,9 @@ export default function VideoModal({ isOpen, project, onClose }) {
 
                       {/* Mute / Unmute Toggle */}
                       <button
+                        type="button"
                         className="cinema-control-btn volume-btn"
-                        onClick={() => setIsMuted(!isMuted)}
+                        onClick={toggleMute}
                         aria-label={isMuted ? 'Unmute' : 'Mute'}
                         title={isMuted ? 'Unmute (M)' : 'Mute (M)'}
                       >
@@ -425,7 +482,17 @@ export default function VideoModal({ isOpen, project, onClose }) {
                       {/* Audio Equalizer Waveform indicator */}
                       <div
                         className="player-audio-bars"
-                        title={isMuted ? 'Muted' : 'Audio Active'}
+                        title={isMuted ? 'Muted (Click to Unmute)' : 'Audio Active (Click to Mute)'}
+                        onClick={toggleMute}
+                        style={{ cursor: 'pointer' }}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            toggleMute();
+                          }
+                        }}
                       >
                         <span
                           className={`audio-bar bar-1 ${isPlaying && !isMuted ? 'active' : ''}`}
@@ -450,6 +517,7 @@ export default function VideoModal({ isOpen, project, onClose }) {
                     <div className="controls-right-group">
                       {/* Speed Selector */}
                       <button
+                        type="button"
                         className="cinema-control-pill speed-pill"
                         onClick={handleSpeedCycle}
                         title="Cycle playback speed"
@@ -464,6 +532,7 @@ export default function VideoModal({ isOpen, project, onClose }) {
 
                       {/* Fullscreen Button */}
                       <button
+                        type="button"
                         className="cinema-control-btn fullscreen-btn"
                         onClick={toggleFullscreen}
                         aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}

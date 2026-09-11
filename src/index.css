@@ -4043,6 +4043,43 @@ img {
     backdrop-filter: blur(6px);
 }
 
+/* Buffering Spinner Luxury */
+.center-buffering-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    pointer-events: none;
+}
+
+.buffering-spinner {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    border-top-color: #06b6d4;
+    border-right-color: #7c3aed;
+    animation: bufferSpin 0.9s linear infinite;
+    box-shadow: 0 0 25px rgba(6, 182, 212, 0.5);
+}
+
+@keyframes bufferSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.buffering-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.12em;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    padding: 0.3rem 0.85rem;
+    border-radius: 9999px;
+    backdrop-filter: blur(8px);
+}
+
 /* Footer Controls Area */
 .player-footer-cinema {
     display: flex;
