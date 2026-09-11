@@ -5585,7 +5585,7 @@ img {
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
-    padding: 1.8rem 1.6rem;
+    padding: 1.6rem 1.4rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -5609,49 +5609,103 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.5rem;
     margin-bottom: 1.25rem;
     width: 100%;
 }
 
 .stat-category-pill {
-    font-size: 0.68rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.25rem 0.65rem;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #94a3b8;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.28rem 0.65rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    line-height: 1;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: all 0.3s ease;
+}
+
+.stat-category-pill::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #64748b;
+    box-shadow: 0 0 5px rgba(100, 116, 139, 0.6);
+}
+
+.mediakit-stat-card-premium:hover .stat-category-pill {
+    color: #e2e8f0;
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 .stat-growth-pill {
-    font-size: 0.74rem;
-    font-weight: 700;
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1;
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    padding: 0.25rem 0.65rem;
+    gap: 0.35rem;
+    padding: 0.3rem 0.7rem;
     border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.04);
+    white-space: nowrap;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-growth-pill i {
+    font-size: 0.7rem;
 }
 
 .stat-growth-pill.text-emerald {
     color: #34d399;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.25);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(5, 150, 105, 0.06) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.32);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .stat-growth-pill.text-purple {
     color: #c084fc;
-    background: rgba(168, 85, 247, 0.12);
-    border: 1px solid rgba(168, 85, 247, 0.25);
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.16) 0%, rgba(147, 51, 234, 0.06) 100%);
+    border: 1px solid rgba(192, 132, 252, 0.32);
+    box-shadow: 0 2px 8px rgba(168, 85, 247, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .stat-growth-pill.text-gold {
     color: #fbbf24;
-    background: rgba(245, 158, 11, 0.12);
-    border: 1px solid rgba(245, 158, 11, 0.25);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.16) 0%, rgba(217, 119, 6, 0.06) 100%);
+    border: 1px solid rgba(251, 191, 36, 0.32);
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.mediakit-stat-card-premium:hover .stat-growth-pill {
+    transform: translateY(-1px);
+}
+
+.mediakit-stat-card-premium:hover .stat-growth-pill.text-emerald {
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(52, 211, 153, 0.5);
+}
+
+.mediakit-stat-card-premium:hover .stat-growth-pill.text-purple {
+    box-shadow: 0 4px 14px rgba(168, 85, 247, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(192, 132, 252, 0.5);
+}
+
+.mediakit-stat-card-premium:hover .stat-growth-pill.text-gold {
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(251, 191, 36, 0.5);
 }
 
 /* Big Number Typography */
@@ -6163,7 +6217,7 @@ img {
 }
 
 /* Responsive Media Queries for Media Kit */
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     .mediakit-stats-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.4rem;

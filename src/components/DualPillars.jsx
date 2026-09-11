@@ -130,9 +130,6 @@ export default function DualPillars() {
                 <span className="tool-chip">
                   <i className="fa-solid fa-sliders text-cyan"></i> Premiere Pro
                 </span>
-                <span className="tool-chip">
-                  <i className="fa-solid fa-wand-sparkles text-purple"></i> After Effects
-                </span>
               </div>
 
               <a href="#services" className="pillar-cta-link link-purple">

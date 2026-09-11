@@ -76,7 +76,7 @@ export default function CreatorMediaKit() {
           {/* Stat 1: Monthly Impressions */}
           <div className="mediakit-stat-card-premium card-glow-cyan stagger-1 scroll-reveal">
             <div className="stat-card-top">
-              <span className="stat-category-pill">REACH METRIC</span>
+              <span className="stat-category-pill">REACH</span>
               <span className="stat-growth-pill text-emerald">
                 <i className="fa-solid fa-arrow-trend-up"></i> +32% MoM
               </span>
