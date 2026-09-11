@@ -48,7 +48,7 @@ export const projects = [
     title: 'Babu Zaraa Bachke | Official Sambalpuri Rap MV',
     desc: 'Edited a high-energy Sambalpuri rap music video with cinematic color grading, performance-driven cuts, rhythmic pacing, and immersive sound design, transforming regional rap into a visually dynamic music experience.',
     img: 'assets/babu-zaraa-bachke.jpg',
-    videoUrl: 'https://youtu.be/3lBV0PMO6ec',
+    videoUrl: '/videos/long-videos/babu-zaraa-bachke.mp4',
     externalUrl: 'https://youtu.be/3lBV0PMO6ec',
     tags: ['Video Editing', 'Sambalpuri Rap', 'Music Video', 'Color Grading', 'Sound Design'],
     badge: 'Video Album',

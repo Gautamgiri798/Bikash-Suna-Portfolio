@@ -550,6 +550,40 @@ export default function VideoModal({ isOpen, project, onClose }) {
                   </div>
                 </div>
               )}
+
+              {/* YouTube Mode Persistent Bottom Bar */}
+              {isYouTube && (
+                <div className="player-footer-cinema youtube-footer-bar">
+                  <div className="player-controls-row">
+                    <div className="controls-left-group">
+                      <a
+                        href={project.externalUrl || project.videoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cinema-control-pill yt-open-pill"
+                        title="Watch full video on YouTube"
+                      >
+                        <i className="fa-brands fa-youtube text-red"></i> Watch on YouTube
+                      </a>
+                    </div>
+                    <div className="controls-right-group">
+                      <button
+                        type="button"
+                        className="cinema-control-btn fullscreen-btn"
+                        onClick={toggleFullscreen}
+                        aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+                        title={isFullscreen ? 'Exit Fullscreen (F)' : 'Fullscreen (F)'}
+                      >
+                        <i
+                          className={`fa-solid ${
+                            isFullscreen ? 'fa-compress text-cyan' : 'fa-expand'
+                          }`}
+                        ></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
