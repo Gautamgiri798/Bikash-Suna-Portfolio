@@ -7750,6 +7750,12 @@ html {
     transform: translateX(3px);
 }
 
+.preset-btn.active-preset {
+    background: rgba(37, 211, 102, 0.16);
+    border-color: rgba(37, 211, 102, 0.45);
+    color: #ffffff;
+}
+
 /* Chat Footer Input */
 .wa-chat-footer {
     display: flex;

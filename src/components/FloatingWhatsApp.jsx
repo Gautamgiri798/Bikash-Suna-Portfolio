@@ -204,25 +204,25 @@ export default function FloatingWhatsApp() {
               </div>
             )}
 
-            {/* Quick Automation Preset Options */}
-            {!selectedOption && (
-              <div className="wa-automation-presets">
-                <span className="presets-title">Tap a quick option to start:</span>
-                <div className="presets-grid">
-                  {automationPresets.map((preset) => (
-                    <button
-                      key={preset.id}
-                      type="button"
-                      className="preset-btn"
-                      onClick={() => handleSelectPreset(preset)}
-                    >
-                      <i className={`fa-solid ${preset.icon}`}></i>
-                      <span>{preset.label}</span>
-                    </button>
-                  ))}
-                </div>
+            {/* Quick Automation Preset Options - Always accessible */}
+            <div className="wa-automation-presets">
+              <span className="presets-title">
+                {chatMessages.length > 1 ? 'Quick options & inquiries:' : 'Tap a quick option to start:'}
+              </span>
+              <div className="presets-grid">
+                {automationPresets.map((preset) => (
+                  <button
+                    key={preset.id}
+                    type="button"
+                    className={`preset-btn ${selectedOption === preset.id ? 'active-preset' : ''}`}
+                    onClick={() => handleSelectPreset(preset)}
+                  >
+                    <i className={`fa-solid ${preset.icon}`}></i>
+                    <span>{preset.label}</span>
+                  </button>
+                ))}
               </div>
-            )}
+            </div>
 
             <div ref={messagesEndRef} />
           </div>
