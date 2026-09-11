@@ -1727,6 +1727,7 @@ img {
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-wrap: wrap;
     margin-top: 0.25rem;
 }
 
@@ -4265,16 +4266,68 @@ img {
 /* Mobile Responsiveness for Cinema Modal */
 @media (max-width: 768px) {
     .modal-content-cinema {
-        width: 96%;
-        border-radius: 18px;
+        width: 94%;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    /* Vertical 9:16 Aspect Ratio for Reels on Mobile */
+    .modal-content-cinema.modal-format-reel {
+        width: min(90vw, 380px);
+        max-height: 82vh;
+    }
+
+    .modal-content-cinema.modal-format-reel .video-container-cinema {
+        aspect-ratio: 9/16;
+        max-height: 78vh;
+    }
+
+    /* Widescreen 16:9 for Albums / Collabs */
+    .modal-content-cinema.modal-format-widescreen {
+        width: 95%;
+        max-width: 600px;
+    }
+
+    .modal-close-luxury {
+        width: 34px;
+        height: 34px;
+        font-size: 0.95rem;
+        top: 0.65rem;
+        right: 0.65rem;
     }
 
     .player-overlay-ui-cinema {
-        padding: 1rem;
+        padding: 0.85rem 1rem;
+    }
+
+    .player-header-cinema {
+        padding-right: 2.5rem;
+        gap: 0.4rem;
+    }
+
+    .header-left-meta {
+        gap: 0.45rem;
+    }
+
+    .player-badge-cinema {
+        font-size: 0.64rem;
+        padding: 0.2rem 0.55rem;
     }
 
     .player-title-cinema {
-        font-size: 1rem;
+        font-size: 0.88rem;
+        line-height: 1.25;
+        max-width: 100%;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .player-res-tag {
+        font-size: 0.62rem;
+        padding: 0.15rem 0.45rem;
     }
 
     .player-inquire-btn {
@@ -4286,13 +4339,54 @@ img {
     }
 
     .center-play-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.4rem;
+        width: 58px;
+        height: 58px;
+        font-size: 1.35rem;
+    }
+
+    .center-play-label {
+        font-size: 0.68rem;
+        padding: 0.2rem 0.65rem;
     }
 
     .hud-rec-indicator {
         display: none;
+    }
+
+    .hud-corner {
+        font-size: 1rem;
+    }
+
+    .hud-corner.top-left { top: 0.75rem; left: 0.75rem; }
+    .hud-corner.top-right { top: 0.75rem; right: 3rem; }
+    .hud-corner.bottom-left { bottom: 4.2rem; left: 0.75rem; }
+    .hud-corner.bottom-right { bottom: 4.2rem; right: 0.75rem; }
+
+    .player-footer-cinema {
+        gap: 0.6rem;
+    }
+
+    .progress-scrubber-track {
+        height: 5px;
+    }
+
+    .progress-scrubber-track:hover {
+        height: 7px;
+    }
+
+    .cinema-control-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
+    }
+
+    .player-time-display {
+        font-size: 0.72rem;
+    }
+
+    .speed-pill {
+        font-size: 0.72rem;
+        padding: 0.2rem 0.55rem;
     }
 }
 
@@ -5291,7 +5385,8 @@ img {
         font-size: 0.7rem;
     }
     .contact-info-card, .payment-card {
-        padding: 1.75rem 1.25rem;
+        padding: 1.5rem 1.15rem;
+        overflow: hidden;
     }
     .contact-details {
         gap: 0.75rem;
@@ -5300,8 +5395,44 @@ img {
         padding: 0.85rem 1rem;
         gap: 0.85rem;
     }
-    .copy-input-wrapper input {
+    .contact-value {
         font-size: 0.95rem;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+    .collab-highlight-row .contact-value {
+        font-size: 0.95rem;
+    }
+    .copy-input-wrapper input {
+        font-size: 0.9rem;
+    }
+    .upi-beneficiary-row {
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        justify-content: space-between;
+    }
+    .beneficiary-name {
+        font-size: 0.82rem;
+    }
+    .beneficiary-app {
+        margin-left: 0;
+    }
+    .qr-viewport {
+        width: 180px;
+        height: 180px;
+    }
+    .qr-instruction-text {
+        font-size: 0.68rem;
+        text-align: center;
+        justify-content: center;
+    }
+    .upi-apps-dock {
+        gap: 0.4rem;
+        justify-content: center;
+    }
+    .upi-app-pill {
+        font-size: 0.7rem;
+        padding: 0.28rem 0.55rem;
     }
     .modal-content {
         width: 96%;
@@ -5320,11 +5451,47 @@ img {
     .editor-watermark {
         display: none;
     }
+    /* Move scroll-to-top to bottom-left on mobile to prevent overlapping with floating WhatsApp button */
     .scroll-to-top-btn {
-        bottom: 5.25rem;
-        right: 1.25rem;
-        width: 44px;
-        height: 44px;
+        bottom: 1.25rem;
+        left: 1.25rem;
+        right: auto;
+        width: 46px;
+        height: 46px;
+        z-index: 998;
+    }
+    /* Stack About CTAs on mobile so buttons never get truncated */
+    .about-action-bar {
+        flex-direction: column;
+        width: 100%;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+    .about-action-bar .btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    /* Sponsor CTA banner pill on mobile */
+    .workflow-cta-banner-premium {
+        padding: 1.5rem 1.15rem;
+        overflow: hidden;
+        border-radius: 18px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .cta-left-content {
+        min-width: 0;
+        width: 100%;
+    }
+    .cta-status-pill {
+        font-size: 0.64rem;
+        letter-spacing: 0.04em;
+        padding: 0.25rem 0.65rem;
+        max-width: 100%;
+        box-sizing: border-box;
+        white-space: normal;
+        text-align: left;
     }
     .scrolling-ticker-wrapper {
         padding: 0.75rem 0;

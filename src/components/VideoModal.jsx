@@ -287,7 +287,9 @@ export default function VideoModal({ isOpen, project, onClose }) {
 
       <div
         ref={playerContainerRef}
-        className={`modal-content modal-content-cinema ${isFullscreen ? 'is-fullscreen' : ''} ${
+        className={`modal-content modal-content-cinema ${
+          project.category === 'reel' ? 'modal-format-reel' : 'modal-format-widescreen'
+        } ${isFullscreen ? 'is-fullscreen' : ''} ${
           isYouTube ? 'modal-has-youtube' : ''
         }`}
       >
