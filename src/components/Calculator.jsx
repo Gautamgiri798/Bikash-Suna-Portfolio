@@ -22,24 +22,26 @@ export default function Calculator() {
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
+  const isCollab = format === 'collab';
   // Compute pricing
-  const baseCostPerUnit = parseInt(format);
+  const baseCostPerUnit = isCollab ? 0 : parseInt(format) || 0;
   const safeQty = isNaN(quantity) || quantity < 1 ? 1 : quantity > 99 ? 99 : quantity;
 
   let expressCostPerUnit = 0;
   if (expressDelivery) {
     if (baseCostPerUnit === 600) expressCostPerUnit = 200;
-    else if (baseCostPerUnit === 1500) expressCostPerUnit = 400;
+    else if (isCollab) expressCostPerUnit = 0;
     else expressCostPerUnit = 1000;
   }
 
-  const sfxCostPerUnit = customSfx ? 150 : 0;
+  const sfxCostPerUnit = customSfx && !isCollab ? 150 : 0;
   const baseTotal = baseCostPerUnit * safeQty;
   const addonsTotal = (expressCostPerUnit + sfxCostPerUnit) * safeQty;
   const targetTotal = baseTotal + addonsTotal;
 
   // Number animation
   useEffect(() => {
+    if (isCollab) return;
     const startPrice = displayedPrice;
     const diff = targetTotal - startPrice;
     if (diff === 0) return;
@@ -61,32 +63,30 @@ export default function Calculator() {
     }, stepTime);
 
     return () => clearInterval(interval);
-  }, [targetTotal]);
+  }, [targetTotal, isCollab]);
 
   // Express price text
-  const expressPriceLabel =
-    baseCostPerUnit === 600
-      ? '+₹200 / video'
-      : baseCostPerUnit === 1500
-      ? '+₹400 / campaign'
-      : '+₹1000 / video';
+  const expressPriceLabel = isCollab
+    ? 'Included / Negotiable'
+    : baseCostPerUnit === 600
+    ? '+₹200 / video'
+    : '+₹1000 / video';
 
   // Construct WhatsApp Link
   let detailsText = '';
-  if (baseCostPerUnit === 1500) {
-    detailsText = `Hi Bikash! I want to collaborate for a Paid Promotion / Brand Collab (${safeQty} campaign).`;
+  if (isCollab) {
+    detailsText = `Hi Bikash! I want to collaborate for a Paid Promotion / Brand Collab (${safeQty} campaign). Let's discuss deliverables and details!`;
   } else {
     detailsText = `Hi Bikash, I want to book ${safeQty} x ${formatName}(s).`;
-  }
+    const addonsList = [];
+    if (expressDelivery) addonsList.push('Express Delivery (24-48h)');
+    if (customSfx) addonsList.push('Custom Premium SFX');
 
-  const addonsList = [];
-  if (expressDelivery) addonsList.push('Express Delivery (24-48h)');
-  if (customSfx) addonsList.push('Custom Premium SFX');
-
-  if (addonsList.length > 0) {
-    detailsText += ` Options: ${addonsList.join(', ')}.`;
+    if (addonsList.length > 0) {
+      detailsText += ` Options: ${addonsList.join(', ')}.`;
+    }
+    detailsText += ` Estimated total: ₹${targetTotal}. Let's discuss details!`;
   }
-  detailsText += ` Estimated total: ₹${targetTotal}. Let's discuss details!`;
 
   const whatsappUrl = `https://wa.me/919360870164?text=${encodeURIComponent(detailsText)}`;
 
@@ -122,7 +122,7 @@ export default function Calculator() {
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                   >
                     <span className="trigger-text">
-                      {formatName} (₹{format}/unit)
+                      {isCollab ? `${formatName} (DM for Collab)` : `${formatName} (₹${format}/unit)`}
                     </span>
                     <i className="fa-solid fa-chevron-down select-arrow"></i>
                   </div>
@@ -146,13 +146,13 @@ export default function Calculator() {
                       <span className="option-price">₹3000 / unit</span>
                     </div>
                     <div
-                      className={`custom-option ${format === '1500' ? 'active' : ''}`}
-                      onClick={() => handleSelectOption('1500', 'Brand Collab / Paid Promo')}
+                      className={`custom-option ${format === 'collab' ? 'active' : ''}`}
+                      onClick={() => handleSelectOption('collab', 'Brand Collab / Paid Promo')}
                     >
                       <span className="option-title">
                         <i className="fa-solid fa-bullhorn text-teal"></i> Brand Collab / Paid Promo
                       </span>
-                      <span className="option-price">₹1500 / post</span>
+                      <span className="option-price">DM for Collab</span>
                     </div>
                   </div>
                 </div>
@@ -248,17 +248,25 @@ export default function Calculator() {
 
             {/* Calculator Result Box */}
             <div className="calculator-result">
-              <div className="result-label">ESTIMATED TOTAL COST</div>
-              <div className="result-price">₹{displayedPrice}</div>
+              <div className="result-label">
+                {isCollab ? 'COLLABORATION INQUIRY' : 'ESTIMATED TOTAL COST'}
+              </div>
+              <div className="result-price">
+                {isCollab ? 'DM for Collab' : `₹${displayedPrice}`}
+              </div>
 
               <div className="price-breakdown">
                 <div className="breakdown-item">
-                  <span className="breakdown-label">Base Cost</span>
-                  <span className="breakdown-val">₹{baseTotal}</span>
+                  <span className="breakdown-label">{isCollab ? 'Campaigns' : 'Base Cost'}</span>
+                  <span className="breakdown-val">
+                    {isCollab ? `${safeQty} ${safeQty > 1 ? 'Campaigns' : 'Campaign'}` : `₹${baseTotal}`}
+                  </span>
                 </div>
                 <div className="breakdown-item">
-                  <span className="breakdown-label">Addon Options</span>
-                  <span className="breakdown-val">₹{addonsTotal}</span>
+                  <span className="breakdown-label">{isCollab ? 'Rate Card' : 'Addon Options'}</span>
+                  <span className="breakdown-val">
+                    {isCollab ? 'Custom Quote via DM' : `₹${addonsTotal}`}
+                  </span>
                 </div>
               </div>
 
@@ -268,7 +276,8 @@ export default function Calculator() {
                 rel="noopener noreferrer"
                 className="btn btn-accent btn-block"
               >
-                <i className="fa-brands fa-whatsapp"></i> Book This Project
+                <i className="fa-brands fa-whatsapp"></i>{' '}
+                {isCollab ? 'DM for Brand Collab' : 'Book This Project'}
               </a>
             </div>
           </div>

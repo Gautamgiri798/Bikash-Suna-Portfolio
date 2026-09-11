@@ -1,102 +1,20 @@
 import React, { useState } from 'react';
 import VideoModal from './VideoModal';
-
-const projects = [
-  {
-    id: 'reel-1',
-    category: 'reel',
-    title: 'Dynamic Motion & Beat-Sync Reel',
-    desc: "High-energy visual cuts sync'd with electronic soundbeats, speed ramping, and stylized kinetic typography overlays.",
-    img: 'assets/reel.jpg',
-    tags: ['Beat Sync', 'Speed Ramping', 'Kinetic SFX'],
-    badge: 'Short Reel',
-    color: 'cyan',
-    icon: 'fa-bolt',
-    duration: '0:32',
-    quality: '4K • 60 FPS',
-    metric: '🔥 68K+ Views',
-  },
-  {
-    id: 'album-1',
-    category: 'album',
-    title: 'The Golden Union Wedding Cinema',
-    desc: 'Emotionally charged, slow-paced wedding narrative showcasing warm grading, soft focus edits, and immersive ambient audio.',
-    img: 'assets/album.jpg',
-    tags: ['Storytelling', 'Color Grading', 'Sound Mix'],
-    badge: 'Video Album',
-    color: 'purple',
-    icon: 'fa-film',
-    duration: '3:45',
-    quality: '4K Cinema • 24 FPS',
-    metric: '💍 Cinematic Love',
-  },
-  {
-    id: 'reel-2',
-    category: 'reel',
-    title: 'Neon Cyberpunk Gaming Highlights',
-    desc: 'Intense high-FPS montage featuring rhythmic speed ramps, chromatic glitch transitions, and punchy visual impacts.',
-    img: 'assets/hero.jpg',
-    style: { objectPosition: 'center bottom' },
-    tags: ['Speed Ramps', 'VFX', 'Glitch FX'],
-    badge: 'Short Reel',
-    color: 'blue',
-    icon: 'fa-gamepad',
-    duration: '0:45',
-    quality: '4K • 60 FPS',
-    metric: '⚡ 42K+ Views',
-  },
-  {
-    id: 'collab-1',
-    category: 'collab',
-    title: 'Creator Tech Unbox & Sponsored Reel',
-    desc: 'High-converting sponsored showcase with retention-engineered hook, macro product b-roll, and story link stickers.',
-    img: 'assets/reel.jpg',
-    style: { filter: 'hue-rotate(50deg) saturate(1.2)' },
-    tags: ['Paid Promotion', 'Brand Collab', 'Hook Retention'],
-    badge: 'Brand Collab',
-    color: 'emerald',
-    icon: 'fa-handshake',
-    duration: '0:28',
-    quality: '4K UHD',
-    metric: '🚀 50K+ Reach',
-    isCollab: true,
-  },
-  {
-    id: 'reel-3',
-    category: 'reel',
-    title: 'Urban Streetwear & Fast-Cut Reel',
-    desc: 'Whip-pan camera wipes, dynamic frame matching, dynamic typography tracking, and bass-drop rhythmic synchronization.',
-    img: 'assets/reel.jpg',
-    style: { filter: 'contrast(1.15) brightness(1.05)' },
-    tags: ['Whip Transitions', 'Typography', 'Bass Drops'],
-    badge: 'Short Reel',
-    color: 'gold',
-    icon: 'fa-fire',
-    duration: '0:38',
-    quality: '4K • 60 FPS',
-    metric: '🔥 35K+ Views',
-  },
-  {
-    id: 'collab-2',
-    category: 'collab',
-    title: 'SaaS App Teaser & Feature Walkthrough',
-    desc: 'High-energy screencast animation, punchy UI callouts, and kinetic sound design engineered for sponsor app conversions.',
-    img: 'assets/hero.jpg',
-    style: { objectPosition: 'center top' },
-    tags: ['Sponsor Promo', 'UI Motion', 'Call to Action'],
-    badge: 'Brand Collab',
-    color: 'cyan',
-    icon: 'fa-laptop-code',
-    duration: '0:34',
-    quality: '4K UHD',
-    metric: '💼 4.8x ROI',
-    isCollab: true,
-  },
-];
+import { projects } from '../data/projects';
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [videoDurations, setVideoDurations] = useState({});
+
+  const handleLoadedMetadata = (id, e) => {
+    const d = e.currentTarget.duration;
+    if (d && !isNaN(d) && isFinite(d)) {
+      const mins = Math.floor(d / 60);
+      const secs = Math.floor(d % 60).toString().padStart(2, '0');
+      setVideoDurations((prev) => ({ ...prev, [id]: `${mins}:${secs}` }));
+    }
+  };
 
   const filteredProjects =
     activeFilter === 'all'
@@ -180,13 +98,33 @@ export default function Portfolio() {
             >
               {/* Thumbnail Container with Cinema Monitor HUD */}
               <div className="portfolio-img-wrapper">
-                <img
-                  src={project.img}
-                  alt={project.title}
-                  className="portfolio-img"
-                  style={project.style || {}}
-                  loading="lazy"
-                />
+                {project.videoUrl && !project.videoUrl.includes('youtube') && !project.videoUrl.includes('youtu.be') ? (
+                  <video
+                    src={project.videoUrl}
+                    poster={project.img}
+                    className="portfolio-img portfolio-video-thumb"
+                    muted
+                    playsInline
+                    loop
+                    preload="metadata"
+                    onLoadedMetadata={(e) => handleLoadedMetadata(project.id, e)}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.play().catch(() => {});
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.pause();
+                      e.currentTarget.currentTime = 0;
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    className="portfolio-img"
+                    style={project.style || {}}
+                    loading="lazy"
+                  />
+                )}
 
                 {/* HUD Corner Framing Brackets */}
                 <span className="cinema-hud-bracket top-left">⌜</span>
@@ -199,9 +137,6 @@ export default function Portfolio() {
                   <span className={`item-tag-badge tag-${project.color}`}>
                     <i className={`fa-solid ${project.icon}`}></i> {project.badge}
                   </span>
-                  <span className="thumb-quality-badge">
-                    {project.quality}
-                  </span>
                 </div>
 
                 {/* Hover Play Backdrop */}
@@ -212,24 +147,18 @@ export default function Portfolio() {
                       <i className="fa-solid fa-play"></i>
                     </div>
                   </div>
-
-                  {/* Dancing Equalizer Waveform */}
-                  <div className="thumb-equalizer" title="Beat Synced">
-                    <span className="eq-bar bar-1"></span>
-                    <span className="eq-bar bar-2"></span>
-                    <span className="eq-bar bar-3"></span>
-                    <span className="eq-bar bar-4"></span>
-                  </div>
                 </div>
 
                 {/* Bottom Overlay Bar */}
                 <div className="thumb-bottom-bar">
-                  <span className="thumb-metric-pill">
-                    {project.metric}
-                  </span>
-                  <span className="thumb-duration-pill">
-                    <i className="fa-regular fa-clock"></i> {project.duration}
-                  </span>
+                  <div className="thumb-duration-luxury">
+                    <div className="duration-eq-indicator" aria-hidden="true">
+                      <span className="eq-line line-1"></span>
+                      <span className="eq-line line-2"></span>
+                      <span className="eq-line line-3"></span>
+                    </div>
+                    <span className="duration-time">{videoDurations[project.id] || project.duration}</span>
+                  </div>
                 </div>
               </div>
 
@@ -237,9 +166,23 @@ export default function Portfolio() {
               <div className="portfolio-info">
                 <div className="card-title-row">
                   <h3>{project.title}</h3>
-                  <span className="card-open-arrow">
-                    <i className="fa-solid fa-arrow-up-right-from-square"></i>
-                  </span>
+                  {project.externalUrl || (project.videoUrl && project.videoUrl.startsWith('http')) ? (
+                    <a
+                      href={project.externalUrl || project.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="card-open-arrow clickable"
+                      onClick={(e) => e.stopPropagation()}
+                      title="Watch on YouTube"
+                      aria-label="Watch on YouTube"
+                    >
+                      <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                  ) : (
+                    <span className="card-open-arrow">
+                      <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                    </span>
+                  )}
                 </div>
                 <p>{project.desc}</p>
 

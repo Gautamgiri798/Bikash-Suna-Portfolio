@@ -6,6 +6,9 @@ export default defineConfig({
   server: {
     port: 5173,
     open: false,
-    host: true
+    host: true,
+    watch: {
+      ignored: ['**/public/**', '**/assets/**', '**/*.mp4', '**/*.webm', '**/*.jpg', '**/*.png']
+    }
   }
 });

@@ -142,10 +142,8 @@ export default function Hero() {
                 <span className="stat-desc">Reel Edit Rate</span>
               </div>
               <div className="stat-editorial-item">
-                <span className="stat-val">
-                  {counterCollab >= 1000 ? '₹1.5k' : `₹${counterCollab}`}
-                </span>
-                <span className="stat-desc">Brand Collab Post</span>
+                <span className="stat-val">DM</span>
+                <span className="stat-desc">Brand Collab & Promo</span>
               </div>
               <div className="stat-editorial-item">
                 <span className="stat-val">{counterHours}h</span>

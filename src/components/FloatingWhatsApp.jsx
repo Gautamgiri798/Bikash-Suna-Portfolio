@@ -34,7 +34,7 @@ export default function FloatingWhatsApp() {
     {
       id: 'collab',
       icon: 'fa-handshake',
-      label: 'Brand Collab / Paid Promo (₹1500)',
+      label: 'Brand Collab / Paid Promo (DM for Collab)',
       msg: 'Hi Bikash! I represent a brand and would like to collaborate with you for a Paid Promotion / Sponsored Reel campaign.',
     },
     {

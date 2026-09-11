@@ -1,29 +1,118 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+// Helper to convert YouTube standard, short, or share URLs to embed URLs
+function getYouTubeEmbedUrl(url) {
+  if (!url) return null;
+  const ytMatch = url.match(
+    /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/
+  );
+  if (ytMatch && ytMatch[1]) {
+    return `https://www.youtube-nocookie.com/embed/${ytMatch[1]}?autoplay=1&rel=0&modestbranding=1`;
+  }
+  return null;
+}
+
 export default function VideoModal({ isOpen, project, onClose }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [videoDuration, setVideoDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const playerContainerRef = useRef(null);
   const progressBarRef = useRef(null);
+  const videoRef = useRef(null);
 
-  const duration = project?.category === 'album' ? 75 : 32;
+  const fallbackDuration = project?.category === 'album' ? 75 : 32;
+  const ytEmbedUrl = getYouTubeEmbedUrl(project?.videoUrl);
+  const isYouTube = Boolean(ytEmbedUrl);
+  const isRealVideo = Boolean(project?.videoUrl && !isYouTube);
+
+  const duration = isRealVideo && videoDuration > 0 ? videoDuration : fallbackDuration;
 
   // Reset when modal opens or project changes
   useEffect(() => {
     if (isOpen) {
-      setIsPlaying(true); // Auto-play simulation for smooth preview
+      setIsPlaying(true);
       setCurrentTime(0);
       setIsMuted(false);
       setPlaybackSpeed(1);
       setIsFullscreen(false);
     } else {
       setIsPlaying(false);
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+      }
     }
   }, [isOpen, project]);
+
+  // Sync isPlaying with real HTML5 video
+  useEffect(() => {
+    if (!isRealVideo || !videoRef.current) return;
+    if (isPlaying) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // If browser prevents unmuted autoplay, play muted automatically
+          if (videoRef.current) {
+            videoRef.current.muted = true;
+            setIsMuted(true);
+            videoRef.current.play().catch(() => {
+              setIsPlaying(false);
+            });
+          }
+        });
+      }
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isPlaying, isRealVideo]);
+
+  // Sync mute state with real video
+  useEffect(() => {
+    if (!isRealVideo || !videoRef.current) return;
+    videoRef.current.muted = isMuted;
+  }, [isMuted, isRealVideo]);
+
+  // Sync playback rate with real video
+  useEffect(() => {
+    if (!isRealVideo || !videoRef.current) return;
+    videoRef.current.playbackRate = playbackSpeed;
+  }, [playbackSpeed, isRealVideo]);
+
+  // Handle video loaded metadata
+  const handleLoadedMetadata = () => {
+    if (videoRef.current && !isNaN(videoRef.current.duration)) {
+      setVideoDuration(videoRef.current.duration);
+    }
+  };
+
+  // Handle video time update
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+    }
+  };
+
+  // Simulated video playback timer when no real video file is supplied
+  useEffect(() => {
+    if (isRealVideo || isYouTube) return;
+    let interval;
+    if (isPlaying) {
+      const tick = 100 / playbackSpeed;
+      interval = setInterval(() => {
+        setCurrentTime((prev) => {
+          if (prev >= duration) {
+            return 0; // Loop seamlessly
+          }
+          return Math.min(duration, +(prev + 0.1).toFixed(1));
+        });
+      }, tick);
+    }
+    return () => clearInterval(interval);
+  }, [isPlaying, duration, playbackSpeed, isRealVideo, isYouTube]);
 
   // Fullscreen state listener
   useEffect(() => {
@@ -61,38 +150,23 @@ export default function VideoModal({ isOpen, project, onClose }) {
         } else {
           onClose();
         }
-      } else if (e.code === 'Space') {
-        e.preventDefault();
-        setIsPlaying((prev) => !prev);
-      } else if (e.key === 'f' || e.key === 'F') {
-        e.preventDefault();
-        toggleFullscreen();
-      } else if (e.key === 'm' || e.key === 'M') {
-        e.preventDefault();
-        setIsMuted((prev) => !prev);
+      } else if (!isYouTube) {
+        if (e.code === 'Space') {
+          e.preventDefault();
+          setIsPlaying((prev) => !prev);
+        } else if (e.key === 'f' || e.key === 'F') {
+          e.preventDefault();
+          toggleFullscreen();
+        } else if (e.key === 'm' || e.key === 'M') {
+          e.preventDefault();
+          setIsMuted((prev) => !prev);
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, isFullscreen, onClose]);
-
-  // Simulated video playback timer with speed adjustment
-  useEffect(() => {
-    let interval;
-    if (isPlaying) {
-      const tick = 100 / playbackSpeed;
-      interval = setInterval(() => {
-        setCurrentTime((prev) => {
-          if (prev >= duration) {
-            return 0; // Loop seamlessly
-          }
-          return Math.min(duration, +(prev + 0.1).toFixed(1));
-        });
-      }, tick);
-    }
-    return () => clearInterval(interval);
-  }, [isPlaying, duration, playbackSpeed]);
+  }, [isOpen, isFullscreen, onClose, isYouTube]);
 
   if (!isOpen || !project) return null;
 
@@ -113,10 +187,6 @@ export default function VideoModal({ isOpen, project, onClose }) {
         elem.requestFullscreen().catch(() => setIsFullscreen(true));
       } else if (elem.webkitRequestFullscreen) {
         elem.webkitRequestFullscreen();
-      } else if (elem.mozRequestFullScreen) {
-        elem.mozRequestFullScreen();
-      } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
       } else {
         setIsFullscreen(true);
       }
@@ -144,7 +214,11 @@ export default function VideoModal({ isOpen, project, onClose }) {
     const rect = progressBarRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const ratio = Math.max(0, Math.min(1, clickX / rect.width));
-    setCurrentTime(+(ratio * duration).toFixed(1));
+    const target = +(ratio * duration).toFixed(1);
+    setCurrentTime(target);
+    if (isRealVideo && videoRef.current) {
+      videoRef.current.currentTime = target;
+    }
   };
 
   // Cycle playback speed
@@ -160,7 +234,7 @@ export default function VideoModal({ isOpen, project, onClose }) {
     return `${mins}:${secs}`;
   };
 
-  const progressPercent = (currentTime / duration) * 100;
+  const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   const badgeText =
     project.category === 'reel'
@@ -178,7 +252,9 @@ export default function VideoModal({ isOpen, project, onClose }) {
 
       <div
         ref={playerContainerRef}
-        className={`modal-content modal-content-cinema ${isFullscreen ? 'is-fullscreen' : ''}`}
+        className={`modal-content modal-content-cinema ${isFullscreen ? 'is-fullscreen' : ''} ${
+          isYouTube ? 'modal-has-youtube' : ''
+        }`}
       >
         {/* Floating Close Button */}
         <button
@@ -192,42 +268,72 @@ export default function VideoModal({ isOpen, project, onClose }) {
 
         <div className="video-container-cinema">
           <div className="simulated-player-cinema">
-            {/* Visual Canvas Background with Project Image & Ambient Light */}
+            {/* Visual Canvas Background with Project Image or Real Video */}
             <div className="cinema-canvas">
-              <img
-                src={project.img}
-                alt={project.title}
-                className={`cinema-source-image ${isPlaying ? 'is-playing' : ''}`}
-                style={project.style || {}}
-              />
-              <div className="cinema-grain-overlay"></div>
-              <div className="cinema-lens-flare"></div>
-              <div className="cinema-vignette"></div>
-
-              {/* Anamorphic Waveform Bleed */}
-              <div
-                className="cinema-waveform-glow"
-                style={{ animationPlayState: isPlaying ? 'running' : 'paused' }}
-              ></div>
+              {isYouTube ? (
+                <div className="cinema-iframe-wrapper">
+                  <iframe
+                    src={ytEmbedUrl}
+                    title={project.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="cinema-iframe"
+                  ></iframe>
+                </div>
+              ) : isRealVideo ? (
+                <video
+                  ref={videoRef}
+                  src={project.videoUrl}
+                  className="cinema-real-video"
+                  playsInline
+                  loop
+                  preload="auto"
+                  onLoadedMetadata={handleLoadedMetadata}
+                  onTimeUpdate={handleTimeUpdate}
+                  onEnded={() => setIsPlaying(false)}
+                />
+              ) : (
+                <>
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    className={`cinema-source-image ${isPlaying ? 'is-playing' : ''}`}
+                    style={project.style || {}}
+                  />
+                  <div className="cinema-grain-overlay"></div>
+                  <div className="cinema-lens-flare"></div>
+                  <div className="cinema-vignette"></div>
+                  <div
+                    className="cinema-waveform-glow"
+                    style={{ animationPlayState: isPlaying ? 'running' : 'paused' }}
+                  ></div>
+                </>
+              )}
             </div>
 
-            {/* Camera Viewfinder Framing Overlays */}
-            <div className="cinema-hud-overlay">
-              <span className="hud-corner top-left">⌜</span>
-              <span className="hud-corner top-right">⌝</span>
-              <span className="hud-corner bottom-left">⌞</span>
-              <span className="hud-corner bottom-right">⌟</span>
+            {/* Camera Viewfinder Framing Overlays (for real video or simulated) */}
+            {!isYouTube && (
+              <div className="cinema-hud-overlay">
+                <span className="hud-corner top-left">⌜</span>
+                <span className="hud-corner top-right">⌝</span>
+                <span className="hud-corner bottom-left">⌞</span>
+                <span className="hud-corner bottom-right">⌟</span>
 
-              {/* Live Record Timecode HUD */}
-              <div className="hud-rec-indicator">
-                <span className={`hud-rec-dot ${isPlaying ? 'blinking' : ''}`}></span>
-                <span className="hud-rec-text">REC</span>
-                <span className="hud-timecode">00:{formatTime(currentTime)}:24</span>
+                {/* Live Record Timecode HUD */}
+                <div className="hud-rec-indicator">
+                  <span className={`hud-rec-dot ${isPlaying ? 'blinking' : ''}`}></span>
+                  <span className="hud-rec-text">REC</span>
+                  <span className="hud-timecode">00:{formatTime(currentTime)}:24</span>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Interactive Player Overlay UI */}
-            <div className={`player-overlay-ui-cinema ${!isPlaying ? 'is-paused-overlay' : ''}`}>
+            <div
+              className={`player-overlay-ui-cinema ${
+                !isPlaying && !isYouTube ? 'is-paused-overlay' : ''
+              } ${isYouTube ? 'overlay-youtube-mode' : ''}`}
+            >
               {/* Header Bar */}
               <div className="player-header-cinema">
                 <div className="header-left-meta">
@@ -252,110 +358,127 @@ export default function VideoModal({ isOpen, project, onClose }) {
                 </div>
               </div>
 
-              {/* Center Play/Pause Trigger */}
-              <div
-                className="player-center-cinema"
-                onClick={() => setIsPlaying(!isPlaying)}
-              >
-                {!isPlaying && (
-                  <div className="center-play-button-luxury">
-                    <div className="pulse-outer-ring"></div>
-                    <div className="center-play-icon">
-                      <i className="fa-solid fa-play"></i>
-                    </div>
-                    <span className="center-play-label">PRESS SPACE TO PLAY</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Footer Controls Area */}
-              <div className="player-footer-cinema">
-                {/* Interactive Scrubber Bar */}
+              {/* Center Play/Pause Trigger (for real video and simulated) */}
+              {!isYouTube && (
                 <div
-                  ref={progressBarRef}
-                  className="progress-scrubber-track"
-                  onClick={handleScrubberClick}
-                  title="Click to seek"
+                  className="player-center-cinema"
+                  onClick={() => setIsPlaying(!isPlaying)}
                 >
-                  <div
-                    className="progress-scrubber-fill"
-                    style={{ width: `${progressPercent}%` }}
-                  >
-                    <span className="scrubber-head-thumb"></span>
-                  </div>
+                  {!isPlaying && (
+                    <div className="center-play-button-luxury">
+                      <div className="pulse-outer-ring"></div>
+                      <div className="center-play-icon">
+                        <i className="fa-solid fa-play"></i>
+                      </div>
+                      <span className="center-play-label">PRESS SPACE TO PLAY</span>
+                    </div>
+                  )}
                 </div>
+              )}
 
-                {/* Bottom Control Bar */}
-                <div className="player-controls-row">
-                  {/* Left Controls */}
-                  <div className="controls-left-group">
-                    {/* Play / Pause Toggle */}
-                    <button
-                      className="cinema-control-btn play-pause-btn"
-                      onClick={() => setIsPlaying(!isPlaying)}
-                      aria-label={isPlaying ? 'Pause video' : 'Play video'}
-                      title={isPlaying ? 'Pause (Space)' : 'Play (Space)'}
+              {/* Footer Controls Area (for real video and simulated) */}
+              {!isYouTube && (
+                <div className="player-footer-cinema">
+                  {/* Interactive Scrubber Bar */}
+                  <div
+                    ref={progressBarRef}
+                    className="progress-scrubber-track"
+                    onClick={handleScrubberClick}
+                    title="Click to seek"
+                  >
+                    <div
+                      className="progress-scrubber-fill"
+                      style={{ width: `${progressPercent}%` }}
                     >
-                      <i className={`fa-solid ${isPlaying ? 'fa-pause' : 'fa-play'}`}></i>
-                    </button>
+                      <span className="scrubber-head-thumb"></span>
+                    </div>
+                  </div>
 
-                    {/* Mute / Unmute Toggle */}
-                    <button
-                      className="cinema-control-btn volume-btn"
-                      onClick={() => setIsMuted(!isMuted)}
-                      aria-label={isMuted ? 'Unmute' : 'Mute'}
-                      title={isMuted ? 'Unmute (M)' : 'Mute (M)'}
-                    >
-                      <i className={`fa-solid ${isMuted ? 'fa-volume-xmark text-red' : 'fa-volume-high'}`}></i>
-                    </button>
+                  {/* Bottom Control Bar */}
+                  <div className="player-controls-row">
+                    {/* Left Controls */}
+                    <div className="controls-left-group">
+                      {/* Play / Pause Toggle */}
+                      <button
+                        className="cinema-control-btn play-pause-btn"
+                        onClick={() => setIsPlaying(!isPlaying)}
+                        aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                        title={isPlaying ? 'Pause (Space)' : 'Play (Space)'}
+                      >
+                        <i className={`fa-solid ${isPlaying ? 'fa-pause' : 'fa-play'}`}></i>
+                      </button>
 
-                    {/* Audio Equalizer Waveform indicator */}
-                    <div className="player-audio-bars" title={isMuted ? 'Muted' : 'Audio Active'}>
-                      <span className={`audio-bar bar-1 ${isPlaying && !isMuted ? 'active' : ''}`}></span>
-                      <span className={`audio-bar bar-2 ${isPlaying && !isMuted ? 'active' : ''}`}></span>
-                      <span className={`audio-bar bar-3 ${isPlaying && !isMuted ? 'active' : ''}`}></span>
+                      {/* Mute / Unmute Toggle */}
+                      <button
+                        className="cinema-control-btn volume-btn"
+                        onClick={() => setIsMuted(!isMuted)}
+                        aria-label={isMuted ? 'Unmute' : 'Mute'}
+                        title={isMuted ? 'Unmute (M)' : 'Mute (M)'}
+                      >
+                        <i
+                          className={`fa-solid ${
+                            isMuted ? 'fa-volume-xmark text-red' : 'fa-volume-high'
+                          }`}
+                        ></i>
+                      </button>
+
+                      {/* Audio Equalizer Waveform indicator */}
+                      <div
+                        className="player-audio-bars"
+                        title={isMuted ? 'Muted' : 'Audio Active'}
+                      >
+                        <span
+                          className={`audio-bar bar-1 ${isPlaying && !isMuted ? 'active' : ''}`}
+                        ></span>
+                        <span
+                          className={`audio-bar bar-2 ${isPlaying && !isMuted ? 'active' : ''}`}
+                        ></span>
+                        <span
+                          className={`audio-bar bar-3 ${isPlaying && !isMuted ? 'active' : ''}`}
+                        ></span>
+                      </div>
+
+                      {/* Time Counter */}
+                      <span className="player-time-display">
+                        <span className="current-time">{formatTime(currentTime)}</span>
+                        <span className="time-separator">/</span>
+                        <span className="total-time">{formatTime(duration)}</span>
+                      </span>
                     </div>
 
-                    {/* Time Counter */}
-                    <span className="player-time-display">
-                      <span className="current-time">{formatTime(currentTime)}</span>
-                      <span className="time-separator">/</span>
-                      <span className="total-time">{formatTime(duration)}</span>
-                    </span>
-                  </div>
+                    {/* Right Controls */}
+                    <div className="controls-right-group">
+                      {/* Speed Selector */}
+                      <button
+                        className="cinema-control-pill speed-pill"
+                        onClick={handleSpeedCycle}
+                        title="Cycle playback speed"
+                      >
+                        {playbackSpeed}x
+                      </button>
 
-                  {/* Right Controls */}
-                  <div className="controls-right-group">
-                    {/* Speed Selector */}
-                    <button
-                      className="cinema-control-pill speed-pill"
-                      onClick={handleSpeedCycle}
-                      title="Cycle playback speed"
-                    >
-                      {playbackSpeed}x
-                    </button>
+                      {/* Watermark Label */}
+                      <span className="cinema-watermark">
+                        <i className="fa-solid fa-scissors"></i> BIKASH SUNA PRO
+                      </span>
 
-                    {/* Watermark Label */}
-                    <span className="cinema-watermark">
-                      <i className="fa-solid fa-scissors"></i> BIKASH SUNA PRO
-                    </span>
-
-                    {/* Fullscreen Button */}
-                    <button
-                      className="cinema-control-btn fullscreen-btn"
-                      onClick={toggleFullscreen}
-                      aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
-                      title={isFullscreen ? 'Exit Fullscreen (F)' : 'Fullscreen (F)'}
-                    >
-                      <i
-                        className={`fa-solid ${
-                          isFullscreen ? 'fa-compress text-cyan' : 'fa-expand'
-                        }`}
-                      ></i>
-                    </button>
+                      {/* Fullscreen Button */}
+                      <button
+                        className="cinema-control-btn fullscreen-btn"
+                        onClick={toggleFullscreen}
+                        aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+                        title={isFullscreen ? 'Exit Fullscreen (F)' : 'Fullscreen (F)'}
+                      >
+                        <i
+                          className={`fa-solid ${
+                            isFullscreen ? 'fa-compress text-cyan' : 'fa-expand'
+                          }`}
+                        ></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -363,4 +486,3 @@ export default function VideoModal({ isOpen, project, onClose }) {
     </div>
   );
 }
-

@@ -196,9 +196,8 @@ export default function Services() {
             <p className="package-target">Brands, Startups, SaaS Apps & Creators</p>
 
             <div className="price-box">
-              <span className="currency">₹</span>
-              <span className="price price-emerald">1500</span>
-              <span className="duration">/ campaign</span>
+              <span className="price price-emerald">DM</span>
+              <span className="duration">/ for Collaboration</span>
             </div>
 
             <p className="package-desc">
@@ -248,12 +247,12 @@ export default function Services() {
 
             <div className="pricing-cta-premium">
               <a
-                href="https://wa.me/919360870164?text=Hi%20Bikash!%20I%20want%20to%20book%20a%20Paid%20Promotion%20/%20Brand%20Sponsorship%20campaign%20(₹1500)."
+                href="https://wa.me/919360870164?text=Hi%20Bikash!%20I%20want%20to%20collaborate%20for%20a%20Paid%20Promotion%20/%20Brand%20Sponsorship."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-pricing btn-emerald btn-block pulse-on-hover"
               >
-                <i className="fa-solid fa-bullhorn"></i> Book Brand Collab
+                <i className="fa-brands fa-whatsapp"></i> DM for Brand Collab
               </a>
             </div>
 
