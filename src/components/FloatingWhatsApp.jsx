@@ -6,7 +6,7 @@ export default function FloatingWhatsApp() {
     {
       id: 1,
       sender: 'bot',
-      text: 'Hi there! 👋 Welcome to my studio portfolio. What kind of project or collaboration are you looking for?',
+      text: 'Hi there! 👋 Welcome to my studio. Choose a quick option below to chat directly on WhatsApp, or type your custom inquiry:',
       time: 'Just now',
     },
   ]);
@@ -52,11 +52,15 @@ export default function FloatingWhatsApp() {
     }
   }, [chatMessages, isTyping, isOpen]);
 
-  // Handle clicking a preset option
+  // Handle clicking a preset option - DIRECTLY opens WhatsApp immediately
   const handleSelectPreset = (preset) => {
     setSelectedOption(preset.id);
 
-    // 1. User message
+    // Directly open WhatsApp immediately in a new tab / app
+    const targetUrl = `https://wa.me/${phone}?text=${encodeURIComponent(preset.msg)}`;
+    window.open(targetUrl, '_blank');
+
+    // Register user selection and show confirmation in chat
     const userMsg = {
       id: Date.now(),
       sender: 'user',
@@ -64,36 +68,28 @@ export default function FloatingWhatsApp() {
       time: 'Just now',
     };
 
-    setChatMessages((prev) => [...prev, userMsg]);
-    setIsTyping(true);
+    const botResponse = {
+      id: Date.now() + 1,
+      sender: 'bot',
+      text: `Opening WhatsApp with your "${preset.label}" details ready! 🚀`,
+      time: 'Just now',
+      actionUrl: targetUrl,
+      actionLabel: 'Re-open in WhatsApp',
+    };
 
-    // 2. Bot automated answer after 600ms
-    setTimeout(() => {
-      setIsTyping(false);
-      const botResponse = {
-        id: Date.now() + 1,
-        sender: 'bot',
-        text: `Awesome choice! 🚀 Opening WhatsApp now with your "${preset.label}" details ready...`,
-        time: 'Just now',
-        actionUrl: `https://wa.me/${phone}?text=${encodeURIComponent(preset.msg)}`,
-        actionLabel: 'Click to Open WhatsApp',
-      };
-      setChatMessages((prev) => [...prev, botResponse]);
-
-      // Open WhatsApp after brief delay
-      setTimeout(() => {
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(preset.msg)}`, '_blank');
-      }, 700);
-    }, 600);
+    setChatMessages((prev) => [...prev, userMsg, botResponse]);
   };
 
-  // Handle submitting custom message
+  // Handle submitting custom message - DIRECTLY opens WhatsApp immediately
   const handleSendCustom = (e) => {
     e.preventDefault();
     if (!customInput.trim()) return;
 
     const text = customInput.trim();
     setCustomInput('');
+
+    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(`Hi Bikash! Inquiry from your portfolio: "${text}"`)}`;
+    window.open(waUrl, '_blank');
 
     const userMsg = {
       id: Date.now(),
@@ -102,27 +98,16 @@ export default function FloatingWhatsApp() {
       time: 'Just now',
     };
 
-    setChatMessages((prev) => [...prev, userMsg]);
-    setIsTyping(true);
+    const botResponse = {
+      id: Date.now() + 1,
+      sender: 'bot',
+      text: 'Connecting you straight to Bikash on WhatsApp! 💬',
+      time: 'Just now',
+      actionUrl: waUrl,
+      actionLabel: 'Re-open in WhatsApp',
+    };
 
-    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(`Hi Bikash! Message from your portfolio: "${text}"`)}`;
-
-    setTimeout(() => {
-      setIsTyping(false);
-      const botResponse = {
-        id: Date.now() + 1,
-        sender: 'bot',
-        text: 'Connecting you straight to Bikash on WhatsApp right now! 💬',
-        time: 'Just now',
-        actionUrl: waUrl,
-        actionLabel: 'Open in WhatsApp',
-      };
-      setChatMessages((prev) => [...prev, botResponse]);
-
-      setTimeout(() => {
-        window.open(waUrl, '_blank');
-      }, 600);
-    }, 600);
+    setChatMessages((prev) => [...prev, userMsg, botResponse]);
   };
 
   const toggleChat = () => {
@@ -206,9 +191,7 @@ export default function FloatingWhatsApp() {
 
             {/* Quick Automation Preset Options - Always accessible */}
             <div className="wa-automation-presets">
-              <span className="presets-title">
-                {chatMessages.length > 1 ? 'Quick options & inquiries:' : 'Tap a quick option to start:'}
-              </span>
+              <span className="presets-title">Quick options & inquiries:</span>
               <div className="presets-grid">
                 {automationPresets.map((preset) => (
                   <button
