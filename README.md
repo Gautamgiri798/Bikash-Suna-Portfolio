@@ -185,16 +185,14 @@ All showcase items are managed in the centralized configuration file [src/data/p
 ---
 
 ## 💬 8. Right-Sided Floating WhatsApp Concierge
-* **Optimal Right-Side Placement**: Anchored cleanly at `bottom: 2rem; right: 2rem;`, eliminating overlap with navigation elements.
-* **Harmonious Scroll Dial Coexistence**: The circular progress dial floats directly above the WhatsApp trigger (`bottom: 6.5rem; right: 2.25rem;`).
-* **Always-Accessible Quick Options**:
-  * ⚡ *Short Reel Edit (₹600)*
-  * 🎬 *Long Video Album (₹3,000)*
-  * 🤝 *Brand Collab / Paid Promo (DM for Collab)*
-  * 🚀 *Rush 24h Express Delivery*
+* **Optimal Right-Side Placement**: Anchored cleanly at `bottom: 2rem; right: 2rem;` on desktop and symmetrically at `bottom: 1.25rem; right: 1.25rem;` (`48px`) on mobile viewports.
+* **Harmonious Scroll Dial Coexistence**: The circular progress dial floats cleanly on the left (`bottom: 1.25rem; left: 1.25rem;`) on mobile, eliminating obstruction.
+* **Direct Access to Quick Options & Inquiries**: Opening the concierge immediately displays the **Quick options & inquiries** menu front and center, inviting visitors to select their needed service or write a custom message.
+* **Instant 1-Click WhatsApp Launch**:
+  * Clicking any preset option (`Short Reel Edit (₹600)`, `Long Video Album (₹3,000)`, `Brand Collab`, or `Rush 24h Express Delivery`) **immediately opens WhatsApp** in 1-click with the custom inquiry pre-filled and ready to send.
+  * Zero fake chatbot delay, zero typing bubble latency, and 100% immune to mobile browser popup-blockers.
 * **Persistent Presets Architecture**: Options remain visible and interactive even after clicking an option, allowing clients to explore multiple service packages without losing access.
-* **Realistic Typing Simulation**: Selecting any chip triggers an animated 3-dot typing response before generating a direct WhatsApp launch button with customized project specs.
-* **Custom Inquiry Input**: Integrated chat input footer allowing visitors to type bespoke requirements or rates and open WhatsApp in 1-click.
+* **Instant Custom Inquiry Input**: Integrated chat input footer allowing visitors to type bespoke requirements or rates and open WhatsApp in 1-click, with a convenient "Re-open in WhatsApp" shortcut inside the widget.
 
 ---
 
