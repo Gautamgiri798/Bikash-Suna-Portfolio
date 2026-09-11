@@ -85,7 +85,9 @@ Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion,
 ### 🎬 2. Cinematic Hero & Pure Diamond Ice-White Typography
 * **High-Contrast Headline Typography**: The rotating typewriter titles (*"Influential Content Creator"*, *"Cinematic Video Editor"*, *"Viral Reel Specialist"*, *"Brand Collab Partner"*) are rendered in a bespoke **Pure Diamond Ice-White with Platinum Glow** gradient (`#FFFFFF` &rarr; `#F8FAFC` &rarr; `#E2E8F0` &rarr; `#CBD5E1`).
 * **Multi-Depth Platinum Aura**: Layered drop shadows guarantee 100% legibility against dark studio backgrounds.
-* **Studio Production Monitor Suite**: Real-time visualizer card displaying Premiere Pro and After Effects workflow previews, simulated playback controls, live frequency audio visualizers, and timecode readouts.
+* **Studio Production Monitor & Multi-Track NLE Timeline HUD**: Real-time visualizer deck featuring Premiere Pro and After Effects workflow previews, simulated playback controls, live frequency audio visualizers, and SMPTE timecode readouts.
+* **Adaptive Dual-Tier Timeline Engine**: Automatically abbreviates track clip names and pipeline badges on mobile viewports (`320px` to `768px`) via `.timeline-desktop-only` tags to guarantee 0% horizontal clipping while retaining full detailed readouts on desktop monitors.
+* **Fluid Category & Availability Pill**: Self-adjusting badge pill utilizing responsive `clamp()` typography and compact padding, guaranteeing the live pulsing green availability dot and creator title never truncate on narrow mobile screens.
 * **Live Verified Metrics**: Dynamic animated counters tracking 120+ projects completed, 4.9★ rating, and 100% client retention.
 
 ### ⚡ 3. Dual Superpowers: "Two Passions. One Powerful Creator."
@@ -394,6 +396,8 @@ Easily tailor this codebase for your personal branding or client project:
 - **Zero Bloat Frameworks**: 100% vanilla CSS tokens with zero Tailwind or Bootstrap runtime overhead.
 - **Hardware-Accelerated Transforms**: Modals, hover elevations, and 3D rotations utilize `transform: translate3d()` and `will-change` hints for smooth 60FPS execution.
 - **Dynamic 3D Throttling**: WebGL frame loops pause automatically when scrolled off-screen to preserve CPU/GPU overhead.
+- **Zero-Overflow Mobile Geometry**: Strict `min-width: 0` flex constraints, adaptive typography clamps, and responsive viewports guarantee 0 horizontal scrolling across all mobile devices (320px to 480px+).
+- **Symmetrical Mobile Floating Suite**: Dual floating widgets (48px WhatsApp concierge on right & 44px scroll dial on left) positioned symmetrically with clearance padding to prevent metric card obstruction.
 - **Persistent Video Controls**: Custom HTML5 media player controls that stay accessible without vanishing or freezing video feeds.
 - **Permanent Preset Quick-Options**: WhatsApp concierge chips remain active after interaction for rapid follow-up inquiries.
 - **Windows File Watcher Guard**: Excludes heavy binary video files from the Vite watcher to prevent `EBUSY` locks.
