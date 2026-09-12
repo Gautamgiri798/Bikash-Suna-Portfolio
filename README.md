@@ -172,8 +172,8 @@ All showcase items are managed in the centralized configuration file [src/data/p
   * `04` **Review & Collaborative Launch** (Day 3 • Live Campaign): Final cut review, official Instagram Co-Author Reel publishing, and targeted story link stickers.
 * **Luxury Mobile-Responsive Sponsor CTA Banner**:
   * Real-time availability pill with a live pulsing green indicator (*"SPONSOR SLOTS OPEN FOR THIS MONTH"*), engineered with flexbox `min-width: 0` protection and multiline wrapping defense.
-  * Starter sponsorship packages highlighted at **₹1,500**, bundling 4K video editing, hook scripting, and co-authorship.
-  * Full-width mobile CTA button (*"Book Brand Sponsorship"*) launching directly into WhatsApp with pre-configured campaign parameters.
+  * Professional collaboration model (*"DM for Collaboration"*), highlighting tailored deliverables with 4K video production, viral hook scripting, and verified Instagram co-authorship.
+  * Full-width mobile CTA button (*"DM for Collaboration"*) launching directly into WhatsApp with pre-configured campaign parameters.
   * **Zero-Clipping Responsive Geometry**: Adaptive `clamp()` typography and nested container padding harmonization (`<= 768px` and `<= 480px`), completely eliminating mobile horizontal overflow and card clipping.
 
 ---
@@ -213,7 +213,7 @@ Transparent, upfront pricing packages designed for immediate commercial decision
 | :--- | :--- | :--- | :---: |
 | **⚡ Short-Form Reel / TikTok** | 9:16 vertical, hook retention pacing, sound design, kinetic subtitle timing, color grading | 24h – 48h | **₹600** / reel |
 | **🎬 Long Video / YouTube Album** | 16:9 cinematic, multi-cam sync, master sound mix, B-roll pacing, custom LUT grade | 48h – 72h | **₹3,000** / video |
-| **🤝 Paid Promotion & Brand Collab** | 1 Dedicated sponsored Reel authored by Bikash, Instagram Co-Author & Tagged Collab, 24h story blast with link sticker, hook scripting, product B-roll, 4K edit & sound design (50K+ Reach) | 48h – 72h | **Starter packages from ₹1,500** / Custom Quote |
+| **🤝 Paid Promotion & Brand Collab** | 1 Dedicated sponsored Reel authored by Bikash, Instagram Co-Author & Tagged Collab, 24h story blast with link sticker, hook scripting, product B-roll, 4K edit & sound design (50K+ Reach) | 48h – 72h | **DM for Collaboration** (Custom Quote) |
 | **🚀 Rush 24h Express Turnaround** | Priority rendering queue, dedicated revision window, same-day draft | 24 Hours | **Add-on** |
 
 ---

@@ -257,7 +257,7 @@ export default function CreatorMediaKit() {
                 <span>SPONSOR SLOTS OPEN FOR THIS MONTH</span>
               </div>
               <h4>Ready to promote your product, app, or brand?</h4>
-              <p>Starter sponsorship packages begin at <strong>₹1,500</strong> with complete video editing, scripting, and tagged co-authorship included.</p>
+              <p>Tailored brand collaboration packages designed for maximum ROI — complete 4K video production, viral hook scripting, and verified Instagram co-authorship included. <strong>DM for Collaboration</strong>.</p>
             </div>
             <div className="cta-actions">
               <a
@@ -266,7 +266,7 @@ export default function CreatorMediaKit() {
                 rel="noopener noreferrer"
                 className="btn btn-primary pulse-on-hover btn-cta-luxury"
               >
-                <i className="fa-solid fa-handshake"></i> Book Brand Sponsorship
+                <i className="fa-solid fa-handshake"></i> DM for Collaboration
               </a>
             </div>
           </div>
