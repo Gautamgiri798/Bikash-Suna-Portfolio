@@ -5832,27 +5832,6 @@ img {
         justify-content: center;
         text-align: center;
     }
-    /* Sponsor CTA banner pill on mobile */
-    .workflow-cta-banner-premium {
-        padding: 1.5rem 1.15rem;
-        overflow: hidden;
-        border-radius: 18px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    .cta-left-content {
-        min-width: 0;
-        width: 100%;
-    }
-    .cta-status-pill {
-        font-size: 0.64rem;
-        letter-spacing: 0.04em;
-        padding: 0.25rem 0.65rem;
-        max-width: 100%;
-        box-sizing: border-box;
-        white-space: normal;
-        text-align: left;
-    }
     .scrolling-ticker-wrapper {
         padding: 0.75rem 0;
     }
@@ -6961,6 +6940,10 @@ img {
     flex-wrap: wrap;
     position: relative;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35), 0 0 25px rgba(6, 182, 212, 0.12);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .cta-left-content {
@@ -6981,6 +6964,12 @@ img {
     padding: 0.3rem 0.8rem;
     border-radius: 9999px;
     margin-bottom: 0.85rem;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.cta-status-pill .pulse-dot {
+    flex-shrink: 0;
 }
 
 .pulse-dot {
@@ -7027,6 +7016,12 @@ img {
     font-weight: 700;
 }
 
+.cta-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
 .btn-cta-luxury {
     background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #7c3aed 100%);
     color: #ffffff !important;
@@ -7064,36 +7059,143 @@ img {
     }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 768px) {
     .mediakit-stats-grid {
         grid-template-columns: 1fr;
-        gap: 1.2rem;
-        margin-bottom: 3rem;
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
     }
 
     .workflow-steps-grid-premium {
         grid-template-columns: 1fr;
-        gap: 1.2rem;
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
     }
 
     .workflow-container-premium {
-        padding: 2rem 1.4rem;
+        padding: 2rem 1.25rem;
         border-radius: 20px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .workflow-header-premium {
+        margin-bottom: 2.25rem;
+    }
+
+    .workflow-header-premium h3 {
+        font-size: clamp(1.4rem, 5vw, 1.85rem);
     }
 
     .workflow-cta-banner-premium {
-        padding: 1.6rem 1.4rem;
+        padding: 1.6rem 1.25rem;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        width: 100%;
+        max-width: 100%;
+        gap: 1.35rem;
+        box-sizing: border-box;
+    }
+
+    .cta-left-content {
+        min-width: 0 !important;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .cta-status-pill {
+        font-size: 0.68rem;
+        letter-spacing: 0.04em;
+        padding: 0.3rem 0.75rem;
+        max-width: 100%;
+        box-sizing: border-box;
+        white-space: normal;
+        line-height: 1.35;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        word-break: break-word;
+    }
+
+    .cta-status-pill .pulse-dot {
+        flex-shrink: 0;
+    }
+
+    .cta-left-content h4 {
+        font-size: clamp(1.15rem, 4.8vw, 1.35rem);
+        line-height: 1.35;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin-bottom: 0.45rem;
+    }
+
+    .cta-left-content p {
+        font-size: 0.88rem;
+        line-height: 1.55;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .cta-actions {
+        width: 100%;
+        display: flex;
     }
 
     .btn-cta-luxury {
         width: 100%;
         justify-content: center;
+        text-align: center;
+        padding: 0.85rem 1.15rem;
+        font-size: clamp(0.85rem, 3.8vw, 0.95rem);
+        box-sizing: border-box;
+        white-space: normal;
     }
 
     .platform-snapshot-bar {
         gap: 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .workflow-container-premium {
+        padding: 1.35rem 0.95rem;
+        border-radius: 16px;
+    }
+
+    .workflow-card-premium {
+        padding: 1.4rem 1.1rem 1.3rem 1.1rem;
+        border-radius: 16px;
+    }
+
+    .workflow-cta-banner-premium {
+        padding: 1.25rem 0.95rem;
+        border-radius: 14px;
+        gap: 1.15rem;
+    }
+
+    .cta-status-pill {
+        font-size: 0.62rem;
+        letter-spacing: 0.03em;
+        padding: 0.25rem 0.55rem;
+        border-radius: 12px;
+    }
+
+    .cta-left-content h4 {
+        font-size: 1.12rem;
+        line-height: 1.35;
+    }
+
+    .cta-left-content p {
+        font-size: 0.84rem;
+        line-height: 1.5;
+    }
+
+    .btn-cta-luxury {
+        padding: 0.8rem 0.95rem;
+        font-size: 0.86rem;
+        gap: 0.45rem;
     }
 }
 

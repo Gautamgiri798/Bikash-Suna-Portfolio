@@ -162,10 +162,19 @@ All showcase items are managed in the centralized configuration file [src/data/p
 ---
 
 ## 📊 6. Creator Media Kit & Live Analytics Desk
-* **Interactive SVG Sparkline Trends**: Dynamic SVG stroke curves visualizing consistent 30-day reach expansion.
-* **Retention & Engagement Matrix**: Transparent metrics displaying 1.2M+ Monthly Reach, 98% Retention Rate, and 8.4% Average Engagement.
-* **Demographic Breakdown**: Clean visual bars depicting core audience segments (18–24, 25–34, 35+).
-* **4-Phase Production Pipeline**: Visual workflow map demonstrating systematic client delivery from Ingestion to 4K Master.
+* **Interactive SVG Sparkline Trends**: Dynamic SVG stroke curves visualizing consistent 30-day reach expansion across viral Reels and Shorts.
+* **Retention & Engagement Matrix**: Transparent, verified metrics displaying 50K+ Monthly Reach, 85%+ Watch Retention, and 8.4% Average Engagement (3.2x industry benchmark).
+* **Demographic Breakdown**: Visual ratio indicator showing core Gen-Z and Millennial audience (72% active age 18–28) with high digital purchasing power.
+* **4-Step Campaign Lifecycle**:
+  * `01` **Briefing & Goal Alignment** (Day 1 • Blueprint): Target audience definition, USP discovery, and campaign CTA lock.
+  * `02` **Scripting & Hook Engineering** (Day 1–2 • Script Draft): First 3-second retention lock and narrative pacing tailored to maximize watch time.
+  * `03` **Cinematic Shooting & Editing** (Day 2 • 4K Production): 4K capture, speed ramping, beat syncing, vocal leveling, and custom LUT color grading.
+  * `04` **Review & Collaborative Launch** (Day 3 • Live Campaign): Final cut review, official Instagram Co-Author Reel publishing, and targeted story link stickers.
+* **Luxury Mobile-Responsive Sponsor CTA Banner**:
+  * Real-time availability pill with a live pulsing green indicator (*"SPONSOR SLOTS OPEN FOR THIS MONTH"*), engineered with flexbox `min-width: 0` protection and multiline wrapping defense.
+  * Starter sponsorship packages highlighted at **₹1,500**, bundling 4K video editing, hook scripting, and co-authorship.
+  * Full-width mobile CTA button (*"Book Brand Sponsorship"*) launching directly into WhatsApp with pre-configured campaign parameters.
+  * **Zero-Clipping Responsive Geometry**: Adaptive `clamp()` typography and nested container padding harmonization (`<= 768px` and `<= 480px`), completely eliminating mobile horizontal overflow and card clipping.
 
 ---
 
@@ -204,7 +213,7 @@ Transparent, upfront pricing packages designed for immediate commercial decision
 | :--- | :--- | :--- | :---: |
 | **⚡ Short-Form Reel / TikTok** | 9:16 vertical, hook retention pacing, sound design, kinetic subtitle timing, color grading | 24h – 48h | **₹600** / reel |
 | **🎬 Long Video / YouTube Album** | 16:9 cinematic, multi-cam sync, master sound mix, B-roll pacing, custom LUT grade | 48h – 72h | **₹3,000** / video |
-| **🤝 Paid Promotion & Brand Collab** | 1 Dedicated sponsored Reel authored by Bikash, Instagram Co-Author & Tagged Collab, 24h story blast with link sticker, hook scripting, product B-roll, 4K edit & sound design (50K+ Reach) | 48h – 72h | **DM for Collaboration** (Custom Quote) |
+| **🤝 Paid Promotion & Brand Collab** | 1 Dedicated sponsored Reel authored by Bikash, Instagram Co-Author & Tagged Collab, 24h story blast with link sticker, hook scripting, product B-roll, 4K edit & sound design (50K+ Reach) | 48h – 72h | **Starter packages from ₹1,500** / Custom Quote |
 | **🚀 Rush 24h Express Turnaround** | Priority rendering queue, dedicated revision window, same-day draft | 24 Hours | **Add-on** |
 
 ---
@@ -394,7 +403,7 @@ Easily tailor this codebase for your personal branding or client project:
 - **Zero Bloat Frameworks**: 100% vanilla CSS tokens with zero Tailwind or Bootstrap runtime overhead.
 - **Hardware-Accelerated Transforms**: Modals, hover elevations, and 3D rotations utilize `transform: translate3d()` and `will-change` hints for smooth 60FPS execution.
 - **Dynamic 3D Throttling**: WebGL frame loops pause automatically when scrolled off-screen to preserve CPU/GPU overhead.
-- **Zero-Overflow Mobile Geometry**: Strict `min-width: 0` flex constraints, adaptive typography clamps, and responsive viewports guarantee 0 horizontal scrolling across all mobile devices (320px to 480px+).
+- **Zero-Overflow Mobile Geometry**: Strict `min-width: 0` flex constraints, adaptive typography clamps, harmonized nested container paddings, and responsive viewports guarantee 0 horizontal scrolling across all mobile devices (320px to 480px+), including complex glassmorphic timeline cards and the luxury sponsor CTA desk.
 - **Symmetrical Mobile Floating Suite**: Dual floating widgets (48px WhatsApp concierge on right & 44px scroll dial on left) positioned symmetrically with clearance padding to prevent metric card obstruction.
 - **Persistent Video Controls**: Custom HTML5 media player controls that stay accessible without vanishing or freezing video feeds.
 - **Permanent Preset Quick-Options**: WhatsApp concierge chips remain active after interaction for rapid follow-up inquiries.
