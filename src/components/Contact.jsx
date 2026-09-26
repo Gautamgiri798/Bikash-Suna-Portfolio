@@ -80,6 +80,25 @@ export default function Contact() {
                 </div>
               </a>
 
+              {/* Direct WhatsApp Chat */}
+              <a
+                href="https://wa.me/919360870164?text=Hi%20Bikash!%20I%20visited%20your%20portfolio%20and%20want%20to%20chat%20about%20a%20video%20editing%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-row-item wa-highlight-row"
+              >
+                <div className="contact-icon-box icon-emerald">
+                  <i className="fa-brands fa-whatsapp"></i>
+                </div>
+                <div className="contact-row-text">
+                  <span className="contact-label label-emerald">DIRECT WHATSAPP CHAT</span>
+                  <span className="contact-value">
+                    +91 9360870164{' '}
+                    <i className="fa-solid fa-arrow-up-right-from-square row-arrow"></i>
+                  </span>
+                </div>
+              </a>
+
               {/* Mobile Call */}
               <a href="tel:9360870164" className="contact-row-item">
                 <div className="contact-icon-box icon-blue">
@@ -135,7 +154,7 @@ export default function Contact() {
                 <i className="fa-brands fa-instagram"></i>
               </a>
               <a
-                href="https://wa.me/919360870164"
+                href="https://wa.me/919360870164?text=Hi%20Bikash!%20I%20visited%20your%20portfolio%20and%20want%20to%20chat%20about%20a%20project%20/%20collaboration."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-circle-link wa-circle"
@@ -237,6 +256,17 @@ export default function Contact() {
                   title="Click to open your default UPI payment app"
                 >
                   <i className="fa-solid fa-bolt"></i> Tap to Pay via UPI App
+                </a>
+
+                {/* WhatsApp Payment Confirmation */}
+                <a
+                  href="https://wa.me/919360870164?text=Hi%20Bikash!%20I%20have%20sent%20the%20UPI%20payment%20for%20my%20editing%20order.%20Sharing%20the%20screenshot%20and%20project%20files!"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="upi-confirm-wa-btn"
+                  title="Send payment screenshot on WhatsApp"
+                >
+                  <i className="fa-brands fa-whatsapp"></i> Confirm Payment on WhatsApp
                 </a>
               </div>
 

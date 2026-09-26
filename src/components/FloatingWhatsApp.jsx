@@ -6,7 +6,7 @@ export default function FloatingWhatsApp() {
     {
       id: 1,
       sender: 'bot',
-      text: 'Hi there! 👋 Welcome to my studio. Choose a quick option below to chat directly on WhatsApp, or type your custom inquiry:',
+      text: 'Namaskar! 🙏 Welcome to Bikash Suna Official Studio. Whether you want to edit a Viral Sambalpuri Reel (₹600), Full Cinematic Video Album (₹3000), or Brand Sponsorship Collab, choose a quick option below to chat directly with me on WhatsApp:',
       time: 'Just now',
     },
   ]);
@@ -22,26 +22,38 @@ export default function FloatingWhatsApp() {
     {
       id: 'reel',
       icon: 'fa-bolt',
-      label: 'Short Reel Edit (₹600)',
-      msg: 'Hi Bikash! I need a high-energy Short Reel editing service for Instagram/YouTube. Let us discuss the project details!',
+      label: 'Viral Reel Edit (₹600)',
+      msg: 'Hi Bikash! I want to order a Viral Reel edit (similar to Best Friend / Mor Maa). Let us discuss footage, speed ramps, and sound design!',
     },
     {
       id: 'album',
       icon: 'fa-film',
-      label: 'Long Video Album (₹3000)',
-      msg: 'Hi Bikash! I am looking for a full story-driven Video Album / Wedding editing service. Let us connect!',
+      label: 'Cinematic Video Album (₹3000)',
+      msg: 'Hi Bikash! I need full story-driven cinematic editing for a Long Video Album / Wedding / Music Video in 4K UHD.',
     },
     {
       id: 'collab',
       icon: 'fa-handshake',
-      label: 'Brand Collab / Paid Promo (DM for Collab)',
-      msg: 'Hi Bikash! I represent a brand and would like to collaborate with you for a Paid Promotion / Sponsored Reel campaign.',
+      label: 'Brand Sponsor & Collab (Paid Promo)',
+      msg: 'Hi Bikash! I represent a brand/agency and want to collaborate with you for a Paid Promotion / Sponsored Reel on your Instagram (@bikash_suna_07).',
+    },
+    {
+      id: 'showreel',
+      icon: 'fa-play',
+      label: 'Inquire Portfolio Showreels',
+      msg: 'Hi Bikash! I was watching your portfolio showreels and love your color grading & transitions. I would like to hire you for my upcoming project!',
+    },
+    {
+      id: 'calculator',
+      icon: 'fa-calculator',
+      label: 'Custom Quote / Calculator Estimate',
+      msg: 'Hi Bikash! I used your portfolio calculator and want to get a custom quote for a multi-video editing package.',
     },
     {
       id: 'rush',
       icon: 'fa-gauge-high',
       label: 'Rush 24h Express Delivery',
-      msg: 'Hi Bikash! I have an urgent editing project that needs fast 24-48h turnaround. Are you available?',
+      msg: 'Hi Bikash! I have an urgent video editing project with a strict 24-48h deadline. Are you available for express delivery?',
     },
   ];
 
@@ -126,7 +138,7 @@ export default function FloatingWhatsApp() {
           <div className="wa-chat-header">
             <div className="wa-header-avatar-box">
               <img
-                src="assets/profile.jpg"
+                src="/assets/profile.jpg"
                 alt="Bikash Suna"
                 className="wa-header-avatar"
               />

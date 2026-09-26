@@ -5,29 +5,6 @@ import { projects } from '../data/projects';
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
-  const [videoDurations, setVideoDurations] = useState({});
-
-  // Pause all background preview videos when modal opens to avoid GPU/CPU contention
-  useEffect(() => {
-    if (selectedProject) {
-      const previews = document.querySelectorAll('.portfolio-video-preview');
-      previews.forEach((vid) => {
-        try {
-          vid.pause();
-          vid.currentTime = 0;
-        } catch (e) {}
-      });
-    }
-  }, [selectedProject]);
-
-  const handleLoadedMetadata = (id, e) => {
-    const d = e.currentTarget.duration;
-    if (d && !isNaN(d) && isFinite(d)) {
-      const mins = Math.floor(d / 60);
-      const secs = Math.floor(d % 60).toString().padStart(2, '0');
-      setVideoDurations((prev) => ({ ...prev, [id]: `${mins}:${secs}` }));
-    }
-  };
 
   const filteredProjects =
     activeFilter === 'all'
@@ -36,6 +13,7 @@ export default function Portfolio() {
 
   const counts = {
     all: projects.length,
+    edited: projects.filter((p) => p.category === 'edited').length,
     reel: projects.filter((p) => p.category === 'reel').length,
     album: projects.filter((p) => p.category === 'album').length,
     collab: projects.filter((p) => p.category === 'collab').length,
@@ -66,15 +44,23 @@ export default function Portfolio() {
               onClick={() => setActiveFilter('all')}
             >
               <i className="fa-solid fa-layer-group"></i>
-              <span>All Projects</span>
+              <span>All Works</span>
               <span className="tab-count-pill">{counts.all}</span>
+            </button>
+            <button
+              className={`portfolio-tab-btn ${activeFilter === 'edited' ? 'active' : ''}`}
+              onClick={() => setActiveFilter('edited')}
+            >
+              <i className="fa-solid fa-wand-magic-sparkles"></i>
+              <span>Cinematic Edits</span>
+              <span className="tab-count-pill">{counts.edited}</span>
             </button>
             <button
               className={`portfolio-tab-btn ${activeFilter === 'reel' ? 'active' : ''}`}
               onClick={() => setActiveFilter('reel')}
             >
               <i className="fa-solid fa-bolt"></i>
-              <span>Short Reels</span>
+              <span>Viral Reels</span>
               <span className="tab-count-pill">{counts.reel}</span>
             </button>
             <button
@@ -82,7 +68,7 @@ export default function Portfolio() {
               onClick={() => setActiveFilter('album')}
             >
               <i className="fa-solid fa-film"></i>
-              <span>Long Albums</span>
+              <span>Music Video Albums</span>
               <span className="tab-count-pill">{counts.album}</span>
             </button>
             <button
@@ -90,7 +76,7 @@ export default function Portfolio() {
               onClick={() => setActiveFilter('collab')}
             >
               <i className="fa-solid fa-handshake"></i>
-              <span>Brand Collabs</span>
+              <span>Brand Campaigns</span>
               <span className="tab-count-pill">{counts.collab}</span>
             </button>
           </div>
@@ -128,20 +114,20 @@ export default function Portfolio() {
                   />
                 )}
 
-                {/* Smooth Video Hover Preview (plays and fades in on card hover) */}
-                {project.videoUrl && !project.videoUrl.includes('youtube') && !project.videoUrl.includes('youtu.be') && (
+                {/* Smooth Video Hover Preview (only mounts when modal is closed, with preload="none" for zero socket contention) */}
+                {!selectedProject && project.videoUrl && !project.videoUrl.includes('youtube') && !project.videoUrl.includes('youtu.be') && (
                   <video
                     src={project.videoUrl}
                     className="portfolio-img portfolio-video-preview"
                     muted
                     playsInline
                     loop
-                    preload="metadata"
-                    onLoadedMetadata={(e) => handleLoadedMetadata(project.id, e)}
+                    preload="none"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
                     onMouseEnter={(e) => {
-                      if (!selectedProject) {
-                        e.currentTarget.play().catch(() => {});
-                      }
+                      e.currentTarget.play().catch(() => {});
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.pause();
@@ -181,7 +167,7 @@ export default function Portfolio() {
                       <span className="eq-line line-2"></span>
                       <span className="eq-line line-3"></span>
                     </div>
-                    <span className="duration-time">{videoDurations[project.id] || project.duration}</span>
+                    <span className="duration-time">{project.duration}</span>
                   </div>
                 </div>
               </div>

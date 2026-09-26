@@ -68,8 +68,8 @@
 
 This web platform is engineered as an ultra-high-end cinematic portfolio, creative showcase, and commercial booking desk for **Bikash Suna**. It reflects both complementary superpowers of his creative career:
 
-1. **Elite Video Editor & Post-Production Specialist**: Precision narrative storytelling, retention-driven cuts, cinematic DaVinci color grading, immersive sound design, and viral pacing for short-form Reels, TikToks, and long-form music video & documentary edits.
-2. **High-Impact Content Creator & Brand Partner**: Authentic lifestyle & tech storytelling, verified creator presence, transparent media kit retention analytics, and instant direct brand collaboration funnels.
+1. **Elite Video Editor & Post-Production Specialist**: Precision narrative storytelling, retention-driven cuts, cinematic DaVinci color grading, immersive sound design, and viral pacing for short-form Sambalpuri Reels, viral social edits, and long-form music video & documentary edits.
+2. **High-Impact Content Creator & Brand Partner**: Authentic lifestyle & regional storytelling, verified creator presence, transparent media kit retention analytics, and instant direct brand collaboration funnels.
 
 Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion, zero input latency, responsive cross-device geometry, and seamless conversion-optimized client onboarding.
 
@@ -80,7 +80,7 @@ Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion,
 ### 🌌 1. Interactive 3D WebGL Gyro & Particle Universe
 * **Three.js Powered Viewport**: Real-time 3D canvas featuring concentric neon gimbal rings, a central camera aperture core, and an ambient celestial particle galaxy.
 * **Physics Cursor Tracking**: Gyroscopic orientation responds dynamically to cursor coordinates on desktop, with continuous automated orbital drifting on touchscreens.
-* **Smart Resource Management**: Frame render loop pauses when scrolled out of view, preserving battery life and eliminating GPU overhead.
+* **Smart Resource Management**: Frame render loop automatically pauses when the video modal is active or scrolled out of view, reserving 100% GPU bandwidth for smooth 60FPS video playback.
 
 ### 🎬 2. Cinematic Hero & Pure Diamond Ice-White Typography
 * **High-Contrast Headline Typography**: The rotating typewriter titles (*"Influential Content Creator"*, *"Cinematic Video Editor"*, *"Viral Reel Specialist"*, *"Brand Collab Partner"*) are rendered in a bespoke **Pure Diamond Ice-White with Platinum Glow** gradient (`#FFFFFF` &rarr; `#F8FAFC` &rarr; `#E2E8F0` &rarr; `#CBD5E1`).
@@ -104,37 +104,49 @@ Every interaction has been fine-tuned for visual excellence, fluid 60FPS motion,
 
 ### 📽️ 4. Cinema Studio Video Player & Persistent Controls
 * **Studio Cinema Monitor Frame**: High-fidelity video player dialog with frosted glass header, glowing window status controls, and an active pulsing `REC` indicator.
-* **Persistent HTML5 Controls**:
-  * Luxury permanent Play/Pause toggle with large center overlay and toolbar control button.
-  * Interactive progress scrubber bar with drag preview.
-  * Accurate SMPTE elapsed / total timecode reader (`00:00:18 / 00:03:42`).
-  * Dedicated volume and audio mute toggle.
-  * True full-screen toggle supporting native Fullscreen API (`requestFullscreen()`) across all browsers.
-* **Embedded YouTube Video Mode**: Seamlessly switches to native responsive YouTube embeds for external music videos with persistent direct action links.
-* **Zero Lag & No Freeze**: Fully optimized local high-bitrate video playback ensuring smooth scrub and audio retention.
+* **Center Press-to-Stop & Play (Icon Only, Zero Text)**:
+  * When paused: Prominent luxury play button with animated ambient ripple ring.
+  * When playing: Frosted glass stop/pause button in the middle for instant stop.
+  * Zero text labels (`STOP`, `PAUSE`, etc.)—purely clean, high-end iconography.
+* **Smart Stream Quality Switching**:
+  * Dynamic stream selector supporting **4K Ultra HD**, **1080p Full HD**, **720p HD (Fast)**, and **Auto**.
+  * Mobile Device Awareness: Automatically defaults to lightweight 720p stream on mobile devices / narrow screens (`<= 768px`) for instant, bufferless, zero-lag playback, while allowing desktop users to enjoy high-bitrate 1080p/4K.
+  * Instant position sync: Preserves playback timestamp seamlessly when switching resolutions.
+* **Direct MP4 Download Action**:
+  * Clean download pill cleanly located in the bottom controls dock.
+  * Downloads the currently selected resolution MP4 with sanitized filename (`Title_1080p.mp4`).
+* **Zero-Lag Direct DOM Performance**:
+  * Direct DOM ref updates (`progressFillRef`, `currentTimeDisplayRef`, `hudTimecodeRef`) completely eliminate React re-renders during video playback, eliminating micro-stutters and frame drops.
+* **Mobile-Safe Autoplay Engine**:
+  * Adheres strictly to mobile browser policies with initial muted playback on mobile viewports and automatic error-recovery, preventing mobile video halts.
+  * Full iOS WebKit support with `playsInline`, `webkit-playsinline="true"`, and `x5-playsinline="true"`.
+* **Responsive Control Dock**:
+  * Audio waveform bars hidden on mobile viewports to prevent control crowding.
+  * Download button automatically adapts to a compact icon on mobile, guaranteeing 0% overlap between timecode and quality pills across all screens (`320px` to `4K`).
 
 ### 🎞️ 5. Filterable Showreel Showcase
-* **Zero-Lag Smooth Filtering**: Fast category switching between `All Work`, `Short Reels (9:16)`, `Long Albums (16:9)`, and `Brand Collabs`.
+* **Zero-Lag Category Filtering**: Instant switching between `All Work`, `Short Reels (9:16)`, `Long Albums (16:9)`, `Brand Collabs`, and `Cinematic Edits`.
+* **Featured Showcase Titles**:
+  * **Viral Sambalpuri Reels**: *"She Is Just My Best Friend"*, *"Mor Maa Mor Sansar"*, *"Pahela Nazar"*.
+  * **Official Music Videos**: *"Babu Zaraa Bachke | Official Sambalpuri Rap MV"*.
+  * **Commercial Brand Collabs**: *"Shree Soni Jewellers"*, *"Diwali & Dhanteras Mega Offer"*.
+  * **Cinematic Edits (Before & After)**: *"A Moment in Motion"*, *"Unspoken Moments"*, *"Royal Elegance (Bridal)"*.
 * **Hardware-Accelerated Transitions**: Pure opacity and transform scale animations eliminating blur artifacts during filter changes.
 * **Luxury Studio Duration Pill**: Frosted glassmorphism duration badge (`backdrop-filter: blur(14px)`) integrated with a 3-bar animated rhythmic gradient sound frequency indicator.
-* **Dynamic Video Length Detection**: Automatically parses and displays precise video durations via `onLoadedMetadata` for local files and custom timestamps for YouTube links.
-* **Multi-Platform Direct Link Badges**:
-  * **Instagram Direct Badges**: Dedicated sunset-pink gradient pill buttons routing directly to live Instagram Reels in a new tab.
-  * **YouTube Direct Badges**: Signature crimson red pill buttons linking directly to full official YouTube music videos.
-* **Decoupled Card Interactivity**: Text descriptions, titles, and tags remain fully selectable for smooth client reading and copying, while video playback is cleanly mapped to the Cinema thumbnail monitor and the *"Watch Project Preview"* action button.
+* **Multi-Platform Direct Link Badges**: Sunset-pink Instagram direct links and crimson YouTube action links.
 
 ---
 
 ## 📁 Video Assets & Custom Media Management
 
-The project is structured with dedicated media folders so you can easily drop in your video files and link them into your portfolio:
+The project is structured with dedicated media folders housing optimized web-ready MP4 video streams:
 
 ```bash
 public/videos/
-├── short-reels/     # Vertical 9:16 reels (bestfriend-reel.mp4, mor-maa.mp4, pahela-nazar.mp4)
-├── long-videos/     # Widescreen 16:9 albums & music videos (babu-zaraa-bachke.mp4)
-└── brand-collabs/   # Sponsored brand deliverables (shree-soni-jewellers.mp4, diwali-dhanteras-offer.mp4)
-public/thumbnails/   # High-resolution posters (reel-1 to reel-3, collab-1, collab-2)
+├── short-reels/     # Faststart 1080p & 720p reels (bestfriend-reel-opt, mor-maa-opt, pahela-nazar-opt, color-grade edits)
+├── long-videos/     # Widescreen 16:9 albums & music videos (babu-zaraa-bachke)
+└── brand-collabs/   # Sponsored brand deliverables (shree-soni-jewellers, diwali-dhanteras-offer)
+public/thumbnails/   # High-resolution showreel posters (reel-1 to reel-6, collab-1, collab-2)
 ```
 
 ### Linking Videos in `src/data/projects.js`
@@ -143,21 +155,21 @@ All showcase items are managed in the centralized configuration file [src/data/p
 ```javascript
 {
   id: 'reel-1',
-  category: 'reel', // 'reel' (9:16) | 'album' (16:9) | 'collab'
+  category: 'reel', // 'reel' (9:16) | 'album' (16:9) | 'collab' | 'edited'
   title: 'She Is Just My Best Friend | Sambalpuri Reel',
   desc: 'Conversational pacing, cinematic framing, and clean dialogue transitions.',
   img: 'assets/thumbnails/reel-1.jpg',
-  videoUrl: '/videos/short-reels/bestfriend-reel.mp4', // Local video or YouTube URL
-  externalUrl: 'https://www.instagram.com/reel/DIx7upbzs2B/', // Instagram or YouTube direct link
+  videoUrl: '/videos/short-reels/bestfriend-reel-opt.mp4',
+  externalUrl: 'https://www.instagram.com/reel/DIx7upbzs2B/',
   tags: ['Dialogue Editing', 'Sambalpuri Reel', 'Visual Pacing'],
   badge: 'Short Reel',
-  color: 'cyan', // 'cyan' | 'purple' | 'gold' | 'blue' | 'emerald'
+  color: 'cyan',
   duration: '1:13',
 }
 ```
 
 > [!TIP]
-> **Windows Watcher Optimization**: Heavy video files in `assets/` and `public/` are ignored by Vite's file watcher in `vite.config.js` to prevent Windows file locking (`EBUSY`) issues while maintaining ultra-fast HMR for all code and style edits.
+> **Windows Watcher Optimization**: Heavy video files in `public/` are ignored by Vite's file watcher in `vite.config.js` to prevent Windows file locking (`EBUSY`) issues while maintaining ultra-fast HMR for all code and style edits.
 
 ---
 
@@ -174,34 +186,41 @@ All showcase items are managed in the centralized configuration file [src/data/p
   * Real-time availability pill with a live pulsing green indicator (*"SPONSOR SLOTS OPEN FOR THIS MONTH"*), engineered with flexbox `min-width: 0` protection and multiline wrapping defense.
   * Professional collaboration model (*"DM for Collaboration"*), highlighting tailored deliverables with 4K video production, viral hook scripting, and verified Instagram co-authorship.
   * Full-width mobile CTA button (*"DM for Collaboration"*) launching directly into WhatsApp with pre-configured campaign parameters.
-  * **Zero-Clipping Responsive Geometry**: Adaptive `clamp()` typography and nested container padding harmonization (`<= 768px` and `<= 480px`), completely eliminating mobile horizontal overflow and card clipping.
 
 ---
 
 ## 💳 7. Clean Luxury Contact & Instant Payments Suite
 * **Direct Commercial Booking Hub**:
-  * **WhatsApp Sponsor Desk**: Instant chat with pre-filled inquiry parameters (`+91 9360870164`).
+  * **Direct WhatsApp Chat**: Dedicated emerald-styled direct chat row with pre-filled greeting (`+91 9360870164`).
+  * **WhatsApp Sponsor Desk**: Instant chat specifically configured for brand collaborations.
   * **One-Click Mobile Call**: Immediate direct phone access (`+91 9360870164`).
   * **Instagram Creator Profile**: Official sunset-violet gradient badge routing directly to `@bikash_suna_07`.
   * **Studio Location**: Jharsuguda, Odisha, India.
 * **Cyber Cinema UPI Desk**:
-  * **1-Click Mobile-Responsive UPI VPA Copy**: High-contrast, touch-optimized copy button displaying both iconic feedback and dynamic text label (`Copy` &rarr; `Copied`) for official UPI ID (**`9360870164@superyes`**). Engineered with flexbox `min-width: 0` protection and robust fallback clipboard execution to guarantee 100% visibility and functionality across all mobile screen sizes and webviews.
+  * **1-Click Mobile-Responsive UPI VPA Copy**: High-contrast, touch-optimized copy button for official UPI ID (**`9360870164@superyes`**).
   * **Verified Payee Indicator**: Displays official payee name **BIKASH SUNA** with a verified status badge and `super.money` badge.
   * **Real Scannable Super.money QR Code**: High-contrast, scannable QR code enclosed in an animated futuristic viewfinder with sweeping neon laser scan and bracket reticles.
   * **Tap to Pay via UPI App**: Native mobile deep link (`upi://pay?pa=9360870164@superyes&pn=Bikash%20Suna&cu=INR`) that instantly launches default payment apps on smartphones.
+  * **Confirm Payment on WhatsApp**: Direct 1-tap confirmation action allowing clients to immediately share payment screenshots on WhatsApp for instant project kickoff.
   * **Supported UPI Apps**: Official badges for **Google Pay**, **PhonePe**, **Paytm**, **super.money**, and **BHIM UPI**.
 
 ---
 
-## 💬 8. Right-Sided Floating WhatsApp Concierge
+## 💬 8. Interactive Floating WhatsApp Automation Concierge
 * **Optimal Right-Side Placement**: Anchored cleanly at `bottom: 2rem; right: 2rem;` on desktop and symmetrically at `bottom: 1.25rem; right: 1.25rem;` (`48px`) on mobile viewports.
-* **Harmonious Scroll Dial Coexistence**: The circular progress dial floats cleanly on the left (`bottom: 1.25rem; left: 1.25rem;`) on mobile, eliminating obstruction.
-* **Direct Access to Quick Options & Inquiries**: Opening the concierge immediately displays the **Quick options & inquiries** menu front and center, inviting visitors to select their needed service or write a custom message.
+* **Personalized Regional Greeting**:
+  > *"Namaskar! 🙏 Welcome to Bikash Suna Official Studio. Whether you want to edit a Viral Sambalpuri Reel (₹600), Full Cinematic Video Album (₹3000), or Brand Sponsorship Collab, choose a quick option below to chat directly with me on WhatsApp:"*
+* **Full-Scope Project Automation Presets**:
+  1. **Viral Reel Edit (₹600)**: Direct inquiry for viral reel editing with speed ramps and sound design.
+  2. **Cinematic Video Album (₹3000)**: Full narrative editing for wedding films, music videos, and 4K story arcs.
+  3. **Brand Sponsor & Collab (Paid Promo)**: Dedicated prompt for agencies and brands reaching out for sponsored content on [@bikash_suna_07](https://instagram.com/bikash_suna_07).
+  4. **Inquire Portfolio Showreels**: Instant inquiry referencing the cinematic showreels and color grading.
+  5. **Custom Quote / Calculator Estimate**: Direct connect for multi-video quotes generated by the pricing calculator.
+  6. **Rush 24h Express Turnaround**: Urgent 24–48h express delivery request.
 * **Instant 1-Click WhatsApp Launch**:
-  * Clicking any preset option (`Short Reel Edit (₹600)`, `Long Video Album (₹3,000)`, `Brand Collab`, or `Rush 24h Express Delivery`) **immediately opens WhatsApp** in 1-click with the custom inquiry pre-filled and ready to send.
+  * Clicking any preset option **immediately opens WhatsApp** in 1-click with the custom inquiry pre-filled and ready to send.
   * Zero fake chatbot delay, zero typing bubble latency, and 100% immune to mobile browser popup-blockers.
-* **Persistent Presets Architecture**: Options remain visible and interactive even after clicking an option, allowing clients to explore multiple service packages without losing access.
-* **Instant Custom Inquiry Input**: Integrated chat input footer allowing visitors to type bespoke requirements or rates and open WhatsApp in 1-click, with a convenient "Re-open in WhatsApp" shortcut inside the widget.
+* **Instant Custom Inquiry Input**: Integrated chat input footer allowing visitors to type bespoke requirements or rates and open WhatsApp in 1-click.
 
 ---
 
@@ -211,8 +230,8 @@ Transparent, upfront pricing packages designed for immediate commercial decision
 
 | Service Package | Format & Scope | Turnaround | Commercial Rate |
 | :--- | :--- | :--- | :---: |
-| **⚡ Short-Form Reel / TikTok** | 9:16 vertical, hook retention pacing, sound design, kinetic subtitle timing, color grading | 24h – 48h | **₹600** / reel |
-| **🎬 Long Video / YouTube Album** | 16:9 cinematic, multi-cam sync, master sound mix, B-roll pacing, custom LUT grade | 48h – 72h | **₹3,000** / video |
+| **⚡ Viral Short Reel** | 9:16 vertical, hook retention pacing, sound design, kinetic subtitle timing, color grading | 24h – 48h | **₹600** / reel |
+| **🎬 Cinematic Video Album** | 16:9 cinematic, multi-cam sync, master sound mix, B-roll pacing, custom LUT grade | 48h – 72h | **₹3,000** / video |
 | **🤝 Paid Promotion & Brand Collab** | 1 Dedicated sponsored Reel authored by Bikash, Instagram Co-Author & Tagged Collab, 24h story blast with link sticker, hook scripting, product B-roll, 4K edit & sound design (50K+ Reach) | 48h – 72h | **DM for Collaboration** (Custom Quote) |
 | **🚀 Rush 24h Express Turnaround** | Priority rendering queue, dedicated revision window, same-day draft | 24 Hours | **Add-on** |
 
@@ -257,7 +276,7 @@ flowchart LR
 
 ```bash
 Bikash-Suna-Portfolio/
-├── assets/
+├── assets/                         # Source graphics & hero imagery
 │   ├── album.jpg                   # Long Album cover artwork
 │   ├── babu-zaraa-bachke.jpg        # Album poster artwork
 │   ├── hero.jpg                    # Studio hero environment photograph
@@ -265,12 +284,12 @@ Bikash-Suna-Portfolio/
 │   ├── payment-qr-code.png         # Scannable super.money payment QR
 │   ├── profile.jpg                 # Creator portrait
 │   ├── reel.jpg                    # High-energy reel preview thumbnail
-│   └── thumbnails/                 # Fallback poster references
+│   └── thumbnails/                 # Showreel poster artwork (reel-1 to reel-6, collab-1, collab-2)
 ├── public/                         # Static assets served at root
-│   ├── assets/                     # Scannable payment QR codes & cards
-│   ├── thumbnails/                 # High-res showreel thumbnails (reel-1 to 3, collab-1 & 2)
-│   └── videos/                     # High-bitrate video categories
-│       ├── short-reels/            # Short reels (bestfriend-reel, mor-maa, pahela-nazar)
+│   ├── assets/                     # Public web assets, thumbnails & QR codes
+│   ├── thumbnails/                 # Showreel poster artwork
+│   └── videos/                     # Optimized MP4 video streams
+│       ├── short-reels/            # Short reels (bestfriend-reel-opt, mor-maa-opt, pahela-nazar-opt, color-grade edits)
 │       ├── long-videos/            # Long video albums (babu-zaraa-bachke)
 │       └── brand-collabs/          # Brand collabs (shree-soni-jewellers, diwali-dhanteras-offer)
 ├── src/
@@ -283,7 +302,7 @@ Bikash-Suna-Portfolio/
 │   │   ├── About.jsx               # Creative journey, software masteries & snapshot
 │   │   ├── CreatorMediaKit.jsx     # Creator metrics, demographic statistics & sparklines
 │   │   ├── Portfolio.jsx           # Filterable 4K showreel gallery with luxury duration pills
-│   │   ├── VideoModal.jsx          # Studio cinema player with persistent controls & fullscreen HUD
+│   │   ├── VideoModal.jsx          # Studio cinema player with persistent controls, quality switch & mobile engine
 │   │   ├── Services.jsx            # Transparent rate cards (Reels ₹600, Albums ₹3000, Collabs via DM)
 │   │   ├── Contact.jsx             # Direct sponsor desk, UPI copy node & laser QR scanner
 │   │   ├── Footer.jsx              # Brand footer with navigation & copyright
@@ -386,7 +405,7 @@ Easily tailor this codebase for your personal branding or client project:
 
 | Configuration Area | File Location | What to Update |
 | :--- | :--- | :--- |
-| **Showreel Projects & Links** | `src/data/projects.js` | Add video links (YouTube or local paths), descriptions, tags, and badges. |
+| **Showreel Projects & Links** | `src/data/projects.js` | Add video links, descriptions, tags, and badges. |
 | **WhatsApp Desk Number** | `src/components/FloatingWhatsApp.jsx` | Change `919360870164` to your international phone number. |
 | **Quick Action Presets** | `src/components/FloatingWhatsApp.jsx` | Modify automated preset chips, message labels, and rates. |
 | **UPI Payment ID** | `src/components/Contact.jsx` | Update `9360870164@superyes` (super.money) and phone number to your VPA. |
@@ -402,12 +421,10 @@ Easily tailor this codebase for your personal branding or client project:
 
 - **Zero Bloat Frameworks**: 100% vanilla CSS tokens with zero Tailwind or Bootstrap runtime overhead.
 - **Hardware-Accelerated Transforms**: Modals, hover elevations, and 3D rotations utilize `transform: translate3d()` and `will-change` hints for smooth 60FPS execution.
-- **Dynamic 3D Throttling**: WebGL frame loops pause automatically when scrolled off-screen to preserve CPU/GPU overhead.
-- **Zero-Overflow Mobile Geometry**: Strict `min-width: 0` flex constraints, adaptive typography clamps, harmonized nested container paddings, and responsive viewports guarantee 0 horizontal scrolling across all mobile devices (320px to 480px+), including complex glassmorphic timeline cards and the luxury sponsor CTA desk.
-- **Symmetrical Mobile Floating Suite**: Dual floating widgets (48px WhatsApp concierge on right & 44px scroll dial on left) positioned symmetrically with clearance padding to prevent metric card obstruction.
-- **Persistent Video Controls**: Custom HTML5 media player controls that stay accessible without vanishing or freezing video feeds.
-- **Permanent Preset Quick-Options**: WhatsApp concierge chips remain active after interaction for rapid follow-up inquiries.
-- **Windows File Watcher Guard**: Excludes heavy binary video files from the Vite watcher to prevent `EBUSY` locks.
+- **Dynamic 3D Throttling**: WebGL frame loops pause automatically when the video modal is open to preserve CPU/GPU overhead.
+- **Zero-Overflow Mobile Geometry**: Strict `min-width: 0` flex constraints, adaptive typography clamps, harmonized nested container paddings, and responsive viewports guarantee 0 horizontal scrolling across all mobile devices (320px to 480px+).
+- **Persistent Video Controls & Center Stop**: Custom HTML5 media player controls with center press-to-stop/play and clean icon-only design.
+- **Mobile Video Engine**: Automatic detection of mobile screens to stream lightweight 720p streams with muted autoplay compliance and zero-render DOM ref timecode updates.
 - **Semantic HTML5 & Accessibility**: Fully semantic element structure (`<header>`, `<main>`, `<section>`, `<aside>`, `<footer>`), valid `aria-label` tags, and accessible contrast ratios.
 
 ---

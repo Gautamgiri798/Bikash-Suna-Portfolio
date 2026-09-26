@@ -197,6 +197,12 @@ export default function ThreeCanvas() {
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+
+      // Skip 3D rendering when video modal is open to free 100% GPU for smooth video playback
+      if (document.querySelector('.modal.active')) {
+        return;
+      }
+
       const elapsedTime = clock.getElapsedTime();
 
       // Smooth mouse lerp

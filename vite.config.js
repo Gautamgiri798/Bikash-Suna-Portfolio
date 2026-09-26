@@ -8,7 +8,7 @@ export default defineConfig({
     open: false,
     host: true,
     watch: {
-      ignored: ['**/public/**', '**/assets/**', '**/*.mp4', '**/*.webm', '**/*.jpg', '**/*.png']
+      ignored: ['**/*.mp4', '**/*.webm', '**/*.mov', '**/*.MOV', '**/*.mkv', '**/node_modules/**']
     }
   }
 });

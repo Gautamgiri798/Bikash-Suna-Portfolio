@@ -20,10 +20,27 @@ export default function VideoModal({ isOpen, project, onClose }) {
   const [isMuted, setIsMuted] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [hasVideoError, setHasVideoError] = useState(false);
+  const [currentQuality, setCurrentQuality] = useState('1080p');
+  const [showQualityMenu, setShowQualityMenu] = useState(false);
+  const [activeVideoSrc, setActiveVideoSrc] = useState('');
 
   const playerContainerRef = useRef(null);
   const progressBarRef = useRef(null);
   const videoRef = useRef(null);
+  const bufferingTimerRef = useRef(null);
+  const qualityMenuRef = useRef(null);
+  const isUserActionRef = useRef(false);
+  const progressFillRef = useRef(null);
+  const currentTimeDisplayRef = useRef(null);
+  const hudTimecodeRef = useRef(null);
+  const lastStateSyncTimeRef = useRef(0);
+
+  const formatTime = (time) => {
+    const mins = Math.floor(time / 60);
+    const secs = Math.floor(time % 60).toString().padStart(2, '0');
+    return `${mins}:${secs}`;
+  };
 
   const fallbackDuration = project?.category === 'album' ? 75 : 32;
   const ytEmbedUrl = getYouTubeEmbedUrl(project?.videoUrl);
@@ -32,23 +49,40 @@ export default function VideoModal({ isOpen, project, onClose }) {
 
   const duration = isRealVideo && videoDuration > 0 ? videoDuration : fallbackDuration;
 
+  const updateScrubberDirect = (time, totalDuration) => {
+    const d = totalDuration > 0 ? totalDuration : duration;
+    const pct = d > 0 ? Math.min(100, (time / d) * 100) : 0;
+    if (progressFillRef.current) {
+      progressFillRef.current.style.width = `${pct}%`;
+    }
+    if (currentTimeDisplayRef.current) {
+      currentTimeDisplayRef.current.textContent = formatTime(time);
+    }
+    if (hudTimecodeRef.current) {
+      hudTimecodeRef.current.textContent = `00:${formatTime(time)}:24`;
+    }
+  };
+
   // Safe Play action that handles browser Autoplay and Abort policies properly
   const safePlay = useCallback(() => {
     if (!videoRef.current) return;
-    const playPromise = videoRef.current.play();
+    const vid = videoRef.current;
+    const playPromise = vid.play();
     if (playPromise !== undefined) {
-      playPromise.catch((err) => {
-        // AbortError happens when pause() is called before play() resolves — safe to ignore!
-        if (err.name === 'AbortError') return;
-        // NotAllowedError happens when browser prevents unmuted autoplay without prior interaction
-        if (err.name === 'NotAllowedError') {
-          if (videoRef.current) {
-            videoRef.current.muted = true;
+      playPromise
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((err) => {
+          // AbortError happens when pause() is called before play() resolves — safe to ignore!
+          if (err.name === 'AbortError') return;
+          // NotAllowedError happens when browser prevents unmuted autoplay without prior interaction
+          if (err.name === 'NotAllowedError') {
+            vid.muted = true;
             setIsMuted(true);
-            videoRef.current.play().catch(() => {});
+            vid.play().then(() => setIsPlaying(true)).catch(() => {});
           }
-        }
-      });
+        });
     }
   }, []);
 
@@ -67,12 +101,30 @@ export default function VideoModal({ isOpen, project, onClose }) {
     const video = videoRef.current;
     if (!video) return;
 
+    isUserActionRef.current = true;
     if (video.paused) {
       safePlay();
     } else {
       safePause();
     }
   }, [isRealVideo, safePlay, safePause]);
+
+  // Auto-recovery pause handler: automatically resumes if pause was caused by browser buffer hitch
+  const handlePause = useCallback(() => {
+    if (isUserActionRef.current) {
+      setIsPlaying(false);
+      isUserActionRef.current = false;
+    } else {
+      // Unintentional pause by browser (buffer hiccup, audio stall)
+      if (videoRef.current && !videoRef.current.ended) {
+        videoRef.current.play().catch(() => {
+          setIsPlaying(false);
+        });
+      } else {
+        setIsPlaying(false);
+      }
+    }
+  }, []);
 
   // Central toggle for mute / unmute
   const toggleMute = useCallback(() => {
@@ -85,33 +137,129 @@ export default function VideoModal({ isOpen, project, onClose }) {
     }
   }, [isRealVideo]);
 
+  // Debounced buffering handler: only shows spinner if video is truly stalled for >600ms
+  const handleWaiting = useCallback(() => {
+    if (bufferingTimerRef.current) clearTimeout(bufferingTimerRef.current);
+    bufferingTimerRef.current = setTimeout(() => {
+      if (videoRef.current && videoRef.current.readyState < 3 && !videoRef.current.paused) {
+        setIsBuffering(true);
+      }
+    }, 600);
+  }, []);
+
+  const handleClearBuffering = useCallback(() => {
+    if (bufferingTimerRef.current) {
+      clearTimeout(bufferingTimerRef.current);
+      bufferingTimerRef.current = null;
+    }
+    setIsBuffering(false);
+  }, []);
+
+  // Quality switch handler: seamlessly switches stream and restores playback position
+  const handleQualityChange = (quality) => {
+    setCurrentQuality(quality);
+    setShowQualityMenu(false);
+    setHasVideoError(false);
+
+    if (!videoRef.current || !project?.videoUrl) return;
+
+    const vid = videoRef.current;
+    const prevTime = vid.currentTime || 0;
+    const wasPlaying = !vid.paused;
+
+    let targetSrc = project.videoUrl;
+    if (quality === '720p') {
+      targetSrc = project.videoUrl.replace('.mp4', '-720p.mp4');
+    }
+
+    isUserActionRef.current = true;
+    setActiveVideoSrc(targetSrc);
+
+    const onReady = () => {
+      vid.removeEventListener('loadedmetadata', onReady);
+      vid.removeEventListener('canplay', onReady);
+      try {
+        if (prevTime > 0 && (!vid.duration || prevTime < vid.duration)) {
+          vid.currentTime = prevTime;
+        }
+      } catch (e) {}
+      if (wasPlaying) {
+        vid.play().catch(() => {});
+      }
+    };
+
+    vid.addEventListener('loadedmetadata', onReady, { once: true });
+    vid.addEventListener('canplay', onReady, { once: true });
+
+    vid.src = targetSrc;
+    vid.load();
+  };
+
+  // Close quality menu when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (qualityMenuRef.current && !qualityMenuRef.current.contains(e.target)) {
+        setShowQualityMenu(false);
+      }
+    };
+    if (showQualityMenu) {
+      document.addEventListener('mousedown', handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [showQualityMenu]);
+
   // Reset and initialize when modal opens or active project changes
   useEffect(() => {
-    if (isOpen) {
-      setCurrentTime(0);
-      setIsBuffering(false);
+    if (isOpen && project) {
+      handleClearBuffering();
+      setHasVideoError(false);
       setPlaybackSpeed(1);
       setIsFullscreen(false);
+      setShowQualityMenu(false);
+
+      const isMobile =
+        typeof window !== 'undefined' &&
+        (window.innerWidth <= 768 ||
+          /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent));
+
+      // On mobile devices/narrow screens, default to 720p for instant, bufferless, zero-lag playback!
+      const initialQuality = isMobile ? '720p' : '1080p';
+      setCurrentQuality(initialQuality);
+
+      let initialSrc = project.videoUrl || '';
+      if (initialQuality === '720p' && project.videoUrl && project.videoUrl.endsWith('.mp4')) {
+        initialSrc = project.videoUrl.replace('.mp4', '-720p.mp4');
+      }
+      setActiveVideoSrc(initialSrc);
 
       if (isRealVideo && videoRef.current) {
         const vid = videoRef.current;
         vid.currentTime = 0;
         vid.playbackRate = 1;
-        vid.muted = false;
-        setIsMuted(false);
+        // On mobile, start muted so browser allows instant autoplay without stopping/blocking
+        if (isMobile) {
+          vid.muted = true;
+          setIsMuted(true);
+        } else {
+          vid.muted = false;
+          setIsMuted(false);
+        }
         safePlay();
       } else if (!isYouTube) {
         setIsPlaying(true);
       }
     } else {
       setIsPlaying(false);
-      setIsBuffering(false);
+      handleClearBuffering();
+      setShowQualityMenu(false);
       if (videoRef.current) {
         videoRef.current.pause();
         videoRef.current.currentTime = 0;
       }
     }
-  }, [isOpen, project, isRealVideo, isYouTube, safePlay]);
+  }, [isOpen, project, isRealVideo, isYouTube, safePlay, handleClearBuffering]);
 
   // Handle video loaded metadata
   const handleLoadedMetadata = () => {
@@ -120,11 +268,13 @@ export default function VideoModal({ isOpen, project, onClose }) {
     }
   };
 
-  // Handle video time update
+  // Handle video time update with direct DOM performance (no lagging or frame drops)
   const handleTimeUpdate = () => {
-    if (videoRef.current) {
-      setCurrentTime(videoRef.current.currentTime);
-    }
+    const vid = videoRef.current;
+    if (!vid) return;
+    const t = vid.currentTime;
+    updateScrubberDirect(t, vid.duration || duration);
+    handleClearBuffering();
   };
 
   // Simulated video playback timer when no real video file is supplied (fallback only)
@@ -247,6 +397,8 @@ export default function VideoModal({ isOpen, project, onClose }) {
     const ratio = Math.max(0, Math.min(1, clickX / rect.width));
     const target = +(ratio * duration).toFixed(1);
     setCurrentTime(target);
+    lastStateSyncTimeRef.current = target;
+    updateScrubberDirect(target, duration);
     if (isRealVideo && videoRef.current) {
       videoRef.current.currentTime = target;
     }
@@ -263,20 +415,35 @@ export default function VideoModal({ isOpen, project, onClose }) {
     }
   };
 
-  const formatTime = (time) => {
-    const mins = Math.floor(time / 60);
-    const secs = Math.floor(time % 60).toString().padStart(2, '0');
-    return `${mins}:${secs}`;
+  // Download active video stream (1080p / 720p)
+  const handleDownload = (e) => {
+    if (e) e.stopPropagation();
+    const downloadUrl = activeVideoSrc || project.videoUrl;
+    if (!downloadUrl) return;
+    const cleanTitle = (project.title || 'video')
+      .replace(/[^\w\s-]/gi, '')
+      .trim()
+      .replace(/\s+/g, '_');
+    const filename = `${cleanTitle}_${currentQuality || '1080p'}.mp4`;
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   const badgeText =
-    project.category === 'reel'
-      ? 'Short Reel'
+    project.badge ||
+    (project.category === 'edited'
+      ? 'Cinematic Edit'
+      : project.category === 'reel'
+      ? 'Viral Reel'
       : project.category === 'album'
-      ? 'Video Album'
-      : 'Brand Collab';
+      ? 'Music Video Album'
+      : 'Brand Campaign');
 
   return (
     <div className={`modal ${isOpen ? 'active' : ''}`} id="video-modal">
@@ -288,7 +455,9 @@ export default function VideoModal({ isOpen, project, onClose }) {
       <div
         ref={playerContainerRef}
         className={`modal-content modal-content-cinema ${
-          project.category === 'reel' ? 'modal-format-reel' : 'modal-format-widescreen'
+          project.category === 'reel' || project.category === 'edited'
+            ? 'modal-format-reel'
+            : 'modal-format-widescreen'
         } ${isFullscreen ? 'is-fullscreen' : ''} ${
           isYouTube ? 'modal-has-youtube' : ''
         }`}
@@ -317,31 +486,60 @@ export default function VideoModal({ isOpen, project, onClose }) {
                     className="cinema-iframe"
                   ></iframe>
                 </div>
-              ) : isRealVideo ? (
+              ) : isRealVideo && !hasVideoError ? (
                 <video
                   ref={videoRef}
-                  src={project.videoUrl}
+                  src={activeVideoSrc || project.videoUrl}
                   className="cinema-real-video"
                   playsInline
+                  webkit-playsinline="true"
+                  x5-playsinline="true"
+                  muted={isMuted}
                   loop
                   preload="auto"
                   onLoadedMetadata={handleLoadedMetadata}
                   onTimeUpdate={handleTimeUpdate}
                   onPlay={() => {
                     setIsPlaying(true);
-                    setIsBuffering(false);
+                    handleClearBuffering();
                   }}
-                  onPause={() => setIsPlaying(false)}
-                  onWaiting={() => setIsBuffering(true)}
-                  onPlaying={() => setIsBuffering(false)}
-                  onCanPlay={() => setIsBuffering(false)}
+                  onPause={handlePause}
+                  onWaiting={handleWaiting}
+                  onPlaying={handleClearBuffering}
+                  onCanPlay={handleClearBuffering}
+                  onCanPlayThrough={handleClearBuffering}
+                  onSeeked={handleClearBuffering}
+                  onProgress={() => {
+                    if (videoRef.current && !videoRef.current.paused) {
+                      handleClearBuffering();
+                    }
+                  }}
                   onVolumeChange={() => {
                     if (videoRef.current) {
                       setIsMuted(videoRef.current.muted);
                     }
                   }}
-                  onError={() => setIsBuffering(false)}
-                  onEnded={() => setIsPlaying(false)}
+                  onError={() => {
+                    handleClearBuffering();
+                    // If a quality stream fails, gracefully fall back to original video stream
+                    if (activeVideoSrc && activeVideoSrc !== project.videoUrl) {
+                      setActiveVideoSrc(project.videoUrl);
+                      setCurrentQuality('1080p');
+                      if (videoRef.current) {
+                        videoRef.current.src = project.videoUrl;
+                        videoRef.current.load();
+                        videoRef.current.play().catch(() => {});
+                      }
+                    } else {
+                      setHasVideoError(true);
+                    }
+                  }}
+                  onEnded={() => {
+                    if (videoRef.current) {
+                      videoRef.current.currentTime = 0;
+                      videoRef.current.play().catch(() => {});
+                    }
+                  }}
                 />
               ) : (
                 <>
@@ -358,6 +556,50 @@ export default function VideoModal({ isOpen, project, onClose }) {
                     className="cinema-waveform-glow"
                     style={{ animationPlayState: isPlaying ? 'running' : 'paused' }}
                   ></div>
+                  {hasVideoError && (
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '80px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      zIndex: 20,
+                      background: 'rgba(15, 23, 42, 0.92)',
+                      border: '1px solid rgba(6, 182, 212, 0.4)',
+                      borderRadius: '12px',
+                      padding: '12px 18px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+                      backdropFilter: 'blur(10px)',
+                      maxWidth: '90%',
+                      width: 'max-content'
+                    }}>
+                      <i className="fa-solid fa-file-video" style={{ color: '#06b6d4', fontSize: '1.2rem' }}></i>
+                      <div style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                        <span>High-bitrate ProRes/HEVC .MOV stream.</span>
+                      </div>
+                      <a
+                        href={project.videoUrl}
+                        download
+                        style={{
+                          background: 'linear-gradient(135deg, #06b6d4, #3b82f6)',
+                          color: '#fff',
+                          padding: '6px 14px',
+                          borderRadius: '8px',
+                          fontSize: '0.8rem',
+                          fontWeight: '600',
+                          textDecoration: 'none',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          whiteSpace: 'nowrap'
+                        }}
+                      >
+                        <i className="fa-solid fa-download"></i> Open / Download
+                      </a>
+                    </div>
+                  )}
                 </>
               )}
             </div>
@@ -374,7 +616,7 @@ export default function VideoModal({ isOpen, project, onClose }) {
                 <div className="hud-rec-indicator">
                   <span className={`hud-rec-dot ${isPlaying ? 'blinking' : ''}`}></span>
                   <span className="hud-rec-text">REC</span>
-                  <span className="hud-timecode">00:{formatTime(currentTime)}:24</span>
+                  <span ref={hudTimecodeRef} className="hud-timecode">00:{formatTime(currentTime)}:24</span>
                 </div>
               </div>
             )}
@@ -392,14 +634,24 @@ export default function VideoModal({ isOpen, project, onClose }) {
                     <i className={`fa-solid ${project.icon || 'fa-film'}`}></i> {badgeText}
                   </span>
                   <h3 className="player-title-cinema">{project.title}</h3>
-                  <span className="player-res-tag">{project.quality || '4K UHD • 60 FPS'}</span>
+                  <span className="player-res-tag">
+                    {currentQuality === '720p'
+                      ? '720p HD • Fast'
+                      : currentQuality === '1080p'
+                      ? '1080p FHD • 60 FPS'
+                      : currentQuality === '4K'
+                      ? '4K UHD • 60 FPS'
+                      : project.quality || '4K UHD • 60 FPS'}
+                  </span>
                 </div>
 
                 <div className="header-right-meta">
                   <a
-                    href={`https://wa.me/919360870164?text=Hi%20Bikash!%20I%20love%20the%20"${encodeURIComponent(
-                      project.title
-                    )}"%20showreel.%20I%20want%20to%20hire%20you%20for%20a%20similar%20project.`}
+                    href={`https://wa.me/919360870164?text=${encodeURIComponent(
+                      project.category === 'reels'
+                        ? `Hi Bikash! I watched your viral reel "${project.title}" on your portfolio. I want to hire you to edit a similar viral short reel for ₹600.`
+                        : `Hi Bikash! I watched the "${project.title}" showreel on your portfolio. I want to hire you for a similar editing project.`
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="player-inquire-btn"
@@ -409,25 +661,48 @@ export default function VideoModal({ isOpen, project, onClose }) {
                 </div>
               </div>
 
-              {/* Center Play/Pause / Buffering Trigger */}
+              {/* Center Play / Pause Trigger */}
               {!isYouTube && (
                 <div
-                  className="player-center-cinema"
+                  className={`player-center-cinema ${isPlaying ? 'is-playing-area' : 'is-paused-area'}`}
                   onClick={togglePlay}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                  title={isPlaying ? 'Click to Pause' : 'Click to Play'}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      togglePlay();
+                    }
+                  }}
                 >
                   {isBuffering && (
-                    <div className="center-buffering-indicator">
-                      <div className="buffering-spinner"></div>
-                      <span className="buffering-label">LOADING HD STREAM...</span>
-                    </div>
+                    <div className="buffering-spinner-subtle" aria-label="Loading stream"></div>
                   )}
                   {!isPlaying && !isBuffering && (
-                    <div className="center-play-button-luxury">
+                    <div
+                      className="center-play-button-luxury"
+                      role="button"
+                      tabIndex={0}
+                      aria-label="Play video"
+                    >
                       <div className="pulse-outer-ring"></div>
                       <div className="center-play-icon">
                         <i className="fa-solid fa-play"></i>
                       </div>
-                      <span className="center-play-label">PRESS SPACE TO PLAY</span>
+                    </div>
+                  )}
+                  {isPlaying && !isBuffering && (
+                    <div
+                      className="center-stop-button-luxury"
+                      role="button"
+                      tabIndex={0}
+                      aria-label="Stop video"
+                    >
+                      <div className="center-stop-icon">
+                        <i className="fa-solid fa-pause"></i>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -444,6 +719,7 @@ export default function VideoModal({ isOpen, project, onClose }) {
                     title="Click to seek"
                   >
                     <div
+                      ref={progressFillRef}
                       className="progress-scrubber-fill"
                       style={{ width: `${progressPercent}%` }}
                     >
@@ -509,7 +785,7 @@ export default function VideoModal({ isOpen, project, onClose }) {
 
                       {/* Time Counter */}
                       <span className="player-time-display">
-                        <span className="current-time">{formatTime(currentTime)}</span>
+                        <span ref={currentTimeDisplayRef} className="current-time">{formatTime(currentTime)}</span>
                         <span className="time-separator">/</span>
                         <span className="total-time">{formatTime(duration)}</span>
                       </span>
@@ -517,6 +793,60 @@ export default function VideoModal({ isOpen, project, onClose }) {
 
                     {/* Right Controls */}
                     <div className="controls-right-group">
+                      {/* Quality Selector */}
+                      {isRealVideo && (
+                        <div className="quality-selector-wrapper" ref={qualityMenuRef}>
+                          <button
+                            type="button"
+                            className={`cinema-control-pill quality-pill ${showQualityMenu ? 'active' : ''}`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setShowQualityMenu((prev) => !prev);
+                            }}
+                            title="Select stream quality"
+                            aria-label="Quality settings"
+                          >
+                            <i className="fa-solid fa-sliders"></i> {currentQuality}
+                          </button>
+                          {showQualityMenu && (
+                            <div className="quality-dropdown-menu" onClick={(e) => e.stopPropagation()}>
+                              <div className="quality-menu-header">STREAM QUALITY</div>
+                              {[
+                                { label: '4K Ultra HD', val: '4K' },
+                                { label: '1080p Full HD', val: '1080p' },
+                                { label: '720p HD (Fast)', val: '720p' },
+                                { label: 'Auto (Optimal)', val: 'Auto' },
+                              ].map((opt) => (
+                                <button
+                                  key={opt.val}
+                                  type="button"
+                                  className={`quality-option-item ${currentQuality === opt.val ? 'active' : ''}`}
+                                  onClick={() => handleQualityChange(opt.val)}
+                                >
+                                  <span>{opt.label}</span>
+                                  {currentQuality === opt.val && (
+                                    <i className="fa-solid fa-check text-cyan" style={{ fontSize: '0.75rem' }}></i>
+                                  )}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Download Pill */}
+                      {isRealVideo && (
+                        <button
+                          type="button"
+                          className="cinema-control-pill download-pill"
+                          onClick={handleDownload}
+                          title={`Download ${currentQuality} MP4`}
+                          aria-label="Download video"
+                        >
+                          <i className="fa-solid fa-download"></i> <span className="pill-download-label">Download</span>
+                        </button>
+                      )}
+
                       {/* Speed Selector */}
                       <button
                         type="button"

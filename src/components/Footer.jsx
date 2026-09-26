@@ -51,6 +51,17 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="https://wa.me/919360870164?text=Hi%20Bikash!%20I%20visited%20your%20portfolio%20and%20want%20to%20discuss%20a%20video%20editing%20project."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-contact-link footer-wa-link"
+                >
+                  <i className="fa-brands fa-whatsapp footer-icon" aria-hidden="true" />
+                  <span>WhatsApp: +91 9360870164</span>
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://www.instagram.com/bikash_suna_07/"
                   target="_blank"
                   rel="noopener noreferrer"
