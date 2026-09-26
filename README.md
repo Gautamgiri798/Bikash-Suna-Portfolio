@@ -10,17 +10,21 @@
 
   <!-- Live Status & Technology Badges -->
   <p align="center">
+    <a href="https://bikash-suna-portfolio.vercel.app/"><img src="https://img.shields.io/badge/Vercel-Live_Deployment-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Deployment" /></a>
     <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 18" /></a>
     <a href="https://threejs.org/"><img src="https://img.shields.io/badge/Three.js-WebGL_3D-black?style=for-the-badge&logo=three.js&logoColor=white" alt="Three.js" /></a>
     <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-6.0-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite 6" /></a>
     <a href="https://github.com/darkroomengineering/lenis"><img src="https://img.shields.io/badge/Lenis-Smooth_Scroll-000000?style=for-the-badge&logoColor=white" alt="Lenis" /></a>
     <a href="https://wa.me/919360870164"><img src="https://img.shields.io/badge/WhatsApp-Live_Desk-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp Desk" /></a>
-    <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" /></a>
     <a href="#-license"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License" /></a>
   </p>
 
   <!-- Quick Action Navigation Badges -->
   <p align="center">
+    <a href="https://bikash-suna-portfolio.vercel.app/">
+      <img src="https://img.shields.io/badge/🚀_Live_Demo-bikash--suna--portfolio.vercel.app-000000?style=flat-square&logo=vercel&logoColor=white" alt="Live Demo" />
+    </a>
+    &nbsp;
     <a href="https://wa.me/919360870164?text=Hi%20Bikash,%20I'm%20interested%20in%20hiring%20you%20for%20a%20project!">
       <img src="https://img.shields.io/badge/💬_Quick_WhatsApp_Inquiry-25D366?style=flat-square&logo=whatsapp&logoColor=white" alt="Chat on WhatsApp" />
     </a>
@@ -36,10 +40,10 @@
     <a href="#-deployment-guide-vercel--production">
       <img src="https://img.shields.io/badge/🌐_Deploy_Guide-000000?style=flat-square&logo=vercel&logoColor=white" alt="Deploy Guide" />
     </a>
-    &nbsp;
-    <a href="#-getting-started--local-setup">
-      <img src="https://img.shields.io/badge/🚀_Run_Locally-0EA5E9?style=flat-square" alt="Run Locally" />
-    </a>
+  </p>
+
+  <p align="center">
+    🔗 <strong>Deployed Web URL:</strong> <a href="https://bikash-suna-portfolio.vercel.app/"><strong>https://bikash-suna-portfolio.vercel.app/</strong></a>
   </p>
 
 </div>
@@ -322,9 +326,14 @@ Bikash-Suna-Portfolio/
 
 ---
 
-## 🌐 Deployment Guide (Vercel & Production)
+## 🌐 Live Production Deployment & Hosting
 
-Deploying the portfolio takes less than 60 seconds with **Vercel**:
+> ### 🚀 Live Production URL
+> **[https://bikash-suna-portfolio.vercel.app/](https://bikash-suna-portfolio.vercel.app/)**
+> 
+> *Deployed on Vercel Edge Network with sub-second asset streaming and automatic continuous deployment via GitHub.*
+
+Deploying or updating the portfolio takes less than 60 seconds with **Vercel**:
 
 ### Option 1: Automatic Deployment via Git (Recommended)
 1. Push your latest code to GitHub:
@@ -437,6 +446,7 @@ For brand sponsorships, video editing projects, or creative inquiries:
 
 | Channel | Details / Action |
 | :--- | :--- |
+| **🌐 Live Portfolio** | [**https://bikash-suna-portfolio.vercel.app/**](https://bikash-suna-portfolio.vercel.app/) |
 | **WhatsApp Sponsor Desk** | [![WhatsApp](https://img.shields.io/badge/Chat_on_WhatsApp-+91_9360870164-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://wa.me/919360870164) |
 | **Direct Phone Call** | `+91 9360870164` |
 | **Instagram Official** | [@bikash_suna_07](https://www.instagram.com/bikash_suna_07/) |
