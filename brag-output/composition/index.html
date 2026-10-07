@@ -1,0 +1,1498 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Bikash Suna — Official Showcase</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- GSAP 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+    <style>
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        width: 1920px;
+        height: 1080px;
+        margin: 0;
+        overflow: hidden;
+        background: #08090d;
+        color: #f8fafc;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ================= ROOT STAGE ================= */
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: radial-gradient(circle at 50% 30%, #111422 0%, #08090d 80%, #040507 100%);
+      }
+
+      /* Global Atmospheric Glows */
+      .ambient-glow {
+        position: absolute;
+        pointer-events: none;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.35;
+        z-index: 1;
+      }
+      .glow-cyan {
+        width: 700px;
+        height: 700px;
+        background: #06b6d4;
+        top: -150px;
+        right: -100px;
+      }
+      .glow-purple {
+        width: 750px;
+        height: 750px;
+        background: #9333ea;
+        bottom: -200px;
+        left: -150px;
+      }
+
+      /* Top Global Tech HUD Bar */
+      .global-hud-bar {
+        position: absolute;
+        top: 28px;
+        left: 56px;
+        right: 56px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 50;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #cbd5e1;
+      }
+      .hud-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .hud-brand-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 13px;
+      }
+      .hud-brand-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #38bdf8;
+        box-shadow: 0 0 10px #38bdf8;
+      }
+      .hud-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .hud-badge {
+        background: rgba(6, 182, 212, 0.18);
+        border: 1px solid rgba(56, 189, 248, 0.5);
+        color: #7dd3fc;
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .rec-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #fca5a5;
+        font-weight: 700;
+      }
+      .rec-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #f87171;
+        box-shadow: 0 0 8px #f87171;
+      }
+
+      /* Global Viewfinder Overlay */
+      .viewfinder-frame {
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        right: 24px;
+        bottom: 24px;
+        pointer-events: none;
+        z-index: 40;
+      }
+      .vf-corner {
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        border: 2px solid rgba(255, 255, 255, 0.35);
+      }
+      .vf-top-left { top: 0; left: 0; border-right: none; border-bottom: none; }
+      .vf-top-right { top: 0; right: 0; border-left: none; border-bottom: none; }
+      .vf-bottom-left { bottom: 0; left: 0; border-right: none; border-top: none; }
+      .vf-bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+      /* Top Progress Line */
+      .timeline-laser-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg, #06b6d4, #a855f7, #38bdf8);
+        transform-origin: left center;
+        z-index: 100;
+        box-shadow: 0 0 12px #06b6d4;
+      }
+
+      /* ================= CLIP WRAPPERS ================= */
+      .clip {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        opacity: 0;
+      }
+
+      /* Typography & Utility Components */
+      .section-badge-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 18px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #7dd3fc;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+      .badge-glow-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #34d399;
+        box-shadow: 0 0 8px #34d399;
+      }
+
+      .gradient-text-hero {
+        background: linear-gradient(135deg, #ffffff 30%, #38bdf8 70%, #c084fc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .gradient-text-cyan {
+        background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .gradient-text-purple {
+        background: linear-gradient(135deg, #f0abfc 0%, #d8b4fe 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* ================= SCENE 1: HOOK / INTRO ================= */
+      .scene-1-container {
+        text-align: center;
+        max-width: 1300px;
+        padding: 0 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .scene-1-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 96px;
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        margin: 24px 0 20px 0;
+      }
+      .scene-1-subtitle {
+        font-size: 26px;
+        line-height: 1.45;
+        color: #e2e8f0;
+        max-width: 900px;
+        margin-bottom: 36px;
+      }
+      .scene-1-chips {
+        display: flex;
+        gap: 16px;
+      }
+      .feature-chip-glass {
+        padding: 10px 22px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 15px;
+        font-weight: 700;
+        color: #f8fafc;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* ================= SCENE 2: TIMELINE NLE SHOWCASE ================= */
+      .scene-2-container {
+        width: 1720px;
+        display: grid;
+        grid-template-columns: 520px 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      .hero-left-card {
+        background: rgba(15, 20, 32, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+        position: relative;
+      }
+      .hero-workstation-img {
+        width: 100%;
+        height: 480px;
+        object-fit: cover;
+        display: block;
+      }
+      .hero-card-footer {
+        padding: 24px;
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), #0b0f19);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .hero-card-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #f8fafc;
+        margin-bottom: 6px;
+      }
+      .hero-card-meta {
+        font-size: 14px;
+        color: #cbd5e1;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* Studio NLE Timeline Scrubber Deck */
+      .nle-deck {
+        background: rgba(14, 18, 28, 0.94);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 24px;
+        padding: 28px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+        position: relative;
+        overflow: hidden;
+      }
+      .nle-deck-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .nle-sequence-name {
+        font-size: 16px;
+        font-weight: 700;
+        color: #7dd3fc;
+      }
+      .nle-codec-pills {
+        display: flex;
+        gap: 10px;
+      }
+      .codec-badge {
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 13px;
+        color: #f8fafc;
+        font-weight: 600;
+      }
+
+      /* Multi-Track Lanes */
+      .nle-tracks-container {
+        margin: 20px 0;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .nle-playhead-line {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 60px;
+        width: 2px;
+        background: #f43f5e;
+        z-index: 30;
+        box-shadow: 0 0 10px #f43f5e;
+      }
+      .nle-playhead-cap {
+        position: absolute;
+        top: -6px;
+        left: -6px;
+        width: 14px;
+        height: 14px;
+        background: #f43f5e;
+        transform: rotate(45deg);
+      }
+
+      .nle-track-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        height: 64px;
+      }
+      .track-header-label {
+        width: 44px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        color: #cbd5e1;
+        background: rgba(255, 255, 255, 0.06);
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .track-lane {
+        flex: 1;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.55);
+        border-radius: 10px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 4px;
+        gap: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .clip-block {
+        height: 100%;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        padding: 0 14px;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+      }
+      .clip-v2-speed {
+        width: 48%;
+        background: linear-gradient(135deg, rgba(168, 85, 247, 0.45), rgba(168, 85, 247, 0.75));
+        border: 1px solid #c084fc;
+      }
+      .clip-v2-lut {
+        width: 48%;
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.45), rgba(6, 182, 212, 0.75));
+        border: 1px solid #38bdf8;
+      }
+      .clip-v1-item {
+        background: rgba(30, 41, 59, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+      }
+      .clip-thumb {
+        width: 38px;
+        height: 38px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      .clip-a1-wave {
+        width: 60%;
+        background: rgba(6, 182, 212, 0.3);
+        border: 1px solid rgba(56, 189, 248, 0.7);
+        display: flex;
+        align-items: center;
+        padding: 0 14px;
+        gap: 12px;
+      }
+      .clip-a1-sfx {
+        width: 38%;
+        background: rgba(168, 85, 247, 0.3);
+        border: 1px solid rgba(192, 132, 252, 0.7);
+        display: flex;
+        align-items: center;
+        padding: 0 14px;
+        gap: 12px;
+      }
+
+      /* Pipeline dock */
+      .nle-deck-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .nle-pipeline {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #cbd5e1;
+      }
+      .pipeline-step-active {
+        color: #7dd3fc;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* ================= SCENE 3: DUAL PILLARS ================= */
+      .scene-3-container {
+        width: 1680px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .scene-3-header {
+        text-align: center;
+        margin-bottom: 36px;
+      }
+      .scene-3-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 64px;
+        font-weight: 800;
+        margin: 12px 0 8px 0;
+      }
+      .scene-3-sub {
+        font-size: 20px;
+        color: #cbd5e1;
+      }
+
+      .pillars-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        width: 100%;
+      }
+      .pillar-card {
+        background: rgba(14, 18, 28, 0.92);
+        border-radius: 24px;
+        padding: 36px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      }
+      .pillar-card-purple {
+        border: 1px solid rgba(168, 85, 247, 0.45);
+      }
+      .pillar-card-cyan {
+        border: 1px solid rgba(6, 182, 212, 0.45);
+      }
+      .pillar-laser-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+      }
+      .laser-purple { background: linear-gradient(90deg, #9333ea, #c084fc); }
+      .laser-cyan { background: linear-gradient(90deg, #06b6d4, #38bdf8); }
+
+      .pillar-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+      .pillar-title-block h3 {
+        font-size: 36px;
+        font-weight: 800;
+        color: #f8fafc;
+      }
+      .pillar-title-block span {
+        font-size: 15px;
+        color: #cbd5e1;
+      }
+      .pillar-features-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+      .pillar-feature-item {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .feature-icon-box {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .box-purple { background: rgba(168, 85, 247, 0.25); color: #d8b4fe; }
+      .box-cyan { background: rgba(6, 182, 212, 0.25); color: #7dd3fc; }
+
+      .feature-text-block h4 {
+        font-size: 17px;
+        font-weight: 700;
+        color: #f8fafc;
+      }
+      .feature-text-block p {
+        font-size: 14px;
+        color: #cbd5e1;
+      }
+
+      /* ================= SCENE 4: CREATOR MEDIA KIT ================= */
+      .scene-4-container {
+        width: 1680px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .stats-4-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 28px;
+        width: 100%;
+        margin-bottom: 36px;
+      }
+      .stat-card-luxury {
+        background: rgba(14, 18, 28, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 20px;
+        padding: 30px 26px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 310px;
+      }
+      .stat-top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .stat-tag-pill {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #cbd5e1;
+      }
+      .stat-growth-tag {
+        font-size: 13px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: rgba(52, 211, 153, 0.18);
+        color: #6ee7b7;
+      }
+      .stat-number-big {
+        font-family: 'Outfit', sans-serif;
+        font-size: 64px;
+        font-weight: 800;
+        line-height: 1;
+        margin: 16px 0 8px 0;
+      }
+      .stat-label-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #f8fafc;
+      }
+      .stat-subtext {
+        font-size: 13px;
+        color: #cbd5e1;
+        margin-bottom: 14px;
+      }
+
+      /* 4-Step Lifecycle Bar */
+      .lifecycle-banner {
+        width: 100%;
+        background: rgba(15, 20, 32, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 18px;
+        padding: 22px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .lifecycle-step {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .step-num-circle {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(6, 182, 212, 0.25);
+        border: 1px solid #7dd3fc;
+        color: #7dd3fc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 14px;
+      }
+      .step-text h5 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #f8fafc;
+      }
+      .step-text span {
+        font-size: 13px;
+        color: #cbd5e1;
+      }
+      .step-arrow {
+        color: #94a3b8;
+        font-size: 20px;
+      }
+
+      /* ================= SCENE 5: CALCULATOR DEMO ================= */
+      .scene-5-container {
+        width: 1400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .calc-card-main {
+        width: 100%;
+        background: rgba(14, 18, 28, 0.94);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 24px;
+        padding: 44px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 50px;
+      }
+      .calc-field-group {
+        margin-bottom: 24px;
+      }
+      .calc-label {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #cbd5e1;
+        margin-bottom: 10px;
+        display: block;
+      }
+      .calc-select-box {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(56, 189, 248, 0.7);
+        border-radius: 12px;
+        padding: 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 17px;
+        font-weight: 700;
+        color: #ffffff;
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+      }
+      .calc-toggle-row {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        padding: 18px 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      .toggle-details h4 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #f8fafc;
+      }
+      .toggle-details p {
+        font-size: 13px;
+        color: #cbd5e1;
+      }
+      .toggle-switch-visual {
+        width: 52px;
+        height: 28px;
+        border-radius: 999px;
+        background: #06b6d4;
+        box-shadow: 0 0 14px #06b6d4;
+        position: relative;
+      }
+      .toggle-knob {
+        position: absolute;
+        top: 3px;
+        left: 26px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #ffffff;
+      }
+
+      /* Calculator Right Price Panel */
+      .calc-summary-panel {
+        background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.98));
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 20px;
+        padding: 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+      }
+      .price-heading-label {
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #cbd5e1;
+      }
+      .price-huge-number {
+        font-family: 'Outfit', sans-serif;
+        font-size: 80px;
+        font-weight: 800;
+        color: #7dd3fc;
+        line-height: 1;
+        margin: 20px 0;
+        text-shadow: 0 0 30px rgba(56, 189, 248, 0.35);
+      }
+      .calc-cta-btn {
+        background: linear-gradient(135deg, #06b6d4, #2563eb);
+        border: none;
+        border-radius: 14px;
+        padding: 18px 24px;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        box-shadow: 0 8px 30px rgba(6, 182, 212, 0.4);
+      }
+
+      /* ================= SCENE 6: BRAND OUTRO ================= */
+      .scene-6-container {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .outro-avatar-ring {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        padding: 6px;
+        background: linear-gradient(135deg, #06b6d4, #a855f7);
+        box-shadow: 0 0 50px rgba(6, 182, 212, 0.4);
+        margin-bottom: 24px;
+      }
+      .outro-avatar-img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .outro-brand-name {
+        font-family: 'Outfit', sans-serif;
+        font-size: 84px;
+        font-weight: 800;
+        line-height: 1.05;
+        margin-bottom: 14px;
+      }
+      .outro-brand-role {
+        font-size: 24px;
+        color: #e2e8f0;
+        margin-bottom: 32px;
+      }
+      .outro-badges-row {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 36px;
+      }
+      .outro-badge {
+        padding: 10px 20px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 15px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+      .outro-cta-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 44px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #06b6d4 0%, #9333ea 100%);
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        box-shadow: 0 10px 40px rgba(6, 182, 212, 0.5);
+        margin-bottom: 20px;
+      }
+      .outro-direct-contact {
+        font-size: 16px;
+        color: #cbd5e1;
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ROOT COMPOSITION CONTAINER (30 Seconds Total) -->
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="30"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- Top timeline laser track progress -->
+      <div id="laser-progress" class="timeline-laser-progress"></div>
+
+      <!-- Global HUD Bar -->
+      <div class="global-hud-bar">
+        <div class="hud-left">
+          <div class="hud-brand-pill">
+            <span class="hud-brand-dot"></span>
+            <span>BIKASH SUNA</span>
+          </div>
+          <span>OFFICIAL SHOWCASE // 2026</span>
+        </div>
+        <div class="hud-right">
+          <div class="rec-pill">
+            <span class="rec-dot"></span>
+            <span>REC 4K</span>
+          </div>
+          <div class="hud-badge">60 FPS MASTER</div>
+          <div>00:00:30:00</div>
+        </div>
+      </div>
+
+      <!-- Viewfinder Frame Brackets -->
+      <div class="viewfinder-frame">
+        <div class="vf-corner vf-top-left"></div>
+        <div class="vf-corner vf-top-right"></div>
+        <div class="vf-corner vf-bottom-left"></div>
+        <div class="vf-corner vf-bottom-right"></div>
+      </div>
+
+      <!-- Global Ambient Glows -->
+      <div class="ambient-glow glow-cyan" data-layout-allow-overflow></div>
+      <div class="ambient-glow glow-purple" data-layout-allow-overflow></div>
+
+      <!-- Audio Tracks with exact clip lengths -->
+      <audio
+        id="bgm"
+        data-start="0"
+        data-duration="30"
+        data-volume="0.8"
+        data-fade-out="2"
+        src="assets/music/track.mp3"
+      ></audio>
+
+      <audio
+        id="sfx-impact1"
+        data-start="1.2"
+        data-duration="0.18"
+        data-volume="0.6"
+        src="assets/sfx/impact1.ogg"
+      ></audio>
+
+      <audio
+        id="sfx-impact2"
+        data-start="4.5"
+        data-duration="0.14"
+        data-volume="0.6"
+        src="assets/sfx/impact2.ogg"
+      ></audio>
+
+      <audio
+        id="sfx-slide"
+        data-start="9.8"
+        data-duration="0.6"
+        data-volume="0.5"
+        src="assets/sfx/slide.ogg"
+      ></audio>
+
+      <audio
+        id="sfx-bell1"
+        data-start="15.2"
+        data-duration="1.5"
+        data-volume="0.55"
+        src="assets/sfx/bell.ogg"
+      ></audio>
+
+      <audio
+        id="sfx-click1"
+        data-start="20.5"
+        data-duration="0.02"
+        data-volume="0.4"
+        src="assets/sfx/click.ogg"
+      ></audio>
+
+      <audio
+        id="sfx-click2"
+        data-start="21.3"
+        data-duration="0.02"
+        data-volume="0.4"
+        src="assets/sfx/click.ogg"
+      ></audio>
+
+      <audio
+        id="sfx-bell2"
+        data-start="25.4"
+        data-duration="1.5"
+        data-volume="0.6"
+        src="assets/sfx/bell.ogg"
+      ></audio>
+
+      <!-- ================= SCENE 1: HOOK / INTRO (0.0s - 4.5s) ================= -->
+      <section id="scene-1" class="clip" data-start="0" data-duration="4.5">
+        <div class="scene-1-container">
+          <div class="section-badge-pill" id="s1-pill">
+            <span class="badge-glow-dot"></span>
+            <span>CINEMATIC VIDEO EDITOR • CONTENT CREATOR</span>
+          </div>
+
+          <h1 class="scene-1-title" id="s1-title">
+            BIKASH <span class="gradient-text-hero">SUNA</span>
+          </h1>
+
+          <p class="scene-1-subtitle" id="s1-sub">
+            Transforming raw footage into scroll-stopping stories for creators, while delivering high-impact paid promotions for brands.
+          </p>
+
+          <div class="scene-1-chips" id="s1-chips">
+            <div class="feature-chip-glass">
+              <span style="color:#7dd3fc;">⚡</span> 48h Delivery Turnaround
+            </div>
+            <div class="feature-chip-glass">
+              <span style="color:#d8b4fe;">🎬</span> 4K Cinema • 60 FPS
+            </div>
+            <div class="feature-chip-glass">
+              <span style="color:#6ee7b7;">💎</span> 50K+ Monthly Reach
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SCENE 2: HOMEPAGE & NLE TIMELINE (4.5s - 9.5s) ================= -->
+      <section id="scene-2" class="clip" data-start="4.5" data-duration="5.0">
+        <div class="scene-2-container">
+          <!-- Left Column: Studio Photo Frame -->
+          <div class="hero-left-card" id="s2-photo">
+            <img src="assets/images/hero.jpg" alt="Bikash Suna Studio" class="hero-workstation-img" />
+            <div class="hero-card-footer">
+              <div class="hero-card-title">Bikash Suna Studio</div>
+              <div class="hero-card-meta">
+                <span>Color Grading & 4K Suite</span>
+                <span style="color:#7dd3fc;">Jharsuguda, Odisha</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: NLE Master Scrubber Deck -->
+          <div class="nle-deck" id="s2-deck">
+            <div class="nle-deck-header">
+              <div class="nle-sequence-name">BIKASH_MASTER_CUT_4K.prproj</div>
+              <div class="nle-codec-pills">
+                <span class="codec-badge">PRORES 422 HQ</span>
+                <span class="codec-badge" style="color:#7dd3fc;">4K • 60FPS</span>
+                <span class="codec-badge" style="color:#6ee7b7;">REC 709</span>
+              </div>
+            </div>
+
+            <div class="nle-tracks-container">
+              <!-- Animated Playhead Line -->
+              <div class="nle-playhead-line" id="s2-playhead">
+                <div class="nle-playhead-cap"></div>
+              </div>
+
+              <!-- V2 FX Track -->
+              <div class="nle-track-row">
+                <div class="track-header-label">V2</div>
+                <div class="track-lane">
+                  <div class="clip-block clip-v2-speed">
+                    <span>⚡ Speed Ramp (400% → 40%)</span>
+                  </div>
+                  <div class="clip-block clip-v2-lut">
+                    <span>✨ Teal & Orange 3D LUT</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- V1 Main Cuts Track -->
+              <div class="nle-track-row">
+                <div class="track-header-label">V1</div>
+                <div class="track-lane">
+                  <div class="clip-block clip-v1-item" style="width: 25%;">
+                    <img src="assets/images/reel.jpg" class="clip-thumb" alt="" />
+                    <span>01_Hook_Cut</span>
+                  </div>
+                  <div class="clip-block clip-v1-item" style="width: 30%;">
+                    <img src="assets/images/babu-zaraa-bachke.jpg" class="clip-thumb" alt="" />
+                    <span>02_Music_Video</span>
+                  </div>
+                  <div class="clip-block clip-v1-item" style="width: 25%;">
+                    <img src="assets/images/album.jpg" class="clip-thumb" alt="" />
+                    <span>03_B-Roll</span>
+                  </div>
+                  <div class="clip-block clip-v1-item" style="width: 18%;">
+                    <img src="assets/images/profile.jpg" class="clip-thumb" alt="" />
+                    <span>04_Outro</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- A1 Audio Waveform Track -->
+              <div class="nle-track-row">
+                <div class="track-header-label">A1</div>
+                <div class="track-lane">
+                  <div class="clip-block clip-a1-wave">
+                    <svg viewBox="0 0 100 16" width="100" height="16" fill="none" stroke="#7dd3fc" stroke-width="2">
+                      <path d="M0 8 L10 2 L20 14 L30 4 L40 12 L50 1 L60 15 L70 5 L80 11 L90 3 L100 8" />
+                    </svg>
+                    <span>Dialogue_Master.wav</span>
+                  </div>
+                  <div class="clip-block clip-a1-sfx">
+                    <svg viewBox="0 0 60 16" width="60" height="16" fill="none" stroke="#d8b4fe" stroke-width="2">
+                      <path d="M0 8 L15 1 L30 15 L45 3 L60 8" />
+                    </svg>
+                    <span>SFX_Impact.wav</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pipeline Dock -->
+            <div class="nle-deck-footer">
+              <div class="nle-pipeline">
+                <span class="pipeline-step-active">✓ INGEST</span>
+                <span>→</span>
+                <span class="pipeline-step-active">✨ COLOR GRADE</span>
+                <span>→</span>
+                <span class="pipeline-step-active">🔊 SFX MASTER</span>
+                <span>→</span>
+                <span class="pipeline-step-active">🎬 4K EXPORT</span>
+              </div>
+              <div style="font-family:'JetBrains Mono'; font-size:14px; color:#7dd3fc; font-weight:700;">
+                00:04:18:24
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SCENE 3: DUAL PILLARS (9.5s - 14.5s) ================= -->
+      <section id="scene-3" class="clip" data-start="9.5" data-duration="5.0">
+        <div class="scene-3-container">
+          <div class="scene-3-header" id="s3-header">
+            <div class="section-badge-pill" style="color:#d8b4fe;">
+              <span class="badge-glow-dot" style="background:#c084fc; box-shadow:0 0 8px #c084fc;"></span>
+              <span>DUAL SUPERPOWERS</span>
+            </div>
+            <h2 class="scene-3-title">Two Passions. <span class="gradient-text-hero">One Powerful Creator.</span></h2>
+            <p class="scene-3-sub">Scripted, 4K Mastered & Published by the Same Creator</p>
+          </div>
+
+          <div class="pillars-grid">
+            <!-- Pillar 1: The Video Editor -->
+            <div class="pillar-card pillar-card-purple" id="s3-card-left">
+              <div class="pillar-laser-top laser-purple"></div>
+              <div class="pillar-header-row">
+                <div class="pillar-title-block">
+                  <span style="color:#d8b4fe; font-weight:700; text-transform:uppercase; letter-spacing:0.08em;">POST-PRODUCTION</span>
+                  <h3>The Video Editor</h3>
+                </div>
+                <div class="hud-badge" style="background:rgba(168,85,247,0.2); border-color:#c084fc; color:#f0abfc;">
+                  120+ EDITS DELIVERED
+                </div>
+              </div>
+
+              <div class="pillar-features-list">
+                <div class="pillar-feature-item">
+                  <div class="feature-icon-box box-purple">⚡</div>
+                  <div class="feature-text-block">
+                    <h4>Velocity Curves & Speed Ramping</h4>
+                    <p>Frame-accurate cut transitions matching musical beats.</p>
+                  </div>
+                </div>
+                <div class="pillar-feature-item">
+                  <div class="feature-icon-box box-purple">🔤</div>
+                  <div class="feature-text-block">
+                    <h4>Kinetic Typography & Word Captions</h4>
+                    <p>High-retention modern animated subtitle styling.</p>
+                  </div>
+                </div>
+                <div class="pillar-feature-item">
+                  <div class="feature-icon-box box-purple">🎨</div>
+                  <div class="feature-text-block">
+                    <h4>Cinematic LUT Color Grading</h4>
+                    <p>Rich filmic contrast and balanced natural skin tones.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pillar 2: The Content Creator -->
+            <div class="pillar-card pillar-card-cyan" id="s3-card-right">
+              <div class="pillar-laser-top laser-cyan"></div>
+              <div class="pillar-header-row">
+                <div class="pillar-title-block">
+                  <span style="color:#7dd3fc; font-weight:700; text-transform:uppercase; letter-spacing:0.08em;">INFLUENCE & REACH</span>
+                  <h3>The Content Creator</h3>
+                </div>
+                <div class="hud-badge">50K+ REACH</div>
+              </div>
+
+              <div class="pillar-features-list">
+                <div class="pillar-feature-item">
+                  <div class="feature-icon-box box-cyan">🤝</div>
+                  <div class="feature-text-block">
+                    <h4>Dedicated Sponsored Reels</h4>
+                    <p>Viral hook scripting, 4K production & co-author tag.</p>
+                  </div>
+                </div>
+                <div class="pillar-feature-item">
+                  <div class="feature-icon-box box-cyan">📦</div>
+                  <div class="feature-text-block">
+                    <h4>Product Showcases & Unboxings</h4>
+                    <p>Authentic reviews, tech gear demos & real-world testing.</p>
+                  </div>
+                </div>
+                <div class="pillar-feature-item">
+                  <div class="feature-icon-box box-cyan">🔗</div>
+                  <div class="feature-text-block">
+                    <h4>Story Promotions & Link Stickers</h4>
+                    <p>Direct traffic conversion to sponsor bio-links and offers.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SCENE 4: CREATOR MEDIA KIT (14.5s - 19.5s) ================= -->
+      <section id="scene-4" class="clip" data-start="14.5" data-duration="5.0">
+        <div class="scene-4-container">
+          <div class="scene-3-header" id="s4-header">
+            <div class="section-badge-pill">
+              <span class="badge-glow-dot"></span>
+              <span>CREATOR MEDIA KIT & SPONSOR DESK</span>
+            </div>
+            <h2 class="scene-3-title">Brand Partnerships & <span class="gradient-text-cyan">Audience Metrics</span></h2>
+            <p class="scene-3-sub">Transparent, verified engagement built for measurable sponsor ROI</p>
+          </div>
+
+          <div class="stats-4-grid">
+            <!-- Stat 1 -->
+            <div class="stat-card-luxury" id="s4-stat-1">
+              <div class="stat-top-row">
+                <span class="stat-tag-pill">REACH</span>
+                <span class="stat-growth-tag">↗ +32% MoM</span>
+              </div>
+              <div>
+                <div class="stat-number-big gradient-text-cyan">50K+</div>
+                <div class="stat-label-title">Monthly Impressions</div>
+                <div class="stat-subtext">Across viral Reels & Shorts</div>
+              </div>
+              <svg viewBox="0 0 100 24" width="100%" height="24" fill="none" stroke="#7dd3fc" stroke-width="2.5">
+                <path d="M0 20 Q 25 16, 45 10 T 80 12 T 100 4" />
+              </svg>
+            </div>
+
+            <!-- Stat 2 -->
+            <div class="stat-card-luxury" id="s4-stat-2">
+              <div class="stat-top-row">
+                <span class="stat-tag-pill">VIRALITY</span>
+                <span class="stat-growth-tag" style="background:rgba(168,85,247,0.2); color:#d8b4fe;">🔥 85%+ Watch</span>
+              </div>
+              <div>
+                <div class="stat-number-big gradient-text-purple">15K–45K</div>
+                <div class="stat-label-title">Avg Reel Views</div>
+                <div class="stat-subtext">High watch-time retention</div>
+              </div>
+              <svg viewBox="0 0 100 24" width="100%" height="24" fill="none" stroke="#d8b4fe" stroke-width="2.5">
+                <path d="M0 22 Q 20 18, 50 6 T 85 8 T 100 2" />
+              </svg>
+            </div>
+
+            <!-- Stat 3 -->
+            <div class="stat-card-luxury" id="s4-stat-3">
+              <div class="stat-top-row">
+                <span class="stat-tag-pill">BENCHMARK</span>
+                <span class="stat-growth-tag">⭐ 3.2x Average</span>
+              </div>
+              <div>
+                <div class="stat-number-big" style="color:#6ee7b7;">8.4%</div>
+                <div class="stat-label-title">Engagement Rate</div>
+                <div class="stat-subtext">High comment & share ratio</div>
+              </div>
+              <svg viewBox="0 0 100 24" width="100%" height="24" fill="none" stroke="#6ee7b7" stroke-width="2.5">
+                <path d="M0 18 Q 30 14, 60 12 T 90 4 T 100 2" />
+              </svg>
+            </div>
+
+            <!-- Stat 4 -->
+            <div class="stat-card-luxury" id="s4-stat-4">
+              <div class="stat-top-row">
+                <span class="stat-tag-pill">AUDIENCE</span>
+                <span class="stat-growth-tag" style="background:rgba(245,158,11,0.2); color:#fde68a;">👥 Gen-Z</span>
+              </div>
+              <div>
+                <div class="stat-number-big" style="color:#fde68a;">18–34</div>
+                <div class="stat-label-title">Core Demographic</div>
+                <div class="stat-subtext">72% Active Age 18–28</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.08); height:8px; border-radius:999px; overflow:hidden;">
+                <div style="background:#fde68a; width:72%; height:100%; border-radius:999px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lifecycle Banner -->
+          <div class="lifecycle-banner" id="s4-lifecycle">
+            <div class="lifecycle-step">
+              <div class="step-num-circle">01</div>
+              <div class="step-text">
+                <h5>Briefing & Hook Setup</h5>
+                <span>Target Audience Alignment</span>
+              </div>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="lifecycle-step">
+              <div class="step-num-circle">02</div>
+              <div class="step-text">
+                <h5>Hook Scripting</h5>
+                <span>First 3-Second Retention</span>
+              </div>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="lifecycle-step">
+              <div class="step-num-circle">03</div>
+              <div class="step-text">
+                <h5>4K Production & Edit</h5>
+                <span>Color Grade & SFX</span>
+              </div>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="lifecycle-step">
+              <div class="step-num-circle">04</div>
+              <div class="step-text">
+                <h5>Co-Author Launch</h5>
+                <span>Story Link & Story Blast</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SCENE 5: CALCULATOR DEMO (19.5s - 25.0s) ================= -->
+      <section id="scene-5" class="clip" data-start="19.5" data-duration="5.5">
+        <div class="scene-5-container">
+          <div class="scene-3-header" id="s5-header">
+            <div class="section-badge-pill" style="color:#7dd3fc;">
+              <span class="badge-glow-dot"></span>
+              <span>INTERACTIVE ESTIMATION</span>
+            </div>
+            <h2 class="scene-3-title">Project Estimate <span class="gradient-text-cyan">Calculator</span></h2>
+            <p class="scene-3-sub">Instant pricing estimation for reels, video albums, and brand campaigns</p>
+          </div>
+
+          <div class="calc-card-main" id="s5-card">
+            <!-- Left inputs -->
+            <div>
+              <div class="calc-field-group">
+                <span class="calc-label">Select Project Format</span>
+                <div class="calc-select-box" id="s5-select">
+                  <span>🎬 Short Reel Edit (₹600 / unit)</span>
+                  <span style="color:#7dd3fc;">▼</span>
+                </div>
+              </div>
+
+              <!-- Toggle 1: Express -->
+              <div class="calc-toggle-row">
+                <div class="toggle-details">
+                  <h4>⚡ Express Delivery (24–48h)</h4>
+                  <p>Fast-track priority editing turnaround (+₹200)</p>
+                </div>
+                <div class="toggle-switch-visual" id="s5-toggle-express">
+                  <div class="toggle-knob"></div>
+                </div>
+              </div>
+
+              <!-- Toggle 2: Sound Design -->
+              <div class="calc-toggle-row">
+                <div class="toggle-details">
+                  <h4>🔊 Sound Design Suite</h4>
+                  <p>Custom SFX & multi-track audio mastering (+₹150)</p>
+                </div>
+                <div class="toggle-switch-visual" id="s5-toggle-sfx">
+                  <div class="toggle-knob"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Summary -->
+            <div class="calc-summary-panel">
+              <div>
+                <span class="price-heading-label">ESTIMATED TOTAL COST</span>
+                <div class="price-huge-number" id="s5-price">₹950</div>
+                <p style="font-size:14px; color:#cbd5e1;">Base ₹600 + Express ₹200 + SFX ₹150</p>
+              </div>
+
+              <div class="calc-cta-btn" id="s5-btn">
+                <span>💬 Book This Project On WhatsApp</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SCENE 6: BRAND OUTRO (25.0s - 30.0s) ================= -->
+      <section id="scene-6" class="clip" data-start="25.0" data-duration="5.0">
+        <div class="scene-6-container">
+          <div class="outro-avatar-ring" id="s6-avatar">
+            <img src="assets/images/profile.jpg" alt="Bikash Suna" class="outro-avatar-img" />
+          </div>
+
+          <h2 class="outro-brand-name" id="s6-name">
+            BIKASH <span class="gradient-text-hero">SUNA</span>
+          </h2>
+
+          <p class="outro-brand-role" id="s6-role">
+            Cinematic Video Editor & Influential Content Creator
+          </p>
+
+          <div class="outro-badges-row" id="s6-badges">
+            <div class="outro-badge">⚡ 48h Turnaround</div>
+            <div class="outro-badge">🎬 4K Cinema 60FPS</div>
+            <div class="outro-badge">💎 50K+ Monthly Reach</div>
+            <div class="outro-badge">🚀 Available for Projects</div>
+          </div>
+
+          <div class="outro-cta-pill" id="s6-cta">
+            <span>DM FOR COLLABORATION • BOOK YOUR EDIT</span>
+          </div>
+
+          <div class="outro-direct-contact" id="s6-contact">
+            WhatsApp: +91 93608 70164 • Instagram: @bikashsuna
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- GSAP TIMELINE SCRIPT -->
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Synchronize laser progress bar
+      tl.fromTo("#laser-progress", { scaleX: 0 }, { scaleX: 1, duration: 30, ease: "none" }, 0);
+
+      // ================= SCENE 1 (0.0s - 4.5s) =================
+      tl.set("#scene-1", { opacity: 1 }, 0);
+      tl.fromTo("#s1-pill", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.3);
+      tl.fromTo("#s1-title", { opacity: 0, scale: 0.9, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.6);
+      tl.fromTo("#s1-sub", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 1.0);
+      tl.fromTo("#s1-chips > div", { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.15, duration: 0.6, ease: "back.out(1.5)" }, 1.4);
+      // Exit Scene 1
+      tl.to("#scene-1", { opacity: 0, scale: 0.95, duration: 0.5, ease: "power2.in" }, 4.0);
+
+      // ================= SCENE 2 (4.5s - 9.5s) =================
+      tl.set("#scene-2", { opacity: 1 }, 4.5);
+      tl.fromTo("#s2-photo", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, 4.6);
+      tl.fromTo("#s2-deck", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, 4.7);
+      // Playhead sweeps across with sub-pixel x transform
+      tl.fromTo("#s2-playhead", { x: 0 }, { x: 920, duration: 3.8, ease: "none" }, 5.0);
+      // Exit Scene 2
+      tl.to("#scene-2", { opacity: 0, y: -30, duration: 0.5, ease: "power2.in" }, 9.0);
+
+      // ================= SCENE 3 (9.5s - 14.5s) =================
+      tl.set("#scene-3", { opacity: 1 }, 9.5);
+      tl.fromTo("#s3-header", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 9.6);
+      tl.fromTo("#s3-card-left", { opacity: 0, x: -50, scale: 0.96 }, { opacity: 1, x: 0, scale: 1, duration: 0.7, ease: "power3.out" }, 9.9);
+      tl.fromTo("#s3-card-right", { opacity: 0, x: 50, scale: 0.96 }, { opacity: 1, x: 0, scale: 1, duration: 0.7, ease: "power3.out" }, 10.3);
+      // Exit Scene 3
+      tl.to("#scene-3", { opacity: 0, scale: 1.05, duration: 0.5, ease: "power2.in" }, 14.0);
+
+      // ================= SCENE 4 (14.5s - 19.5s) =================
+      tl.set("#scene-4", { opacity: 1 }, 14.5);
+      tl.fromTo("#s4-header", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 14.6);
+      tl.fromTo(["#s4-stat-1", "#s4-stat-2", "#s4-stat-3", "#s4-stat-4"], 
+        { opacity: 0, y: 40, scale: 0.92 }, 
+        { opacity: 1, y: 0, scale: 1, stagger: 0.12, duration: 0.6, ease: "back.out(1.4)" }, 
+        14.8
+      );
+      tl.fromTo("#s4-lifecycle", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 15.6);
+      // Exit Scene 4
+      tl.to("#scene-4", { opacity: 0, y: -40, duration: 0.5, ease: "power2.in" }, 19.0);
+
+      // ================= SCENE 5 (19.5s - 25.0s) =================
+      tl.set("#scene-5", { opacity: 1 }, 19.5);
+      tl.fromTo("#s5-header", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 19.6);
+      tl.fromTo("#s5-card", { opacity: 0, scale: 0.95, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "power3.out" }, 19.8);
+      // Interactive price step simulation
+      tl.fromTo("#s5-price", { innerText: "₹600" }, { innerText: "₹800", duration: 0.4, snap: { innerText: 1 }, ease: "power1.inOut" }, 20.8);
+      tl.to("#s5-price", { innerText: "₹950", duration: 0.4, snap: { innerText: 1 }, ease: "power1.inOut" }, 21.8);
+      tl.fromTo("#s5-btn", { scale: 0.96 }, { scale: 1.04, yoyo: true, repeat: 1, duration: 0.4, ease: "power2.inOut" }, 22.8);
+      // Exit Scene 5
+      tl.to("#scene-5", { opacity: 0, scale: 0.95, duration: 0.5, ease: "power2.in" }, 24.5);
+
+      // ================= SCENE 6 (25.0s - 30.0s) =================
+      tl.set("#scene-6", { opacity: 1 }, 25.0);
+      tl.fromTo("#s6-avatar", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.6)" }, 25.1);
+      tl.fromTo("#s6-name", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 25.5);
+      tl.fromTo("#s6-role", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 25.8);
+      tl.fromTo("#s6-badges > div", { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.1, duration: 0.5, ease: "back.out(1.4)" }, 26.2);
+      tl.fromTo("#s6-cta", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }, 26.8);
+      tl.fromTo("#s6-contact", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 27.2);
+
+      // Register timeline for Hyperframes runtime
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
