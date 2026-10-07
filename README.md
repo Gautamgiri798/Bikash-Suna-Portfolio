@@ -74,10 +74,17 @@
 A custom-rendered, cinema-grade 30-second promotional showcase video is bundled directly within the workspace under [`brag-output/`](brag-output/):
 
 <div align="center">
-  <a href="brag-output/brag.mp4">
-    <img src="brag-output/brag.jpg" width="85%" style="border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 20px 50px rgba(0,0,0,0.6);" alt="Bikash Suna Promotional Showcase Video Poster" />
-  </a>
-  <p><em>Click to play <code>brag-output/brag.mp4</code> — 1080p @ 30 FPS • Ultra-High Bitrate • Master Audio Sync</em></p>
+  <video src="https://github.com/Gautamgiri798/Bikash-Suna-Portfolio/raw/main/brag-output/brag.mp4" poster="brag-output/brag.jpg" controls="controls" width="85%" style="max-width: 100%; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+    <source src="brag-output/brag.mp4" type="video/mp4">
+    <source src="https://github.com/Gautamgiri798/Bikash-Suna-Portfolio/raw/main/brag-output/brag.mp4" type="video/mp4">
+    <a href="https://github.com/Gautamgiri798/Bikash-Suna-Portfolio/raw/main/brag-output/brag.mp4">
+      <img src="brag-output/brag.jpg" width="85%" alt="Bikash Suna Promotional Showcase Video Poster" />
+    </a>
+  </video>
+  <br />
+  <p>
+    🎬 <strong><a href="https://github.com/Gautamgiri798/Bikash-Suna-Portfolio/raw/main/brag-output/brag.mp4">Watch / Download Showcase Video (1080p Full HD • 30 FPS • MP4)</a></strong> &bull; <em>Runtime: 30.0s</em>
+  </p>
 </div>
 
 ### 📦 Video Deliverables & Specs
