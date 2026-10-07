@@ -52,6 +52,7 @@
 
 ## 📑 Quick Navigation Hub
 
+<a href="#-official-30-second-promotional-showcase-video"><img src="https://img.shields.io/badge/🎬_PROMO_VIDEO-1e293b?style=for-the-badge&logoColor=white" alt="Promo Video" /></a>
 <a href="#-executive-overview"><img src="https://img.shields.io/badge/🌟_OVERVIEW-1e293b?style=for-the-badge&logoColor=white" alt="Overview" /></a>
 <a href="#-1-interactive-3d-webgl-gyro--particle-universe"><img src="https://img.shields.io/badge/🌌_3D_WEBGL-1e293b?style=for-the-badge&logoColor=white" alt="3D WebGL" /></a>
 <a href="#-2-cinematic-hero--pure-diamond-ice-white-typography"><img src="https://img.shields.io/badge/🎬_ICE--WHITE_HERO-1e293b?style=for-the-badge&logoColor=white" alt="Hero" /></a>
@@ -65,6 +66,34 @@
 <a href="#-7-clean-luxury-contact--instant-payments-suite"><img src="https://img.shields.io/badge/💳_CONTACT_%26_UPI-1e293b?style=for-the-badge&logoColor=white" alt="Contact & Payments" /></a>
 <a href="#-8-right-sided-floating-whatsapp-concierge"><img src="https://img.shields.io/badge/💬_WHATSAPP_DESK-1e293b?style=for-the-badge&logoColor=white" alt="WhatsApp" /></a>
 <a href="#-deployment-guide-vercel--production"><img src="https://img.shields.io/badge/🌐_DEPLOYMENT-1e293b?style=for-the-badge&logoColor=white" alt="Deployment" /></a>
+
+---
+
+## 🎬 Official 30-Second Promotional Showcase Video
+
+A custom-rendered, cinema-grade 30-second promotional showcase video is bundled directly within the workspace under [`brag-output/`](brag-output/):
+
+<div align="center">
+  <a href="brag-output/brag.mp4">
+    <img src="brag-output/brag.jpg" width="85%" style="border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 20px 50px rgba(0,0,0,0.6);" alt="Bikash Suna Promotional Showcase Video Poster" />
+  </a>
+  <p><em>Click to play <code>brag-output/brag.mp4</code> — 1080p @ 30 FPS • Ultra-High Bitrate • Master Audio Sync</em></p>
+</div>
+
+### 📦 Video Deliverables & Specs
+* 🎥 **Video File**: [`brag-output/brag.mp4`](brag-output/brag.mp4) (30.0s, 1920x1080 Full HD @ 30 FPS, H.264 High Profile / AAC Stereo, 1360 kbps)
+* 🖼️ **Settled Poster Frame**: [`brag-output/brag.jpg`](brag-output/brag.jpg) (Bake-in on Frame 0 for instant social preview across all players)
+* ⚙️ **Hyperframes Source Composition**: [`brag-output/composition/index.html`](brag-output/composition/index.html) (Deterministic GSAP 3 animation timeline)
+* 📝 **Ready-to-Post Copy**: [`brag-output/share-copy.txt`](brag-output/share-copy.txt) & [`brag-output/share-copy-variants.md`](brag-output/share-copy-variants.md) (Platform-tailored captions for LinkedIn, Instagram Reels, and direct sponsor pitches)
+* 📋 **Production Plan & Storyboard**: [`brag-output/brag-plan.md`](brag-output/brag-plan.md)
+
+### ⏱️ Video Storyboard (30.0s Timeline Arc)
+1. **Act 1 (0.0s – 4.5s) — Cinematic Hook & Brand Intro**: Futuristic camera viewfinder HUD brackets (`REC ● 4K 60FPS`), status pill, and bold title reveal with 3D ambient glows.
+2. **Act 2 (4.5s – 9.5s) — Master NLE Timeline Showcase**: Real studio workstation photography paired with the live multi-track NLE deck (`BIKASH_MASTER_CUT_4K.prproj`, ProRes 422 HQ) and sweeping red laser playhead.
+3. **Act 3 (9.5s – 14.5s) — Dual Superpowers**: Side-by-side comparison of **The Video Editor** (Velocity curves, kinetic captions, 3D LUT grading) and **The Content Creator** (Sponsored reels, product showcases, link stickers, 50K+ reach).
+4. **Act 4 (14.5s – 19.5s) — Creator Media Kit & Verified Metrics**: Live animated metric cards (**50K+** Reach, **15K–45K** Views, **8.4%** Engagement, Gen-Z demographics) and the 4-step campaign lifecycle.
+5. **Act 5 (19.5s – 25.0s) — Interactive Project Calculator**: Simulated UI interaction selecting project formats and toggling Express Delivery & Sound Design with live price recalculation (**₹600 ➔ ₹800 ➔ ₹950**).
+6. **Act 6 (25.0s – 30.0s) — Final Brand Reveal & Direct Booking**: Avatar lockup, 48h turnaround chip, WhatsApp concierge booking CTA pill, and graceful audio fade.
 
 ---
 
@@ -415,6 +444,7 @@ Easily tailor this codebase for your personal branding or client project:
 | Configuration Area | File Location | What to Update |
 | :--- | :--- | :--- |
 | **Showreel Projects & Links** | `src/data/projects.js` | Add video links, descriptions, tags, and badges. |
+| **Promotional Showcase Video** | `brag-output/` | Re-render launch video (`brag.mp4`), poster (`brag.jpg`), or modify `composition/index.html`. |
 | **WhatsApp Desk Number** | `src/components/FloatingWhatsApp.jsx` | Change `919360870164` to your international phone number. |
 | **Quick Action Presets** | `src/components/FloatingWhatsApp.jsx` | Modify automated preset chips, message labels, and rates. |
 | **UPI Payment ID** | `src/components/Contact.jsx` | Update `9360870164@superyes` (super.money) and phone number to your VPA. |
